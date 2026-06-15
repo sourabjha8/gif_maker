@@ -33,7 +33,6 @@ const SCREEN_REGISTRY: Record<ScreenId, ScreenFactory> = {
   login: ({ goTo }) => (
     <LoginScreen onContinue={() => goTo('choose')} />
   ),
-  //this is teh login screen bla bla blah
 
   choose: ({ selectModeAndGo }) => (
     <ExperienceSelection onContinue={(mode) => selectModeAndGo(mode)} />
