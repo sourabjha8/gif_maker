@@ -1,0 +1,417 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-05-06T00:00:00Z",
+  "floors": [
+    {
+      "id": "floor-1",
+      "slug": "1f",
+      "name": "First Floor",
+      "description": "Ground-level showroom experience",
+      "cities": [
+        {
+          "id": "city-mumbai",
+          "slug": "mumbai",
+          "name": "Mumbai",
+          "nameLocal": "मुंबई",
+          "region": "Maharashtra",
+          "tags": ["metro", "west"],
+          "projects": [
+            {
+              "id": "proj-seabreeze",
+              "slug": "seabreeze-residences",
+              "name": "Seabreeze Residences",
+              "locality": "Worli",
+              "bhkType": "3BHK",
+              "rooms": [
+                {
+                  "id": "room-living",
+                  "slug": "living-room",
+                  "name": "Living Room",
+                  "type": "living",
+                  "variants": [
+                    {
+                      "id": "var-living-modern",
+                      "slug": "modern-minimal",
+                      "name": "Modern Minimal",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "isDefault": true,
+                      "description": "A contemporary living room with clean lines, neutral tones, and modular furniture.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-sofa-1",
+                          "label": "L-Shape Sofa",
+                          "type": "product",
+                          "yaw": 45.0,
+                          "pitch": -10.0,
+                          "description": "Premium Italian leather L-shape sofa with adjustable headrests.",
+                          "image": "/assets/products/sofa-lshape.jpg",
+                          "sku": "SOF-LS-001",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "SOF-LS-001",
+                            "quantity": 1
+                          }
+                        },
+                        {
+                          "id": "hs-tv-unit",
+                          "label": "TV Unit",
+                          "type": "module",
+                          "yaw": 180.0,
+                          "pitch": 0.0,
+                          "description": "Wall-mounted modular TV unit with integrated storage.",
+                          "moduleCode": "MOD-TV-200",
+                          "pricingRef": {
+                            "type": "module",
+                            "code": "MOD-TV-200"
+                          }
+                        },
+                        {
+                          "id": "hs-room-nav",
+                          "label": "Go to Kitchen",
+                          "type": "navigation",
+                          "yaw": 270.0,
+                          "pitch": -5.0,
+                          "targetRoomSlug": "kitchen"
+                        }
+                      ],
+                      "media": [
+                        {
+                          "id": "vid-living-walkthrough",
+                          "type": "video",
+                          "title": "Living Room Walkthrough",
+                          "url": "/assets/videos/living-walkthrough.mp4",
+                          "poster": "/assets/videos/living-walkthrough-poster.jpg",
+                          "mimeType": "video/mp4"
+                        }
+                      ],
+                      "layerOptions": [
+                        {
+                          "id": "layer-sofa-beige",
+                          "label": "Beige Fabric",
+                          "group": "material",
+                          "mode": "full-panorama-variant",
+                          "targetVariantSlug": "modern-beige"
+                        }
+                      ],
+                      "gallery": [
+                        {
+                          "id": "g-living-modern-1",
+                          "title": "Sofa angle",
+                          "url": "/assets/images/background.png",
+                          "alt": "L-Shape sofa in the modern minimal living room"
+                        },
+                        {
+                          "id": "g-living-modern-2",
+                          "title": "Coffee table",
+                          "url": "/assets/images/background.png",
+                          "alt": "Walnut coffee table with brass accents"
+                        },
+                        {
+                          "id": "g-living-modern-3",
+                          "title": "TV wall",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modular TV unit with integrated lighting"
+                        }
+                      ],
+                      "longDescription": "This modern minimal living room is designed around restful negative space and a single, confident accent. The L-shape sofa anchors the seating zone in genuine Italian top-grain leather, balanced by a walnut coffee table with brushed brass inlays. A wall-mounted modular TV unit with integrated cove lighting keeps storage hidden and sight lines clean. Acoustic linen drapes frame floor-to-ceiling glazing, while engineered oak flooring with a matte clear coat ties the palette together. The result is a calm, low-glare space ideal for evening conversations and weekend films, scaled for a 3 BHK Worli residence.",
+                      "materials": [
+                        {
+                          "id": "mat-floor",
+                          "label": "Flooring",
+                          "material": "Engineered oak plank",
+                          "finish": "Matte clear lacquer",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)",
+                          "note": "10 mm wear layer · 2400 mm planks"
+                        },
+                        {
+                          "id": "mat-wall-feature",
+                          "label": "Feature wall",
+                          "material": "Diamond-quilted wallpaper",
+                          "finish": "Champagne satin",
+                          "swatch": "linear-gradient(135deg, #d6c9a8, #a89572)"
+                        },
+                        {
+                          "id": "mat-sofa",
+                          "label": "Sofa upholstery",
+                          "material": "Italian top-grain leather",
+                          "finish": "Charcoal pull-up",
+                          "swatch": "linear-gradient(135deg, #2c2c2e, #4a4a4d)",
+                          "note": "Pull-up patina deepens with use"
+                        },
+                        {
+                          "id": "mat-coffee-table",
+                          "label": "Coffee table",
+                          "material": "American walnut veneer",
+                          "finish": "Hand-rubbed oil",
+                          "swatch": "linear-gradient(135deg, #5a3a23, #2f1d10)"
+                        },
+                        {
+                          "id": "mat-tv-unit",
+                          "label": "TV unit modules",
+                          "material": "BWP-grade plywood + PU lacquer",
+                          "finish": "Matte graphite",
+                          "swatch": "linear-gradient(135deg, #2a2c30, #14161a)",
+                          "note": "Soft-close push-to-open drawers"
+                        },
+                        {
+                          "id": "mat-accent",
+                          "label": "Hardware accents",
+                          "material": "Solid brass",
+                          "finish": "Brushed champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-living-beige",
+                      "slug": "modern-beige",
+                      "name": "Modern Beige",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "Same modern layout with warm beige fabric sofa variant.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-sofa-beige",
+                          "label": "L-Shape Sofa (Beige)",
+                          "type": "product",
+                          "yaw": 45.0,
+                          "pitch": -10.0,
+                          "description": "Premium beige fabric L-shape sofa.",
+                          "sku": "SOF-LS-002",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "SOF-LS-002",
+                            "quantity": 1
+                          }
+                        }
+                      ],
+                      "longDescription": "The Modern Beige variant keeps the same architecture and lighting plan but swaps the leather sofa for a sand-toned performance fabric, dialling the room toward warmth and softness. Travertine-look porcelain replaces the oak floor, reflecting more light back into the space, while the TV unit moves to a fluted oak finish to play against the linen-wrapped walls. The brass hardware shifts to satin nickel, and a hand-knotted wool rug sits under the seating cluster. The plan suits clients who want a daytime-friendly room that photographs bright but still dresses up well in evening lamp-light.",
+                      "materials": [
+                        {
+                          "id": "mat-b-floor",
+                          "label": "Flooring",
+                          "material": "Travertine-effect porcelain tile",
+                          "finish": "Honed",
+                          "swatch": "linear-gradient(135deg, #d8cdb8, #a89c84)",
+                          "note": "1200 × 600 mm rectified format"
+                        },
+                        {
+                          "id": "mat-b-walls",
+                          "label": "Walls",
+                          "material": "Linen-look wallcovering",
+                          "finish": "Eggshell",
+                          "swatch": "linear-gradient(135deg, #e7dec9, #b9ad92)"
+                        },
+                        {
+                          "id": "mat-b-sofa",
+                          "label": "Sofa upholstery",
+                          "material": "Performance boucle fabric",
+                          "finish": "Sandstone",
+                          "swatch": "linear-gradient(135deg, #d8c6a0, #a08864)",
+                          "note": "Spill-resistant, 80 000 Martindale"
+                        },
+                        {
+                          "id": "mat-b-tv",
+                          "label": "TV unit modules",
+                          "material": "Fluted oak veneer",
+                          "finish": "Natural matte oil",
+                          "swatch": "linear-gradient(135deg, #c9a36a, #8a6630)"
+                        },
+                        {
+                          "id": "mat-b-rug",
+                          "label": "Rug",
+                          "material": "Hand-knotted wool",
+                          "finish": "Ivory + camel",
+                          "swatch": "linear-gradient(135deg, #f4ead2, #c9a87a)"
+                        },
+                        {
+                          "id": "mat-b-hardware",
+                          "label": "Hardware accents",
+                          "material": "Stainless steel",
+                          "finish": "Satin nickel",
+                          "swatch": "linear-gradient(135deg, #c0c5c8, #6e7378)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-kitchen",
+                  "slug": "kitchen",
+                  "name": "Kitchen",
+                  "type": "kitchen",
+                  "variants": [
+                    {
+                      "id": "var-kitchen-modular",
+                      "slug": "modular-classic",
+                      "name": "Modular Classic",
+                      "designStyle": "classic",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "isDefault": true,
+                      "description": "A fully modular kitchen with premium fittings and integrated appliances.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-counter",
+                          "label": "Kitchen Counter",
+                          "type": "module",
+                          "yaw": 90.0,
+                          "pitch": -15.0,
+                          "description": "Quartz countertop with integrated sink and hob.",
+                          "moduleCode": "MOD-KIT-300",
+                          "pricingRef": {
+                            "type": "module",
+                            "code": "MOD-KIT-300"
+                          }
+                        },
+                        {
+                          "id": "hs-info-material",
+                          "label": "Material Details",
+                          "type": "info",
+                          "yaw": 200.0,
+                          "pitch": 5.0,
+                          "description": "All cabinets use marine-grade plywood with soft-close hinges."
+                        }
+                      ],
+                      "longDescription": "A working chef's kitchen built on a 1200 mm modular grid, with a deep peninsular counter that doubles as a casual breakfast bar. Tall larders flank a built-in oven and microwave column, and the upper cabinets carry a continuous LED reveal so the splashback never sits in shadow. A single-bowl undermount sink is paired with a dual-flow pull-out tap, and the hob is induction with an integrated downdraft extractor. Soft-close hardware throughout keeps the room library-quiet during evening prep, while marine-grade ply and PU lacquer survive Mumbai's humid monsoon months without warping.",
+                      "materials": [
+                        {
+                          "id": "mat-k-counter",
+                          "label": "Countertop",
+                          "material": "Engineered quartz",
+                          "finish": "Carrara polished",
+                          "swatch": "linear-gradient(135deg, #f1efe9, #c9c5b9)",
+                          "note": "20 mm with mitred edge"
+                        },
+                        {
+                          "id": "mat-k-cabinets",
+                          "label": "Base & wall cabinets",
+                          "material": "BWP marine-grade plywood",
+                          "finish": "PU matte ivory",
+                          "swatch": "linear-gradient(135deg, #f3eee2, #cbc3ad)",
+                          "note": "Blum soft-close hinges & runners"
+                        },
+                        {
+                          "id": "mat-k-splash",
+                          "label": "Splashback",
+                          "material": "Glazed ceramic",
+                          "finish": "Subway gloss",
+                          "swatch": "linear-gradient(135deg, #efeee8, #b8b6ae)"
+                        },
+                        {
+                          "id": "mat-k-hob",
+                          "label": "Hob & sink fittings",
+                          "material": "304 stainless steel",
+                          "finish": "Brushed",
+                          "swatch": "linear-gradient(135deg, #c4c8cb, #6e7479)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "city-bangalore",
+          "slug": "bangalore",
+          "name": "Bangalore",
+          "nameLocal": "बेंगलुरु",
+          "region": "Karnataka",
+          "tags": ["metro", "south"],
+          "projects": [
+            {
+              "id": "proj-prestige-kingfisher",
+              "slug": "prestige-kingfisher-towers",
+              "name": "Prestige Kingfisher Towers",
+              "locality": "Ashok Nagar",
+              "bhkType": "4BHK",
+              "rooms": [
+                {
+                  "id": "room-bedroom-blr",
+                  "slug": "bedroom",
+                  "name": "Bedroom",
+                  "type": "bedroom",
+                  "variants": [
+                    {
+                      "id": "var-bedroom-default",
+                      "slug": "default",
+                      "name": "Master Bedroom",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "isDefault": true,
+                      "description": "A serene bedroom with warm tones and modular wardrobes.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/Bangalore/Room image/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": []
+                    }
+                  ]
+                },
+                {
+                  "id": "room-living-blr",
+                  "slug": "living-room",
+                  "name": "Living Room",
+                  "type": "living",
+                  "variants": [
+                    {
+                      "id": "var-living-default",
+                      "slug": "default",
+                      "name": "Living Room",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "isDefault": true,
+                      "description": "An open, light-filled living area with modular seating.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/Bangalore/Room image/living_room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

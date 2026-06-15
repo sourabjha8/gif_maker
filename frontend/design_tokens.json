@@ -1,0 +1,101 @@
+{
+  "Virtual XP": {
+    "collection": "Virtual XP Design System",
+    "modes": ["Default"],
+    "tokens": {
+      "Color": {
+        "Primary-Blue": {
+          "50": { "value": "#F1F9FE", "type": "color" },
+          "100": { "value": "#E1F2FD", "type": "color" },
+          "200": { "value": "#BDE6FA", "type": "color" },
+          "300": { "value": "#82D3F7", "type": "color" },
+          "400": { "value": "#3FBDF1", "type": "color" },
+          "500": { "value": "#17A8E5", "type": "color" },
+          "600": { "value": "#0A85BF", "type": "color" },
+          "700": { "value": "#09699B", "type": "color" },
+          "800": { "value": "#0C5A80", "type": "color" },
+          "900": { "value": "#104A6A", "type": "color" },
+          "950": { "value": "#0B2F46", "type": "color" }
+        },
+        "Neutral-Greys": {
+          "50": { "value": "#fafafa", "type": "color" },
+          "100": { "value": "#f5f5f5", "type": "color" },
+          "200": { "value": "#f0f0f0", "type": "color" },
+          "300": { "value": "#d9d9d9", "type": "color" },
+          "400": { "value": "#bfbfbf", "type": "color" },
+          "500": { "value": "#8c8c8c", "type": "color" },
+          "600": { "value": "#595959", "type": "color" },
+          "700": { "value": "#434343", "type": "color" },
+          "800": { "value": "#3f434a", "type": "color" },
+          "900": { "value": "#1f1f1f", "type": "color" },
+          "950": { "value": "#16171a", "type": "color" }
+        },
+        "Spatial": {
+          "bg-base": { "value": "#1f1f1f", "type": "color" },
+          "bg-glass-base": { "value": "rgba(18, 18, 18, 0.6)", "type": "color" },
+          "bg-glass-elevated": { "value": "rgba(255, 255, 255, 0.05)", "type": "color" },
+          "border-glass": { "value": "rgba(255, 255, 255, 0.1)", "type": "color" },
+          "border-elevated": { "value": "rgba(255, 255, 255, 0.2)", "type": "color" },
+          "border-active": { "value": "#17A8E5", "type": "color" },
+          "glow-glass": { "value": "rgba(255, 255, 255, 0.2)", "type": "color" }
+        }
+      },
+      "Number": {
+        "Spacing": {
+          "container": { "value": 40, "type": "number" },
+          "group": { "value": 24, "type": "number" },
+          "element": { "value": 16, "type": "number" },
+          "tight": { "value": 8, "type": "number" }
+        },
+        "Radius": {
+          "container": { "value": 32, "type": "number" },
+          "card": { "value": 24, "type": "number" },
+          "element": { "value": 12, "type": "number" },
+          "pill": { "value": 100, "type": "number" }
+        },
+        "Depth": {
+          "near": { "value": 20, "type": "number" },
+          "mid": { "value": 10, "type": "number" },
+          "far": { "value": 0, "type": "number" }
+        },
+        "Blur": {
+          "standard": { "value": 24, "type": "number" }
+        },
+        "Typography-Size": {
+          "H1": { "value": 32, "type": "number" },
+          "H3": { "value": 24, "type": "number" },
+          "Title-Large": { "value": 18, "type": "number" },
+          "Title-Medium": { "value": 16, "type": "number" },
+          "Title-Small": { "value": 14, "type": "number" },
+          "Body-Large": { "value": 16, "type": "number" },
+          "Body-Medium": { "value": 14, "type": "number" },
+          "Body-Small": { "value": 12, "type": "number" },
+          "Body-Small-2": { "value": 12, "type": "number" },
+          "CTA": { "value": 14, "type": "number" }
+        },
+        "Typography-Weight": {
+          "Bold": { "value": 700, "type": "number" },
+          "SemiBold": { "value": 600, "type": "number" },
+          "Medium": { "value": 500, "type": "number" },
+          "Regular": { "value": 400, "type": "number" }
+        },
+        "Typography-LineHeight": {
+          "H1": { "value": 38, "type": "number" },
+          "H3": { "value": 29, "type": "number" },
+          "Title-Large": { "value": 26, "type": "number" },
+          "Title-Medium": { "value": 24, "type": "number" },
+          "Title-Small": { "value": 22, "type": "number" },
+          "Body-Large": { "value": 24, "type": "number" },
+          "Body-Medium": { "value": 22, "type": "number" },
+          "Body-Small": { "value": 18, "type": "number" },
+          "CTA": { "value": 22, "type": "number" }
+        }
+      },
+      "String": {
+        "Typography": {
+          "Font-Family": { "value": "Open Sans", "type": "string" }
+        }
+      }
+    }
+  }
+}

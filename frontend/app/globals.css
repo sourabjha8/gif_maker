@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@source "../../packages";
+
+@theme {
+  /* Colors - Primary Blue */
+  --color-primary-50: #F1F9FE;
+  --color-primary-100: #E1F2FD;
+  --color-primary-200: #BDE6FA;
+  --color-primary-300: #82D3F7;
+  --color-primary-400: #3FBDF1;
+  --color-primary-500: #17A8E5;
+  --color-primary-600: #0A85BF;
+  --color-primary-700: #09699B;
+  --color-primary-800: #0C5A80;
+  --color-primary-900: #104A6A;
+  --color-primary-950: #0B2F46;
+
+  /* Colors - Neutral Greys */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #f0f0f0;
+  --color-neutral-300: #d9d9d9;
+  --color-neutral-400: #bfbfbf;
+  --color-neutral-500: #8c8c8c;
+  --color-neutral-600: #595959;
+  --color-neutral-700: #434343;
+  --color-neutral-800: #3f434a;
+  --color-neutral-900: #1f1f1f;
+  --color-neutral-950: #16171a;
+
+  /* Spatial Design / Glassmorphism */
+  --color-spatial-bg: #1f1f1f;
+  --color-spatial-glass: rgba(18, 18, 18, 0.6);
+  --color-spatial-glass-elevated: rgba(255, 255, 255, 0.05);
+  --color-spatial-border: rgba(255, 255, 255, 0.1);
+  --color-spatial-border-elevated: rgba(255, 255, 255, 0.2);
+  --color-spatial-active: #17A8E5;
+
+  /* Spacing */
+  --spacing-tight: 8px;
+  --spacing-element: 16px;
+  --spacing-group: 24px;
+  --spacing-container: 40px;
+
+  /* Radius */
+  --radius-element: 12px;
+  --radius-card: 24px;
+  --radius-container: 32px;
+  --radius-pill: 100px;
+
+  /* Typography Sizes */
+  --text-h1: 40px;
+  --text-h1--line-height: 48px;
+  --text-h2: 32px;
+  --text-h2--line-height: 38px;
+  --text-h3: 24px;
+  --text-h3--line-height: 29px;
+  --text-titleLarge: 18px;
+  --text-titleLarge--line-height: 26px;
+  --text-titleMedium: 16px;
+  --text-titleMedium--line-height: 24px;
+  --text-titleSmall: 14px;
+  --text-titleSmall--line-height: 22px;
+  --text-bodyLarge: 16px;
+  --text-bodyLarge--line-height: 24px;
+  --text-bodyMedium: 14px;
+  --text-bodyMedium--line-height: 22px;
+  --text-bodySmall: 12px;
+  --text-bodySmall--line-height: 18px;
+  --text-cta: 14px;
+  --text-cta--line-height: 22px;
+
+  /* Shadows */
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.16);
+  --shadow-element: 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  /* Fonts */
+  --font-sans: 'Open Sans', sans-serif;
+
+  /* Animations */
+  --animate-ambient-blur: ambient-pulse 2s ease-in-out infinite;
+
+  @keyframes ambient-pulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.35;
+    }
+
+    50% {
+      transform: scale(1.05);
+      opacity: 0.55;
+    }
+  }
+
+  @keyframes scatter-pulse {
+    0%, 100% { transform: scale(1);    opacity: 1;   }
+    50%       { transform: scale(1.22); opacity: 0.6; }
+  }
+
+  @keyframes scatter-dot-pulse {
+    0%, 100% { transform: scale(1);   opacity: 0.9; }
+    50%       { transform: scale(0.7); opacity: 1;   }
+  }
+
+  --animate-fade-in: fade-in 3s ease-out forwards;
+  --animate-reveal: reveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  --animate-fade-in-down: fade-in-down 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* PSV hotspot markers — dim by default, full opacity on hover */
+.psv-marker-hotspot {
+  opacity: 0.60;
+  transition: opacity 0.25s ease;
+}
+.psv-marker-hotspot:hover {
+  opacity: 1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-spatial-bg);
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Custom modern scrollbar for the spatial design system */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-spatial-border-elevated);
+  border-radius: 100px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-400);
+}
+
+/* Firefox support (simplified) */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-spatial-border-elevated) transparent;
+}
