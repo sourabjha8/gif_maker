@@ -13,6 +13,10 @@ dist-ssr
 *.local
 /package-lock.json
 
+# Generated CSS/HTML build artifacts
+output.css
+output.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
