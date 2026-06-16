@@ -21,6 +21,7 @@ export * from './ScreenLayout';
 export * from './LoadingOverlay';
 export * from './Navbar';
 export * from './AlertBox';
+export * from './WelcomeModal';
 
 // Tour & Estimate
 export {
