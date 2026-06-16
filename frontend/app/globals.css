@@ -2,6 +2,7 @@
 @source "../../packages";
 
 @theme {
+  /* BEGIN GENERATED TOKENS — source: design_tokens.json via scripts/build-tokens.mjs. Run `pnpm build:tokens` to regenerate. Do not edit by hand. */
   /* Colors - Primary Blue */
   --color-primary-50: #F1F9FE;
   --color-primary-100: #E1F2FD;
@@ -77,6 +78,7 @@
 
   /* Fonts */
   --font-sans: 'Open Sans', sans-serif;
+  /* END GENERATED TOKENS */
 
   /* Animations */
   --animate-ambient-blur: ambient-pulse 2s ease-in-out infinite;

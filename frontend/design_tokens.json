@@ -62,7 +62,8 @@
           "standard": { "value": 24, "type": "number" }
         },
         "Typography-Size": {
-          "H1": { "value": 32, "type": "number" },
+          "H1": { "value": 40, "type": "number" },
+          "H2": { "value": 32, "type": "number" },
           "H3": { "value": 24, "type": "number" },
           "Title-Large": { "value": 18, "type": "number" },
           "Title-Medium": { "value": 16, "type": "number" },
@@ -80,7 +81,8 @@
           "Regular": { "value": 400, "type": "number" }
         },
         "Typography-LineHeight": {
-          "H1": { "value": 38, "type": "number" },
+          "H1": { "value": 48, "type": "number" },
+          "H2": { "value": 38, "type": "number" },
           "H3": { "value": 29, "type": "number" },
           "Title-Large": { "value": 26, "type": "number" },
           "Title-Medium": { "value": 24, "type": "number" },
@@ -93,7 +95,13 @@
       },
       "String": {
         "Typography": {
-          "Font-Family": { "value": "Open Sans", "type": "string" }
+          "Font-Family": { "value": "Open Sans", "type": "string" },
+          "Font-Fallback": { "value": "sans-serif", "type": "string" }
+        },
+        "Shadow": {
+          "modal": { "value": "0 8px 32px rgba(0, 0, 0, 0.4)", "type": "string" },
+          "card": { "value": "0 4px 16px rgba(0, 0, 0, 0.16)", "type": "string" },
+          "element": { "value": "0 2px 4px rgba(0, 0, 0, 0.08)", "type": "string" }
         }
       }
     }

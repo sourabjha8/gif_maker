@@ -1,8 +1,8 @@
 /**
  * Virtual XP Design Tokens
- * 
- * Scalable design tokens derived from the Virtual XP Design System.
- * These tokens are platform-agnostic where possible.
+ *
+ * AUTO-GENERATED from design_tokens.json by scripts/build-tokens.mjs.
+ * Do not edit by hand — run `pnpm build:tokens` (also runs on `pnpm dev` / `pnpm build`).
  */
 
 export const tokens = {
@@ -43,11 +43,11 @@ export const tokens = {
       bgGlassElevated: 'rgba(255, 255, 255, 0.05)',
       borderGlass: 'rgba(255, 255, 255, 0.1)',
       borderElevated: 'rgba(255, 255, 255, 0.2)',
-      borderActive: '#17A8E5', // primary blue 500
+      borderActive: '#17A8E5',
       glowGlass: 'rgba(255, 255, 255, 0.2)',
     },
   },
-  
+
   spacing: {
     container: 40,
     group: 24,
