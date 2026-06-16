@@ -17,7 +17,6 @@ export { Play } from './Play';
 export { Images } from './Images';
 export { Volume2 } from './Volume2';
 export { VolumeX } from './VolumeX';
-export { Door } from './Door';
 export { List } from './List';
 export { Palette } from './Palette';
 export { Menu } from './Menu';
