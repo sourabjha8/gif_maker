@@ -24,6 +24,10 @@
     "allowJs": true,
     "incremental": true,
     "esModuleInterop": true,
+    "paths": {
+      "@shared": ["./packages/shared/index.ts"],
+      "@shared/*": ["./packages/shared/*"]
+    },
     "plugins": [
       {
         "name": "next"

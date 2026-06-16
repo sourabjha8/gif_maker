@@ -159,3 +159,29 @@ export function getDefaultFilters(): Record<string, string> {
 export function getDefaultSociety(): Society {
   return loadNavigation().defaultSociety;
 }
+
+// ─── URL Slug Helpers ────────────────────────────────────────────
+// Nav cities/societies are stored by display name; URLs need slugs.
+// We derive slugs from names so no extra data is required. The derived
+// city/society slugs intentionally line up with the tour content slugs
+// (e.g. "Bangalore" -> "bangalore", "Prestige Kingfisher Towers" ->
+// "prestige-kingfisher-towers"), which is what lets the dolly flow hand
+// off into the real tour route.
+
+/** Convert a display name to a URL-safe kebab-case slug. */
+export function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+/** Resolve a nav city by its slugified name. */
+export function getNavCityBySlug(slug: string): NavCity | undefined {
+  return loadNavigation().floors.find((f) => slugify(f.city.name) === slug)?.city;
+}
+
+/** Resolve a society within a city by their slugified names. */
+export function getNavSocietyBySlug(citySlug: string, societySlug: string): Society | undefined {
+  return getNavCityBySlug(citySlug)?.societies.find((s) => slugify(s.name) === societySlug);
+}

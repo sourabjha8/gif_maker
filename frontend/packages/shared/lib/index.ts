@@ -1,4 +1,7 @@
-export { FlowProvider, useFlow } from './navigation';
+// Screen-flow navigation is now handled by real App Router routes
+// (next/navigation). The former FlowProvider/useFlow context + sessionStorage
+// screen state has been retired. Cross-cutting cart/estimate state still lives
+// in the Zustand store below.
 
 // ─── Content Loader ─────────────────────────────────────────────
 // Import directly from './content' or './validation' when needed.

@@ -1,4 +1,5 @@
 export * from './UI';
+export * from './AppFrame';
 export * from './TextBox';
 export * from './Button';
 export * from './Tooltip';
