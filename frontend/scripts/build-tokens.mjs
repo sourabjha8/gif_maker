@@ -3,7 +3,7 @@
  * build-tokens.mjs — single source of truth: design_tokens.json
  *
  * Reads frontend/design_tokens.json and regenerates:
- *   - packages/shared/tokens.ts        (the exported `tokens` object — fully generated)
+ *   - src/tokens.ts                    (the exported `tokens` object — fully generated)
  *   - app/globals.css                  (only the @theme region between the
  *                                        BEGIN/END GENERATED TOKENS markers)
  *
@@ -22,7 +22,7 @@ import { dirname, join } from 'node:path';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE = join(ROOT, 'design_tokens.json');
-const TOKENS_TS = join(ROOT, 'packages', 'shared', 'tokens.ts');
+const TOKENS_TS = join(ROOT, 'src', 'tokens.ts');
 const GLOBALS_CSS = join(ROOT, 'app', 'globals.css');
 
 const raw = JSON.parse(readFileSync(SOURCE, 'utf8'));
@@ -250,4 +250,4 @@ const replacement = `${beginMarker}\n${generateThemeBlock()}\n${endMarker}`;
 const nextCss = css.replace(markerRe, replacement);
 writeFileSync(GLOBALS_CSS, nextCss, 'utf8');
 
-console.log('build-tokens: wrote packages/shared/tokens.ts and app/globals.css @theme block.');
+console.log('build-tokens: wrote src/tokens.ts and app/globals.css @theme block.');

@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@source "../../packages";
+@source "../src";
 
 @theme {
   /* BEGIN GENERATED TOKENS — source: design_tokens.json via scripts/build-tokens.mjs. Run `pnpm build:tokens` to regenerate. Do not edit by hand. */

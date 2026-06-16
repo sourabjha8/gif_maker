@@ -16,8 +16,8 @@
  */
 
 import type { NextRequest } from 'next/server';
-import type { PricingRequest, PricingResponse } from '../../../packages/shared/types';
-import { mockPricingAdapter } from '../../../packages/shared/lib/pricing/mock-adapter';
+import type { PricingRequest, PricingResponse } from '@shared/types';
+import { mockPricingAdapter } from '@shared/lib/pricing/mock-adapter';
 
 export const runtime = 'nodejs';
 

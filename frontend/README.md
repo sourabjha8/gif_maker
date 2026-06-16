@@ -35,32 +35,43 @@ The proxy handler lives at `app/api/pricing/route.ts`. With `NEXT_PUBLIC_PRICING
 ## Project layout
 
 ```
-app/                          # Next.js App Router
+app/                          # Next.js App Router (real routes per screen)
   layout.tsx                  # Root layout (loads globals.css)
-  page.tsx                    # Screen registry / router
+  page.tsx                    # Start screen ("/")
+  login/ choose/ location/    # Onboarding routes
+  room-type/ room-filter/     # Design-flow routes
+  [city]/                     # ProjectSelection
+    [project]/                # RoomSelection
+      [room]/                 # TourScreen (360 viewer island)
+      dolly/                  # DollyScreen (floor-plan map)
+  estimate/                   # Estimate summary
   globals.css                 # Tailwind 4 theme + design tokens
   api/pricing/route.ts        # Optional pricing proxy
 
-packages/shared/              # Shared design system + screens
-  components/                 # UI primitives (Button, AlertBox, ...)
+src/                          # Shared design system + screens (alias: @shared)
+  components/                 # UI primitives (Button, AlertBox, AppFrame, ...)
     tour/                     # 360 viewer + hotspot panel + video modal
     estimate/                 # Estimate sidebar + summary view
-  screens/                    # Top-level routed screens
+  screens/                    # Screen components (wired to routes via @shared)
   lib/
-    content.ts                # JSON content loader
+    content.ts                # JSON content loader + nav/slug helpers
     validation/               # Zod schemas
     pricing/                  # Adapter, factory, INR formatter
     estimate/                 # Zustand store + selectors
   data/
-    virtual-xp-content.json   # Static tour content (edit here for v1)
+    virtual-xp-content.json   # Static content (tour + navigation; edit here for v1)
   types/                      # All TypeScript domain types
 
 public/assets/                # Panoramas, posters, videos, icons
 ```
 
+Routing uses `next/navigation`; selections live in URL segments. Cross-cutting
+cart/estimate state stays in the Zustand store. Screens are imported via the
+`@shared` path alias (configured in `tsconfig.json`).
+
 ## Editing tour content
 
-All tour data lives in `packages/shared/data/virtual-xp-content.json`. The shape is enforced by Zod schemas in `packages/shared/lib/validation/schemas.ts`.
+All tour data lives in `src/data/virtual-xp-content.json`. The shape is enforced by Zod schemas in `src/lib/validation/schemas.ts`.
 
 When adding a hotspot:
 

@@ -25,8 +25,8 @@
     "incremental": true,
     "esModuleInterop": true,
     "paths": {
-      "@shared": ["./packages/shared/index.ts"],
-      "@shared/*": ["./packages/shared/*"]
+      "@shared": ["./src/index.ts"],
+      "@shared/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -36,8 +36,8 @@
   },
   "include": [
     "globals.d.ts",
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "app/**/*.ts",
     "app/**/*.tsx",
     ".next/types/**/*.ts",
