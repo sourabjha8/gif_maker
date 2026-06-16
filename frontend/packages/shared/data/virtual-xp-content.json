@@ -373,7 +373,7 @@
                       "description": "A serene bedroom with warm tones and modular wardrobes.",
                       "panorama": {
                         "type": "equirectangular",
-                        "url": "/assets/Bangalore/Room image/bedroom.jpg",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
                         "width": 8192,
                         "height": 4096
                       },
@@ -399,7 +399,7 @@
                       "description": "An open, light-filled living area with modular seating.",
                       "panorama": {
                         "type": "equirectangular",
-                        "url": "/assets/Bangalore/Room image/living_room.jpg",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
                         "width": 8192,
                         "height": 4096
                       },

@@ -50,7 +50,7 @@ export const DollyScreen: React.FC<DollyScreenProps> = ({
     <div className="absolute inset-0 bg-spatial-bg overflow-hidden">
       {/* Dollhouse image */}
       <img
-        src="/assets/Bangalore/Dolly Image/image (4).png"
+        src="/assets/bangalore/dolly/image-4.png"
         alt={`${societyName} dollhouse`}
         className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
         draggable={false}
