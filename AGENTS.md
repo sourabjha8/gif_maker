@@ -1,8 +1,8 @@
-# AGENTS.md - Virtual XP Web v1 Pilot
+# AGENT.md - Virtual XP Web v1 Pilot
 
 You are building **Virtual XP Web**, a browser-based 360-degree interior showroom and pitch tool.
 
-This file is the highest-priority project instruction for Codex. Read it before editing files.
+This file is the highest-priority project instruction for Codex and other AI-agents except Claude Code. Read it before editing files.
 
 ## Product goal
 
@@ -149,7 +149,7 @@ This applies to the whole project and is a standing rule for future work. Only a
 - Modals must trap focus and close with Escape.
 - Do not rely only on color to communicate state.
 
-## Workflow rules for Codex
+## Workflow rules for Claude Code
 
 1. Start every major phase with a short implementation plan.
 2. Do not mix multiple phases in one pass.
