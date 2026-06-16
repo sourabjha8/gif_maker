@@ -6,12 +6,16 @@
  * Reference: FEATURE_SPEC.md §3 - Content data contract
  */
 
+import type { NavigationData } from './navigation-data';
+
 // ─── Top-Level Content ───────────────────────────────────────────
 
 export interface VirtualXpContent {
   version: string;
   updatedAt: string;
   floors: ContentFloor[];
+  /** Selection-flow navigation catalog + design-flow config. */
+  navigation: NavigationData;
 }
 
 // ─── Content Hierarchy ───────────────────────────────────────────

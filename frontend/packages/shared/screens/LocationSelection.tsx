@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, ScreenLayout, StepHeader, ActionFooter, FloorTab, CityCard } from '../components';
 import { ChevronLeft } from '../assets/icons';
-import { FLOOR_CITY_MAP, FLOORS } from '../data';
+import { getNavFloorLabels, getNavCityByFloor } from '../lib/content';
 
 export interface LocationSelectionProps {
   onBack?: () => void;
@@ -16,19 +16,20 @@ export interface LocationSelectionProps {
  * Shows floor-based city selection with FloorTab navigation.
  */
 export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, onExplore }) => {
-  const [activeFloor, setActiveFloor] = useState(FLOORS[0]);
-  const currentCity = FLOOR_CITY_MAP[activeFloor];
-  const activeFloorIndex = FLOORS.indexOf(activeFloor);
+  const floors = getNavFloorLabels();
+  const [activeFloor, setActiveFloor] = useState(floors[0]);
+  const currentCity = getNavCityByFloor(activeFloor)!;
+  const activeFloorIndex = floors.indexOf(activeFloor);
 
   const handleUpClick = () => {
-    if (activeFloorIndex < FLOORS.length - 1) {
-      setActiveFloor(FLOORS[activeFloorIndex + 1]);
+    if (activeFloorIndex < floors.length - 1) {
+      setActiveFloor(floors[activeFloorIndex + 1]);
     }
   };
 
   const handleDownClick = () => {
     if (activeFloorIndex > 0) {
-      setActiveFloor(FLOORS[activeFloorIndex - 1]);
+      setActiveFloor(floors[activeFloorIndex - 1]);
     }
   };
 
@@ -47,7 +48,7 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, on
         {/* Left: Floor Tab Navigation */}
         <div className="flex-shrink-0 md:h-full">
           <FloorTab
-            floors={FLOORS}
+            floors={floors}
             activeFloor={activeFloor}
             onFloorSelect={setActiveFloor}
             onUpClick={handleUpClick}
@@ -70,7 +71,7 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, on
               </div>
               {/* Dot indicators */}
               <div className="flex items-center gap-tight">
-                {FLOORS.map((floor) => (
+                {floors.map((floor) => (
                   <button
                     key={floor}
                     onClick={() => setActiveFloor(floor)}

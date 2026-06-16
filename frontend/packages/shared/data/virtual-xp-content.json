@@ -413,5 +413,102 @@
         }
       ]
     }
-  ]
+  ],
+  "navigation": {
+    "defaultCity": "Gurugram",
+    "floors": [
+      {
+        "label": "1F",
+        "city": {
+          "name": "Gurugram",
+          "nameHindi": "गुरुग्राम",
+          "state": "Haryana",
+          "country": "India",
+          "projectCount": 14,
+          "tags": ["Luxury Interiors", "Garden City", "South Indian Heritage"],
+          "image": "/assets/images/background.png",
+          "societies": [
+            { "name": "DLF Camellias", "bhk": "2 BHK", "address": "Gold Course Road", "logo": "/assets/icons/default_icon.svg" },
+            { "name": "M3M Golf Hills", "bhk": "3 BHK", "address": "Gold Course Road", "logo": "/assets/icons/default_icon.svg" },
+            { "name": "Godrej", "bhk": "1 BHK", "address": "Gold Course Road", "logo": "/assets/icons/default_icon.svg" }
+          ]
+        }
+      },
+      {
+        "label": "2F",
+        "city": {
+          "name": "Mumbai",
+          "nameHindi": "मुंबई",
+          "state": "Maharashtra",
+          "country": "India",
+          "projectCount": 18,
+          "tags": ["Sea-facing Villas", "Modern Lofts", "Heritage Homes"],
+          "image": "/assets/images/background.png",
+          "societies": [
+            { "name": "Lodha Altamount", "bhk": "4 BHK", "address": "Altamount Road", "logo": "/assets/icons/default_icon.svg" },
+            { "name": "Piramal Mahalaxmi", "bhk": "3 BHK", "address": "Mahalaxmi", "logo": "/assets/icons/default_icon.svg" }
+          ]
+        }
+      },
+      {
+        "label": "3F",
+        "city": {
+          "name": "Bangalore",
+          "nameHindi": "बेंगलुरु",
+          "state": "Karnataka",
+          "country": "India",
+          "projectCount": 12,
+          "tags": ["Tech Hub Living", "Garden City", "Contemporary Design"],
+          "image": "/assets/images/background.png",
+          "societies": [
+            { "name": "Prestige Kingfisher Towers", "bhk": "4 BHK", "address": "Ashok Nagar", "logo": "/assets/icons/default_icon.svg" }
+          ]
+        }
+      },
+      {
+        "label": "4F",
+        "city": {
+          "name": "Pune",
+          "nameHindi": "पुणे",
+          "state": "Maharashtra",
+          "country": "India",
+          "projectCount": 14,
+          "tags": ["Luxury Interiors", "Garden City", "South Indian Heritage"],
+          "image": "/assets/images/background.png",
+          "societies": [
+            { "name": "Panchshil Trump Towers", "bhk": "5 BHK", "address": "Kalyani Nagar", "logo": "/assets/icons/default_icon.svg" }
+          ]
+        }
+      }
+    ],
+    "rooms": [
+      { "id": "master-bedroom", "name": "Master Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "kids-bedroom", "name": "Kid's Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "guest-bedroom", "name": "Guest Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "kitchen", "name": "Kitchen", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "bathroom", "name": "Bathroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "balcony", "name": "Balcony", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" }
+    ],
+    "roomTypes": [
+      { "id": "master-bedroom", "name": "Master Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "living-room", "name": "Living Room", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "kids-bedroom", "name": "Kid's Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "guest-bedroom", "name": "Guest Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "kitchen", "name": "Kitchen", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
+      { "id": "bathroom", "name": "Bathroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" }
+    ],
+    "filterGroups": [
+      { "id": "design", "label": "Design Style", "options": ["Modern", "Classic", "Industrial", "Minimalist"] },
+      { "id": "module", "label": "Module Type", "options": ["Standard", "Premium", "Custom"] },
+      { "id": "luxury", "label": "Luxury Level", "options": ["Gold", "Platinum", "Diamond"] },
+      { "id": "size", "label": "Room Size", "options": ["10x12 ft", "12x14 ft", "15x18 ft"] }
+    ],
+    "defaultFilters": {
+      "design": "Modern",
+      "module": "Standard",
+      "luxury": "Gold",
+      "size": "12x14 ft"
+    },
+    "defaultSociety": { "name": "DLF Camellias", "bhk": "2 BHK", "address": "Gold Course Road", "logo": "/assets/icons/default_icon.svg" }
+  }
 }

@@ -8,7 +8,19 @@
 
 import contentJson from '../data/virtual-xp-content.json';
 import { validateContent, validateContentSafe } from './validation';
-import type { VirtualXpContent, ContentFloor, ContentCity, ContentProject, ContentRoom, RoomVariant } from '../types';
+import type {
+  VirtualXpContent,
+  ContentFloor,
+  ContentCity,
+  ContentProject,
+  ContentRoom,
+  RoomVariant,
+  NavigationData,
+  NavCity,
+  NavFilterGroupData,
+  Room,
+  Society,
+} from '../types';
 
 // ─── Load & Validate ─────────────────────────────────────────────
 
@@ -92,4 +104,58 @@ export function findBestVariant(
   }
 
   return scored[0].variant;
+}
+
+// ─── Navigation Catalog Helpers ──────────────────────────────────
+// Lookups for the selection-flow screens. These replace the former
+// data/cities.ts, projects.ts and rooms.ts constants and read from the
+// same validated content source.
+
+export function loadNavigation(): NavigationData {
+  return loadContent().navigation;
+}
+
+/** Ordered floor labels (e.g. ['1F','2F','3F','4F']). Replaces FLOORS. */
+export function getNavFloorLabels(): string[] {
+  return loadNavigation().floors.map((f) => f.label);
+}
+
+/** City for a floor label. Replaces FLOOR_CITY_MAP[label]. */
+export function getNavCityByFloor(label: string): NavCity | undefined {
+  return loadNavigation().floors.find((f) => f.label === label)?.city;
+}
+
+/** City (with societies) by display name. Replaces PROJECTS_DATA[cityName]. */
+export function getNavCityByName(name: string): NavCity | undefined {
+  return loadNavigation().floors.find((f) => f.city.name === name)?.city;
+}
+
+/** Default city name. Replaces DEFAULT_CITY. */
+export function getDefaultCityName(): string {
+  return loadNavigation().defaultCity;
+}
+
+/** Rooms for the city-flow room grid. Replaces ROOMS. */
+export function getNavRooms(): Room[] {
+  return loadNavigation().rooms;
+}
+
+/** Room types for the design flow. Replaces ROOM_TYPES. */
+export function getNavRoomTypes(): Room[] {
+  return loadNavigation().roomTypes;
+}
+
+/** Design-flow filter groups (data only; icons mapped in the screen). Replaces FILTER_GROUPS. */
+export function getFilterGroups(): NavFilterGroupData[] {
+  return loadNavigation().filterGroups;
+}
+
+/** Default filter selections. Replaces DEFAULT_FILTERS. */
+export function getDefaultFilters(): Record<string, string> {
+  return loadNavigation().defaultFilters;
+}
+
+/** Default society fallback. Replaces DEFAULT_SOCIETY. */
+export function getDefaultSociety(): Society {
+  return loadNavigation().defaultSociety;
 }

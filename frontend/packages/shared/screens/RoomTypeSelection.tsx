@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, ScreenLayout, StepHeader, ActionFooter, RoomCard } from '../components';
-import { ROOM_TYPES } from '../data';
+import { getNavRoomTypes } from '../lib/content';
 
 export interface RoomTypeSelectionProps {
   onBack?: () => void;
@@ -18,6 +18,7 @@ export const RoomTypeSelection: React.FC<RoomTypeSelectionProps> = ({
   onContinue,
 }) => {
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const roomTypes = getNavRoomTypes();
 
   return (
     <ScreenLayout>
@@ -41,7 +42,7 @@ export const RoomTypeSelection: React.FC<RoomTypeSelectionProps> = ({
           </Typography>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-element overflow-y-auto custom-scrollbar pr-2 pb-4">
-            {ROOM_TYPES.map((room) => (
+            {roomTypes.map((room) => (
               <RoomCard
                 key={room.id}
                 room={room}

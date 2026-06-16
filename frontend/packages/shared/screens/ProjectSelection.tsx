@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, ScreenLayout, StepHeader, ActionFooter, SocietyCard } from '../components';
-import { PROJECTS_DATA, DEFAULT_CITY } from '../data';
+import { getNavCityByName, getDefaultCityName } from '../lib/content';
 import type { Society } from '../types';
 
 export interface ProjectSelectionProps {
@@ -24,11 +24,11 @@ export const ProjectSelection: React.FC<ProjectSelectionProps> = ({
   onBack,
   onContinue,
   onViewOnMap,
-  cityName = DEFAULT_CITY,
+  cityName = getDefaultCityName(),
 }) => {
   const [selectedSociety, setSelectedSociety] = useState<string | null>(null);
 
-  const projectData = PROJECTS_DATA[cityName] || PROJECTS_DATA[DEFAULT_CITY];
+  const projectData = (getNavCityByName(cityName) ?? getNavCityByName(getDefaultCityName()))!;
   const currentSociety = projectData.societies.find((s) => s.name === selectedSociety);
 
   return (
@@ -39,11 +39,11 @@ export const ProjectSelection: React.FC<ProjectSelectionProps> = ({
           currentStep={3}
           totalSteps={4}
           label="Project Selection"
-          title={projectData.cityName}
+          title={projectData.name}
         >
           <div className="flex items-baseline gap-tight -mt-1">
             <Typography variant="bodyMedium" className="font-normal text-neutral-400 text-sm md:text-bodyMedium">
-              {projectData.cityNameHindi}
+              {projectData.nameHindi}
             </Typography>
             <span className="mx-2 text-neutral-600">·</span>
             <Typography variant="bodySmall" className="font-normal text-neutral-400 text-sm md:text-bodySmall">

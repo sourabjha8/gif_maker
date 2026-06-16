@@ -1,6 +1,7 @@
 export type { City, FloorCityMap } from './city';
 export type { Society, CityProjectData, CityProjectMap } from './project';
 export type { Room, FilterGroup } from './room';
+export type { NavCity, NavFloor, NavFilterGroupData, NavigationData } from './navigation-data';
 export type { ExperienceMode } from './experience';
 export type {
   ScreenId,

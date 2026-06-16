@@ -181,12 +181,67 @@ export const ContentFloorSchema = z.object({
   cities: z.array(ContentCitySchema),
 });
 
+// ─── Navigation Catalog ──────────────────────────────────────────
+// Validated data for the selection-flow screens (location / project /
+// room / room-type / room-filter). This is the navigation catalog and
+// design-flow config that previously lived in data/cities.ts,
+// projects.ts and rooms.ts. It is intentionally a separate shape from
+// the tour `floors` hierarchy above (different fields, different cardinality).
+
+export const NavSocietySchema = z.object({
+  name: z.string(),
+  bhk: z.string(),
+  address: z.string(),
+  logo: z.string(),
+});
+
+export const NavCitySchema = z.object({
+  name: z.string(),
+  nameHindi: z.string(),
+  state: z.string(),
+  country: z.string(),
+  projectCount: z.number(),
+  tags: z.array(z.string()),
+  image: z.string(),
+  societies: z.array(NavSocietySchema),
+});
+
+export const NavFloorSchema = z.object({
+  label: z.string(),
+  city: NavCitySchema,
+});
+
+export const NavRoomSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  image: z.string(),
+  icon: z.string(),
+});
+
+// Filter groups store data only; the icon component is mapped by id in the screen.
+export const NavFilterGroupSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  options: z.array(z.string()),
+});
+
+export const NavigationSchema = z.object({
+  defaultCity: z.string(),
+  floors: z.array(NavFloorSchema),
+  rooms: z.array(NavRoomSchema),
+  roomTypes: z.array(NavRoomSchema),
+  filterGroups: z.array(NavFilterGroupSchema),
+  defaultFilters: z.record(z.string(), z.string()),
+  defaultSociety: NavSocietySchema,
+});
+
 // ─── Root Content Schema ─────────────────────────────────────────
 
 export const VirtualXpContentSchema = z.object({
   version: z.string(),
   updatedAt: z.string(),
   floors: z.array(ContentFloorSchema),
+  navigation: NavigationSchema,
 });
 
 // ─── Pricing Schemas ─────────────────────────────────────────────

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Stack, Typography, ScreenLayout, StepHeader, ActionFooter, LoadingOverlay, RoomCard } from '../components';
-import { ROOMS, DEFAULT_SOCIETY } from '../data';
+import { getNavRooms, getDefaultSociety } from '../lib/content';
 import type { Society } from '../types';
 
 export interface RoomSelectionProps {
@@ -21,13 +21,14 @@ export interface RoomSelectionProps {
 export const RoomSelection: React.FC<RoomSelectionProps> = ({
   onBack,
   onExplore,
-  society = DEFAULT_SOCIETY,
+  society = getDefaultSociety(),
   cityName = 'Gurugram',
   stateName = 'Haryana',
   country = 'India',
 }) => {
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const rooms = getNavRooms();
 
   const handleExplore = () => {
     setIsLoading(true);
@@ -83,7 +84,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
           </Typography>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-element overflow-y-auto custom-scrollbar pr-2 pb-4">
-            {ROOMS.map((room) => (
+            {rooms.map((room) => (
               <RoomCard
                 key={room.id}
                 room={room}

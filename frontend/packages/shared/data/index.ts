@@ -1,3 +1,8 @@
-export { FLOOR_CITY_MAP, FLOORS } from './cities';
-export { PROJECTS_DATA, DEFAULT_CITY } from './projects';
-export { ROOMS, ROOM_TYPES, FILTER_GROUPS, DEFAULT_FILTERS, DEFAULT_SOCIETY } from './rooms';
+// Static content now lives in a single validated source:
+//   data/virtual-xp-content.json  (loaded + validated via lib/content.ts).
+//
+// The former cities.ts / projects.ts / rooms.ts constants were migrated
+// into that JSON under the `navigation` key. Read them through the
+// lib/content.ts helpers (getNavFloorLabels, getNavCityByName, getNavRooms,
+// getNavRoomTypes, getFilterGroups, getDefaultFilters, getDefaultSociety, …).
+export {};

@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { Typography, ScreenLayout, StepHeader, ActionFooter, LoadingOverlay } from '../components';
-import { FILTER_GROUPS, DEFAULT_FILTERS } from '../data';
+import { Settings, Layout, Award, Maximize } from '../assets/icons';
+import { getFilterGroups, getDefaultFilters } from '../lib/content';
 
 export interface RoomFilterSelectionProps {
   onBack?: () => void;
   onExplore?: (filters: Record<string, string>) => void;
 }
+
+/**
+ * Maps a filter group id to its icon component. Icons are React
+ * components, so they live in code; the group data (label/options)
+ * comes from the validated content source.
+ */
+const FILTER_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  design: Layout,
+  module: Settings,
+  luxury: Award,
+  size: Maximize,
+};
 
 /**
  * Room Filter Selection Screen
@@ -17,8 +30,9 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
   onBack,
   onExplore,
 }) => {
-  const [selections, setSelections] = useState<Record<string, string>>(DEFAULT_FILTERS);
+  const [selections, setSelections] = useState<Record<string, string>>(getDefaultFilters());
   const [isLoading, setIsLoading] = useState(false);
+  const filterGroups = getFilterGroups();
 
   const handleExplore = () => {
     setIsLoading(true);
@@ -49,8 +63,8 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
 
         {/* ─── Filter Sections ─── */}
         <div className="flex flex-col gap-group px-2 pb-6">
-          {FILTER_GROUPS.map((group) => {
-            const Icon = group.icon;
+          {filterGroups.map((group) => {
+            const Icon = FILTER_ICONS[group.id];
             return (
               <div key={group.id} className="flex flex-col gap-element">
                 <div className="flex items-center gap-tight">
