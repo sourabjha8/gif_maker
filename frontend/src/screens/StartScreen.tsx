@@ -12,7 +12,7 @@ export interface StartScreenProps {
 
 export const StartScreen: React.FC<StartScreenProps> = ({ onBegin }) => {
   return (
-    <div className="relative w-screen h-screen [height:100dvh] overflow-hidden bg-spatial-bg flex items-center justify-center font-sans">
+    <div className="relative w-screen h-dvh overflow-hidden bg-spatial-bg flex items-center justify-center font-sans">
 
       {/* Background Image Layer */}
       <img
