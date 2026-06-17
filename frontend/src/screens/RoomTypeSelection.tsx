@@ -41,7 +41,7 @@ export const RoomTypeSelection: React.FC<RoomTypeSelectionProps> = ({
             Tap a room type to continue
           </Typography>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-element overflow-y-auto custom-scrollbar pr-2 pb-4">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-element overflow-y-auto custom-scrollbar pr-2 pb-4">
             {roomTypes.map((room) => (
               <RoomCard
                 key={room.id}

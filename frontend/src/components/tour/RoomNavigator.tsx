@@ -55,7 +55,7 @@ export const RoomNavigator: React.FC<RoomNavigatorProps> = ({
       aria-label={`${roomName} — tap for room info`}
       aria-expanded={isInfoOpen}
       className="
-        h-12 min-w-[160px] px-6 flex items-center justify-center
+        h-12 min-w-[120px] sm:min-w-[160px] px-4 sm:px-6 flex items-center justify-center
         rounded-card
         bg-spatial-glass backdrop-blur-3xl
         border border-spatial-border shadow-card

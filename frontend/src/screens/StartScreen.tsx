@@ -12,7 +12,7 @@ export interface StartScreenProps {
 
 export const StartScreen: React.FC<StartScreenProps> = ({ onBegin }) => {
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-spatial-bg flex items-center justify-center font-sans">
+    <div className="relative w-screen h-screen [height:100dvh] overflow-hidden bg-spatial-bg flex items-center justify-center font-sans">
 
       {/* Background Image Layer */}
       <img
@@ -28,14 +28,14 @@ export const StartScreen: React.FC<StartScreenProps> = ({ onBegin }) => {
       <div className="absolute inset-0 w-full h-full z-11 bg-[linear-gradient(180deg,_rgba(0,0,10,0.7)_0%,_transparent_30%,_transparent_70%,_rgba(0,0,10,0.9)_100%)] animate-fade-in" />
 
       {/* Main Content Container Layer */}
-      <div className="relative z-20 flex flex-col items-center text-center max-w-[680px] w-full px-container">
+      <div className="relative z-20 flex flex-col items-center text-center max-w-[680px] w-full px-6 md:px-container">
 
         {/* Logo Container */}
-        <div className="mb-16 animate-reveal">
+        <div className="mb-8 md:mb-16 animate-reveal">
           <img
             src="/assets/icons/logo.svg"
             alt="Interior Company Logo"
-            className="w-[160px] h-auto object-contain drop-shadow-md"
+            className="w-[120px] md:w-[160px] h-auto object-contain drop-shadow-md"
           />
         </div>
 
@@ -58,7 +58,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({ onBegin }) => {
             Explore luxury residences, handpicked materials, and world-class design — all in immersive 3D.
           </Typography>
 
-          <div className="mt-group animate-reveal opacity-0 [animation-delay:550ms]">
+          <div className="animate-reveal opacity-0 [animation-delay:550ms]">
             <Button
               label="Begin Experience"
               onClick={onBegin}

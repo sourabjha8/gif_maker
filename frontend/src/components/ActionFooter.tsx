@@ -36,7 +36,7 @@ export const ActionFooter: React.FC<ActionFooterProps> = ({
           type="button"
           onClick={onBack}
           disabled={isBackDisabled || isLoading}
-          className={`flex items-center gap-tight px-element h-[40px] rounded-pill border border-spatial-border bg-transparent text-neutral-300 font-sans font-medium text-bodyMedium transition-all duration-200 hover:border-spatial-border-elevated hover:text-white cursor-pointer ${isBackDisabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`flex items-center gap-tight px-element h-11 min-w-[44px] rounded-pill border border-spatial-border bg-transparent text-neutral-300 font-sans font-medium text-bodyMedium transition-all duration-200 hover:border-spatial-border-elevated hover:text-white cursor-pointer ${isBackDisabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           <ChevronLeft size={14} />
           <span>Back</span>
@@ -51,7 +51,7 @@ export const ActionFooter: React.FC<ActionFooterProps> = ({
         onClick={onPrimaryAction}
         disabled={isPrimaryDisabled || isLoading}
         className={`
-          flex items-center gap-tight px-group h-[40px] rounded-pill font-sans font-bold text-bodyMedium transition-all duration-200
+          flex items-center gap-tight px-group h-11 min-w-[44px] rounded-pill font-sans font-bold text-bodyMedium transition-all duration-200
           ${isPrimaryDisabled || isLoading
             ? 'bg-neutral-700 text-neutral-400 cursor-not-allowed opacity-60'
             : 'bg-primary-500 text-white hover:bg-primary-400 shadow-card hover:shadow-modal cursor-pointer'

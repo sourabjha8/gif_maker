@@ -49,7 +49,7 @@ export const AlertBox: React.FC<AlertBoxProps> = ({
 
       {/* Alert Box */}
       <div
-        className={`relative w-full max-w-[320px] bg-spatial-glass-base backdrop-blur-3xl border border-spatial-border rounded-[32px] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 ease-out transform ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
+        className={`relative w-full max-w-[min(320px,calc(100vw-2rem))] bg-spatial-glass-base backdrop-blur-3xl border border-spatial-border rounded-[32px] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 ease-out transform ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
           }`}
         role="dialog"
         aria-modal="true"
