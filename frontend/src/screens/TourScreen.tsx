@@ -16,7 +16,6 @@ import {
   RoomInfoPanel,
   RoomNavigator,
   TourTopBar,
-  WelcomeModal,
 } from '../components';
 import {
   loadContent,
@@ -88,12 +87,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isStyleSheetOpen, setIsStyleSheetOpen] = useState(true); // variant switcher visible by default
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isWelcomeOpen, setIsWelcomeOpen] = useState(true);
-
-  useEffect(() => {
-    setIsWelcomeOpen(true);
-  }, [roomSlug]);
-
   // Estimate store hooks.
   const addItem = useEstimateStore((s) => s.addItem);
   const openEstimate = useEstimateStore((s) => s.open);
@@ -375,18 +368,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         onPlayVideo={(media) => setActiveVideo(media)}
         onNavigateRoom={handleNavigateRoom}
       />
-
-      {/* Welcome modal — appears on room entry */}
-      {resolved && (
-        <WelcomeModal
-          isOpen={isWelcomeOpen}
-          societyName={resolved.project.name}
-          roomName={resolved.room.name}
-          styleName={resolved.variant.name}
-          onStart={() => setIsWelcomeOpen(false)}
-          onClose={() => setIsWelcomeOpen(false)}
-        />
-      )}
 
       {/* Estimate sidebar */}
       <EstimateSidebar onViewSummary={onOpenEstimate} />
