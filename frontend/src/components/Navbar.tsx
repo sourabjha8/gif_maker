@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { AlertBox } from './AlertBox';
 
 interface NavbarProps {
@@ -29,13 +30,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onSignOut }) => {
         className="fixed top-0 left-0 right-0 z-[100] h-[70px] flex items-center justify-between px-6 md:px-12 animate-fade-in-down"
       >
         {/* Left Side: Logo */}
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <img
             src="/assets/icons/logo.svg"
             alt="Virtual XP Logo"
             className="h-10 w-auto object-contain"
           />
-        </div>
+        </Link>
 
         {/* Right Side: Sign Out */}
         <nav aria-label="User navigation">

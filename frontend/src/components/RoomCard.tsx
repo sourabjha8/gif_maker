@@ -41,12 +41,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({ room, isSelected, onClick })
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
       {/* Top Left Icon Container */}
-      <div className="absolute top-element left-element w-8 h-8 rounded-element bg-black/30 backdrop-blur-md border border-white/10 flex items-center justify-center">
+      <div className="hidden md:flex absolute top-element left-element w-8 h-8 rounded-element bg-black/30 backdrop-blur-md border border-white/10 items-center justify-center">
         <img src={room.icon} alt="icon" className="w-4 h-4 opacity-70" />
       </div>
 
       {/* Bottom Text */}
-      <div className="absolute bottom-element left-element right-element">
+      <div className="absolute bottom-1 left-2 right-2 md:bottom-element md:left-element md:right-element">
         <Typography variant="titleMedium" className="font-bold text-white drop-shadow-md truncate">
           {room.name}
         </Typography>

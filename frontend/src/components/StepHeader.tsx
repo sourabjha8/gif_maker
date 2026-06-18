@@ -6,7 +6,7 @@ interface StepHeaderProps {
   currentStep: number;
   totalSteps: number;
   label: string;
-  title: string;
+  title?: string;
   description?: string;
   children?: React.ReactNode;
   className?: string;
@@ -26,13 +26,15 @@ export const StepHeader: React.FC<StepHeaderProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`flex flex-col gap-2 md:gap-group flex-shrink-0 ${className}`}>
+    <div className={`flex flex-col gap-element md:gap-group flex-shrink-0 ${className}`}>
       <StepIndicator currentStep={currentStep} totalSteps={totalSteps} label={label} />
 
       <Stack gap="tiny">
-        <Typography variant="h2" className="font-bold text-white text-2xl md:text-h2">
-          {title}
-        </Typography>
+        {title && (
+          <Typography variant="h2" className="font-bold text-white text-2xl md:text-h2">
+            {title}
+          </Typography>
+        )}
         {description && (
           <Typography variant="bodyLarge" className="font-normal text-neutral-300 max-w-[505px] text-sm md:text-bodyLarge">
             {description}

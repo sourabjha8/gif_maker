@@ -23,7 +23,7 @@ export const AppFrame: React.FC<AppFrameProps> = ({ withNavbar = false, children
   const router = useRouter();
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-screen h-dvh overflow-hidden">
       {withNavbar && <Navbar onSignOut={() => router.push('/')} />}
       <div className="w-full h-full">{children}</div>
     </div>

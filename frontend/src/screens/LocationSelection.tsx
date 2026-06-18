@@ -40,11 +40,17 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, on
         totalSteps={4}
         label="Location Selection"
         title="Start Your Interior Journey"
-        description="Select a location to begin your immersive walkthrough experience."
-      />
+      >
+        <p className="block md:hidden font-normal text-neutral-300 text-sm leading-relaxed">
+          Select a location to begin your experience.
+        </p>
+        <p className="hidden md:block font-normal text-neutral-300 text-sm md:text-bodyLarge leading-relaxed max-w-[505px]">
+          Select a location to begin your immersive walkthrough experience.
+        </p>
+      </StepHeader>
 
       {/* ─── Main Content: FloorTab + City Card ─── */}
-      <div className="flex flex-col-reverse md:flex-row gap-2 md:gap-group mt-2 md:mt-group flex-1 min-h-0">
+      <div className="flex flex-col md:flex-row gap-element md:gap-group mt-element md:mt-group flex-1 min-h-0 flex-shrink-0 md:h-full">
         {/* Left: Floor Tab Navigation */}
         <div className="flex-shrink-0 md:h-full">
           <FloorTab

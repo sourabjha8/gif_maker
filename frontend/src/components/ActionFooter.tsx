@@ -29,17 +29,17 @@ export const ActionFooter: React.FC<ActionFooterProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`flex items-center justify-between mt-2 md:mt-group pt-2 md:pt-group border-t border-spatial-border flex-shrink-0 ${className}`}>
+    <div className={`flex items-center justify-between mt-element md:mt-group pt-element md:pt-group border-t border-spatial-border flex-shrink-0 ${className}`}>
       {/* Back Button */}
       {showBack ? (
         <button
           type="button"
           onClick={onBack}
           disabled={isBackDisabled || isLoading}
-          className={`flex items-center gap-tight px-element h-11 min-w-[44px] rounded-pill border border-spatial-border bg-transparent text-neutral-300 font-sans font-medium text-bodyMedium transition-all duration-200 hover:border-spatial-border-elevated hover:text-white cursor-pointer ${isBackDisabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`flex items-center justify-center gap-tight w-11 md:w-auto px-0 md:px-element h-11 min-w-[44px] rounded-pill border border-spatial-border bg-transparent text-neutral-300 font-sans font-medium text-bodyMedium transition-all duration-200 hover:border-spatial-border-elevated hover:text-white cursor-pointer ${isBackDisabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           <ChevronLeft size={14} />
-          <span>Back</span>
+          <span className="hidden md:inline">Back</span>
         </button>
       ) : (
         <div />

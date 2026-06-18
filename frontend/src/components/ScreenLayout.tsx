@@ -18,14 +18,14 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   containerClassName = '',
 }) => {
   return (
-    <div className={`relative w-screen h-screen overflow-hidden bg-spatial-bg font-sans flex items-center justify-center ${className}`}>
+    <div className={`relative w-full h-full overflow-hidden bg-spatial-bg font-sans flex items-center justify-center ${className}`}>
       <ScreenBackground />
 
-      {/* Main Glass Container */}
-      <div className="relative z-20 w-full h-full max-w-[1080px] mx-auto p-4 md:px-container md:py-container flex flex-col justify-center">
+      {/* Main Glass Container — top padding clears the fixed navbar on mobile */}
+      <div className="relative z-20 w-full h-full max-w-[1080px] mx-auto pt-[86px] px-element pb-element md:pt-container md:px-container md:pb-container flex flex-col justify-center">
         <GlassContainer
           radius="container"
-          className={`w-full max-h-full flex flex-col animate-reveal p-4 md:p-container overflow-hidden ${containerClassName}`}
+          className={`w-full max-h-full flex flex-col animate-reveal p-element md:p-container overflow-hidden ${containerClassName}`}
         >
           {children}
         </GlassContainer>

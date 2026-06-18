@@ -418,7 +418,7 @@
     "defaultCity": "Gurugram",
     "floors": [
       {
-        "label": "1F",
+        "label": "GGN",
         "city": {
           "name": "Gurugram",
           "nameHindi": "गुरुग्राम",
@@ -435,7 +435,7 @@
         }
       },
       {
-        "label": "2F",
+        "label": "MUM",
         "city": {
           "name": "Mumbai",
           "nameHindi": "मुंबई",
@@ -451,7 +451,7 @@
         }
       },
       {
-        "label": "3F",
+        "label": "BLR",
         "city": {
           "name": "Bangalore",
           "nameHindi": "बेंगलुरु",
@@ -466,7 +466,7 @@
         }
       },
       {
-        "label": "4F",
+        "label": "PUN",
         "city": {
           "name": "Pune",
           "nameHindi": "पुणे",

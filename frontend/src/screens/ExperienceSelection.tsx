@@ -25,8 +25,14 @@ export const ExperienceSelection: React.FC<ExperienceSelectionProps> = ({ onCont
           totalSteps={4}
           label="Experience Selection"
           title="Choose Your Experience"
-          description="Explore curated interior projects across India's finest cities. Select a location to begin your immersive walkthrough experience."
-        />
+        >
+          <p className="block md:hidden font-normal text-neutral-300 text-sm leading-relaxed">
+            Explore curated interior projects across India's finest cities.
+          </p>
+          <p className="hidden md:block font-normal text-neutral-300 text-sm md:text-bodyLarge leading-relaxed max-w-[505px]">
+            Explore curated interior projects across India's finest cities. Select a location to begin your immersive walkthrough experience.
+          </p>
+        </StepHeader>
 
         {/* Experience Mode Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-element mt-group pb-4">

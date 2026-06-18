@@ -10,7 +10,7 @@ export interface StepIndicatorProps {
 
 export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, totalSteps, label }) => {
   return (
-    <div className="flex flex-col gap-2 md:gap-element flex-shrink-0">
+    <div className="flex flex-col gap-tight md:gap-element flex-shrink-0">
       <div className="flex items-center gap-element">
         <div className="w-9 h-9 rounded-element bg-spatial-glass-elevated border border-spatial-border flex items-center justify-center">
           <Globe size={16} className="text-neutral-300" />
@@ -25,7 +25,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, total
           </Typography>
         </div>
       </div>
-      <div className="flex items-center gap-tight">
+      <div className="hidden md:flex items-center gap-tight">
         {Array.from({ length: totalSteps }).map((_, index) => (
           <div
             key={index}

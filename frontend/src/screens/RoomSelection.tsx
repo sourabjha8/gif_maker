@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Typography, ScreenLayout, StepHeader, ActionFooter, LoadingOverlay, RoomCard } from '../components';
+import { Typography, ScreenLayout, StepHeader, ActionFooter, LoadingOverlay, RoomCard } from '../components';
 import { getNavRooms, getDefaultSociety } from '../lib/content';
 import type { Society } from '../types';
 
@@ -46,9 +46,8 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
           currentStep={4}
           totalSteps={4}
           label="Room Selection"
-          title={society.name}
         >
-          <div className="flex items-start gap-element mt-1">
+          <div className="flex items-center gap-element">
             <div className="w-12 h-12 rounded-element bg-neutral-800 border border-spatial-border flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
                 src={society.logo}
@@ -56,8 +55,10 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
                 className="w-full h-full object-cover"
               />
             </div>
-
-            <Stack gap="tiny" className="min-w-0">
+            <div className="flex flex-col gap-1 min-w-0">
+              <Typography variant="h2" className="font-bold text-white text-2xl md:text-h2">
+                {society.name}
+              </Typography>
               <div className="flex items-center gap-1 min-w-0">
                 <img
                   src="/assets/icons/default_icon.svg"
@@ -70,7 +71,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
                   {stateName}, {country}
                 </Typography>
               </div>
-            </Stack>
+            </div>
           </div>
         </StepHeader>
 

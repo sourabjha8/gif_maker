@@ -32,13 +32,13 @@ export const FloorTab: React.FC<FloorTabProps> = ({
       {/* Down Arrow Button (Left on Mobile, Bottom on Desktop) */}
       <button
         onClick={onDownClick}
-        className="order-1 md:order-1 w-12 h-12 flex items-center justify-center bg-spatial-glass backdrop-blur-3xl rounded-element border border-spatial-border transition-all hover:bg-spatial-glass-elevated hover:border-spatial-border-elevated active:scale-95"
+        className="order-1 md:order-1 hidden md:flex w-12 h-12 items-center justify-center bg-spatial-glass backdrop-blur-3xl rounded-element border border-spatial-border transition-all hover:bg-spatial-glass-elevated hover:border-spatial-border-elevated active:scale-95"
       >
         <ChevronDown className="text-neutral-300 rotate-90 md:rotate-0" />
       </button>
 
       {/* Floors Pill Container */}
-      <div className="order-2 bg-spatial-glass backdrop-blur-3xl border border-spatial-border rounded-[16px] px-4 py-2 md:py-4 md:px-2 flex flex-row md:flex-col-reverse items-center gap-2 shadow-card">
+      <div className="order-2 bg-spatial-glass backdrop-blur-3xl border border-spatial-border rounded-[16px] px-2 py-2 md:py-4 md:px-2 flex flex-row md:flex-col-reverse items-center gap-2 shadow-card w-full md:w-auto">
         {floors.map((floor) => {
           const isActive = floor === activeFloor;
 
@@ -47,7 +47,7 @@ export const FloorTab: React.FC<FloorTabProps> = ({
               key={floor}
               onClick={() => onFloorSelect?.(floor)}
               className={`
-                w-12 h-12 flex items-center justify-center rounded-element transition-all
+                flex-1 md:flex-none h-8 md:h-12 md:w-12 flex items-center justify-center rounded-pill md:rounded-element transition-all
                 ${isActive
                   ? 'border border-primary-300 bg-[linear-gradient(180deg,rgba(130,211,247,0.2)_0%,rgba(130,211,247,0.08)_100%)] shadow-[0_0_8px_rgba(130,211,247,0.3)]'
                   : 'border border-transparent text-neutral-400 hover:text-neutral-100 hover:bg-white/5'
@@ -69,7 +69,7 @@ export const FloorTab: React.FC<FloorTabProps> = ({
       {/* Up Arrow Button (Right on Mobile, Top on Desktop) */}
       <button
         onClick={onUpClick}
-        className="order-3 w-12 h-12 flex items-center justify-center bg-spatial-glass backdrop-blur-3xl rounded-element border border-spatial-border transition-all hover:bg-spatial-glass-elevated hover:border-spatial-border-elevated active:scale-95"
+        className="order-3 hidden md:flex w-12 h-12 items-center justify-center bg-spatial-glass backdrop-blur-3xl rounded-element border border-spatial-border transition-all hover:bg-spatial-glass-elevated hover:border-spatial-border-elevated active:scale-95"
       >
         <ChevronUp className="text-neutral-300 rotate-90 md:rotate-0" />
       </button>
