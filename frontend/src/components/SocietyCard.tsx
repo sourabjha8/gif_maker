@@ -43,10 +43,10 @@ export const SocietyCard: React.FC<SocietyCardProps> = ({ society, isSelected, o
       <div className="flex flex-col gap-0.5 min-w-0 flex-1">
         {/* Name + BHK badge */}
         <div className="flex items-center gap-tight">
-          <Typography variant="titleMedium" className="font-bold text-white truncate">
+          <Typography variant="titleMedium" className="font-bold text-white text-sm md:text-titleMedium md:truncate">
             {society.name}
           </Typography>
-          <span className="px-tight py-0.5 rounded-pill bg-primary-500/20 border border-primary-400/30 text-primary-300 text-sm md:text-bodySmall font-medium whitespace-nowrap">
+          <span className="px-tight py-0.5 rounded-pill bg-primary-500/20 border border-primary-400/30 text-primary-300 text-xs md:text-bodySmall font-medium whitespace-nowrap">
             {society.bhk}
           </span>
         </div>
