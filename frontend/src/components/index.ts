@@ -30,6 +30,7 @@ export {
   ViewerIconDock,
   GalleryModal,
   RoomsMenu,
+  RoomListSidebar,
   RoomDescriptionCard,
   RoomInfoPanel,
   RoomNavigator,

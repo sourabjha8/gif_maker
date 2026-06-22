@@ -56,7 +56,6 @@ export const GlassIconButton = React.forwardRef<HTMLButtonElement, GlassIconButt
           ref={ref}
           type="button"
           aria-label={label}
-          title={label}
           className={`
             w-12 h-12 min-w-[44px] min-h-[44px] flex items-center justify-center
             ${shapeClass}

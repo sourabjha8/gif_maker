@@ -5,6 +5,7 @@ export { VariantSwitcher } from './VariantSwitcher';
 export { ViewerIconDock } from './ViewerIconDock';
 export { GalleryModal } from './GalleryModal';
 export { RoomsMenu } from './RoomsMenu';
+export { RoomListSidebar } from './RoomListSidebar';
 export { RoomDescriptionCard } from './RoomDescriptionCard';
 export { RoomInfoPanel } from './RoomInfoPanel';
 export { RoomNavigator } from './RoomNavigator';

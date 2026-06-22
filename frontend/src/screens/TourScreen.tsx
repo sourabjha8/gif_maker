@@ -16,6 +16,7 @@ import {
   RoomInfoPanel,
   RoomNavigator,
   TourTopBar,
+  RoomListSidebar,
 } from '../components';
 import {
   loadContent,
@@ -84,6 +85,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   // New on-screen feature state.
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
+  const [isRoomListOpen, setIsRoomListOpen] = useState(false);
   const [isStyleSheetOpen, setIsStyleSheetOpen] = useState(true); // variant switcher visible by default
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -293,6 +295,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           projectName={resolved?.project.name ?? ''}
           projectBhkType={resolved?.project.bhkType}
           onBack={onBack}
+          onOpenRooms={() => setIsRoomListOpen(true)}
         />
 
         {/* Mid: variant switcher (toggle via Palette icon) */}
@@ -358,6 +361,19 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         isOpen={isGalleryOpen}
         onClose={() => setIsGalleryOpen(false)}
       />
+
+      {/* Floating room-list sidebar — opens from the project pill */}
+      {resolved && (
+        <RoomListSidebar
+          projectName={resolved.project.name}
+          projectBhkType={resolved.project.bhkType}
+          rooms={resolved.project.rooms}
+          activeRoomSlug={resolved.room.slug}
+          isOpen={isRoomListOpen}
+          onClose={() => setIsRoomListOpen(false)}
+          onSelect={handleNavigateRoom}
+        />
+      )}
 
       {/* Rooms menu (left sheet) */}
       {resolved && (

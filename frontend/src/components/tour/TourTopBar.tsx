@@ -12,6 +12,8 @@ export interface TourTopBarProps {
   projectBhkType?: string;
   /** Called when the back / project pill is tapped. */
   onBack?: () => void;
+  /** Opens the floating room-list sidebar. */
+  onOpenRooms?: () => void;
   /** Called when the Walkthrough button is tapped — wired up in a later phase. */
   onWalkthrough?: () => void;
 }
@@ -21,6 +23,7 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
   projectName,
   projectBhkType,
   onBack,
+  onOpenRooms,
   onWalkthrough,
 }) => {
   const projectLabel = projectBhkType
@@ -52,17 +55,22 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
           />
         </button>
 
-        <div className="
-          flex items-center h-11 px-element
-          rounded-pill
-          bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-card
-        ">
+        <button
+          type="button"
+          onClick={onOpenRooms}
+          aria-label={`Open room list for ${projectLabel}`}
+          className="
+            flex items-center h-11 px-element rounded-pill
+            bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-card
+            hover:bg-white/10 transition-all duration-200 active:scale-95
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+          "
+        >
           <Typography variant="bodySmall" weight="semiBold" colorClass="text-neutral-100" className="whitespace-nowrap">
             {projectLabel}
           </Typography>
-        </div>
+        </button>
       </div>
-
 
       {/* Right — Walkthrough button */}
       <button
