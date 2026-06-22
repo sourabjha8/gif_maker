@@ -136,12 +136,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     return resolved.variant.media?.find((m) => m.id === activeHotspot.videoRef);
   }, [resolved, activeHotspot]);
 
-  // First video on the variant — used by the dock's Play button.
-  const primaryVideo: MediaAsset | undefined = useMemo(
-    () => resolved?.variant.media?.find((m) => m.type === 'video'),
-    [resolved],
-  );
-
   // Fetch pricing for a hotspot lazily.
   const fetchPricingFor = useCallback(
     async (hotspot: Hotspot) => {
@@ -251,14 +245,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     handleNavigateRoom(rooms[idx + 1].slug);
   }, [resolved, handleNavigateRoom]);
 
-  const handleToggleStyle = useCallback(() => {
-    setIsStyleSheetOpen((v) => !v);
-  }, []);
-
-  const handlePlayPrimaryVideo = useCallback(() => {
-    if (primaryVideo) setActiveVideo(primaryVideo);
-  }, [primaryVideo]);
-
   if (error) {
     return (
       <div className="w-full h-full bg-spatial-bg flex items-center justify-center p-4 relative">
@@ -282,9 +268,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     itemIds.has(`${resolved?.room.slug}:${id}`);
 
   const galleryImages = variant?.gallery ?? [];
-  const hasGallery = galleryImages.length > 0;
-  const hasVideo = !!primaryVideo;
-  const hasMultipleVariants = (resolved?.room.variants.length ?? 0) > 1;
   const hasMultipleRooms = (resolved?.project.rooms.length ?? 0) > 1;
 
   return (
@@ -307,9 +290,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         {/* Top bar */}
         <TourTopBar
           roomName={resolved?.room.name ?? 'Loading...'}
-          estimateCount={itemCount}
+          projectName={resolved?.project.name ?? ''}
+          projectBhkType={resolved?.project.bhkType}
           onBack={onBack}
-          onOpenEstimate={openEstimate}
         />
 
         {/* Mid: variant switcher (toggle via Palette icon) */}
@@ -329,7 +312,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
             <RoomNavigator
               roomName={resolved?.room.name ?? 'Room'}
               onPrev={handlePrevRoom}
-              onNext={() => handleNavigateRoom('living-room')}
+              onNext={handleNextRoom}
               onOpenInfo={() => setIsInfoOpen(true)}
               isPrevDisabled={!hasMultipleRooms}
               isInfoOpen={isInfoOpen}
@@ -341,17 +324,11 @@ export const TourScreen: React.FC<TourScreenProps> = ({
       {/* Right-rail icon dock — items 1, 2, 4, 5, 6, 7 */}
       {resolved && (
         <ViewerIconDock
-          hasVideo={hasVideo}
-          hasGallery={hasGallery}
-          hasMultipleVariants={hasMultipleVariants}
-          hasMultipleRooms={hasMultipleRooms}
           isMuted={isMuted}
-          onPlayVideo={handlePlayPrimaryVideo}
+          estimateCount={itemCount}
           onOpenGallery={() => setIsGalleryOpen(true)}
-          onToggleStyle={handleToggleStyle}
-          onPrevRoom={handlePrevRoom}
-          onNextRoom={handleNextRoom}
           onOpenRoomsMenu={() => setIsRoomsMenuOpen(true)}
+          onOpenEstimate={openEstimate}
           onToggleMute={() => setIsMuted((m) => !m)}
         />
       )}

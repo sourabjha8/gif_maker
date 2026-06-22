@@ -2,71 +2,56 @@
 
 import React from 'react';
 import { GlassIconButton } from '../GlassIconButton';
-import { Play, Images, Volume2, VolumeX, List, Palette } from '../../assets/icons';
+import { CountBadge } from '../CountBadge';
 
 export interface ViewerIconDockProps {
-  hasVideo: boolean;
-  hasGallery: boolean;
-  hasMultipleVariants: boolean;
-  hasMultipleRooms: boolean;
   isMuted: boolean;
-  onPlayVideo: () => void;
+  /** Number of items in the estimate — shown as a badge on the Cart button. */
+  estimateCount: number;
   onOpenGallery: () => void;
-  onToggleStyle: () => void;
-  onPrevRoom: () => void;
-  onNextRoom: () => void;
   onOpenRoomsMenu: () => void;
+  onOpenEstimate: () => void;
   onToggleMute: () => void;
+  /** Visualize handler — wired in a later phase. */
+  onVisualize?: () => void;
 }
 
-/**
- * Right-rail icon dock for the 360 tour screen.
- *
- * Each control is a shared {@link GlassIconButton} with a left-anchored
- * tooltip. Room prev/next navigation lives in the bottom RoomNavigator, so the
- * dock focuses on media, gallery, style, rooms menu, and audio.
- */
 export const ViewerIconDock: React.FC<ViewerIconDockProps> = ({
-  hasVideo: _hasVideo,
-  hasGallery: _hasGallery,
-  hasMultipleVariants: _hasMultipleVariants,
-  hasMultipleRooms: _hasMultipleRooms,
   isMuted,
-  onPlayVideo,
+  estimateCount,
   onOpenGallery,
-  onToggleStyle,
-  onPrevRoom: _onPrevRoom,
-  onNextRoom: _onNextRoom,
   onOpenRoomsMenu,
+  onOpenEstimate,
   onToggleMute,
-}) => {
-  return (
-    <div className="pointer-events-auto absolute right-element md:right-group top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20">
-      <GlassIconButton label="Play room walkthrough" tooltip tooltipPosition="left" onClick={onPlayVideo}>
-        <Play size={20} />
-      </GlassIconButton>
+  onVisualize,
+}) => (
+  <div className="pointer-events-auto absolute right-element md:right-group top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20">
+    <GlassIconButton label="Visualize room" tooltip tooltipPosition="left" onClick={onVisualize} />
 
-      <GlassIconButton label="Open image gallery" tooltip tooltipPosition="left" onClick={onOpenGallery}>
-        <Images size={20} />
-      </GlassIconButton>
+    <GlassIconButton label="Gallery" tooltip tooltipPosition="left" onClick={onOpenGallery} />
 
-      <GlassIconButton label="Change design style" tooltip tooltipPosition="left" onClick={onToggleStyle}>
-        <Palette size={20} />
-      </GlassIconButton>
+    <GlassIconButton label="Room Menu" tooltip tooltipPosition="left" onClick={onOpenRoomsMenu} />
 
-      <GlassIconButton label="Open rooms menu" tooltip tooltipPosition="left" onClick={onOpenRoomsMenu}>
-        <List size={20} />
-      </GlassIconButton>
-
+    <span className="relative">
       <GlassIconButton
-        label={isMuted ? 'Unmute audio' : 'Mute audio'}
+        label={`Cart${estimateCount > 0 ? ` (${estimateCount})` : ''}`}
         tooltip
         tooltipPosition="left"
-        active={!isMuted}
-        onClick={onToggleMute}
-      >
-        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-      </GlassIconButton>
-    </div>
-  );
-};
+        onClick={onOpenEstimate}
+      />
+      {estimateCount > 0 && (
+        <span className="absolute -top-1 -right-1 pointer-events-none">
+          <CountBadge count={estimateCount} />
+        </span>
+      )}
+    </span>
+
+    <GlassIconButton
+      label={isMuted ? 'Unmute' : 'Mute'}
+      tooltip
+      tooltipPosition="left"
+      active={!isMuted}
+      onClick={onToggleMute}
+    />
+  </div>
+);

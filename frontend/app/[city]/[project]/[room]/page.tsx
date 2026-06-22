@@ -9,7 +9,7 @@ export default function TourRoutePage() {
   const { city, project, room } = useParams<{ city: string; project: string; room: string }>();
 
   return (
-    <AppFrame withNavbar>
+    <AppFrame>
       <TourScreen
         citySlug={city}
         projectSlug={project}
