@@ -386,18 +386,20 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         />
       )}
 
-      {/* Elongated room info panel — behind the bottom hamburger button */}
+      {/* Room info bottom sheet — opens when user taps the room name pill */}
       {resolved && (
         <RoomInfoPanel
           isOpen={isInfoOpen}
           onClose={() => setIsInfoOpen(false)}
           room={resolved.room}
           variant={resolved.variant}
+          projectName={resolved.project.name}
+          projectBhkType={resolved.project.bhkType}
+          roomIndex={resolved.project.rooms.findIndex((r) => r.slug === resolved.room.slug) + 1}
+          totalRooms={resolved.project.rooms.length}
           pricingByHotspot={pricingByHotspot}
-          onSelectHotspot={(id) => {
-            setActiveHotspotId(id);
-            setIsInfoOpen(false);
-          }}
+          onAddHotspot={handleAddToEstimate}
+          isInEstimate={isInEstimate}
         />
       )}
     </div>

@@ -49,30 +49,86 @@
                       "hotspots": [
                         {
                           "id": "hs-sofa-1",
-                          "label": "L-Shape Sofa",
+                          "label": "3-Seater Sofa",
                           "type": "product",
                           "yaw": 45.0,
                           "pitch": -10.0,
-                          "description": "Premium Italian leather L-shape sofa with adjustable headrests.",
-                          "image": "/assets/products/sofa-lshape.jpg",
-                          "sku": "SOF-LS-001",
+                          "description": "L-shape sofa in genuine Italian top-grain leather with adjustable headrests.",
+                          "sku": "Linen · Sand",
                           "pricingRef": {
                             "type": "sku",
-                            "code": "SOF-LS-001",
+                            "code": "SOF-3S-001",
+                            "quantity": 1
+                          }
+                        },
+                        {
+                          "id": "hs-coffee-table",
+                          "label": "Coffee Table",
+                          "type": "product",
+                          "yaw": 20.0,
+                          "pitch": -20.0,
+                          "description": "Walnut coffee table with brushed brass inlays.",
+                          "sku": "Oak · Walnut top",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "TBL-COFFEE-001",
+                            "quantity": 1
+                          }
+                        },
+                        {
+                          "id": "hs-floor-lamp",
+                          "label": "Floor Lamp",
+                          "type": "product",
+                          "yaw": -30.0,
+                          "pitch": -5.0,
+                          "description": "Arc floor lamp in brushed brass finish.",
+                          "sku": "Brass · Arc",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "LMP-FLOOR-001",
+                            "quantity": 1
+                          }
+                        },
+                        {
+                          "id": "hs-area-rug",
+                          "label": "Area Rug",
+                          "type": "product",
+                          "yaw": 60.0,
+                          "pitch": -25.0,
+                          "description": "Hand-tufted wool area rug, 2.4 × 1.7 m.",
+                          "sku": "Wool · 2.4 × 1.7m",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "RUG-WOOL-001",
                             "quantity": 1
                           }
                         },
                         {
                           "id": "hs-tv-unit",
-                          "label": "TV Unit",
+                          "label": "Media Console",
                           "type": "module",
                           "yaw": 180.0,
                           "pitch": 0.0,
-                          "description": "Wall-mounted modular TV unit with integrated storage.",
+                          "description": "Wall-mounted modular TV unit with integrated cove lighting and 4-door storage.",
+                          "sku": "Oak · 4-door",
                           "moduleCode": "MOD-TV-200",
                           "pricingRef": {
                             "type": "module",
                             "code": "MOD-TV-200"
+                          }
+                        },
+                        {
+                          "id": "hs-accent-chair",
+                          "label": "Accent Chair (pair)",
+                          "type": "product",
+                          "yaw": -60.0,
+                          "pitch": -12.0,
+                          "description": "Pair of bouclé accent chairs in cream upholstery.",
+                          "sku": "Bouclé · Cream",
+                          "pricingRef": {
+                            "type": "sku",
+                            "code": "CHR-ACCENT-001",
+                            "quantity": 2
                           }
                         },
                         {
@@ -108,67 +164,62 @@
                           "id": "g-living-modern-1",
                           "title": "Sofa angle",
                           "url": "/assets/images/background.png",
-                          "alt": "L-Shape sofa in the modern minimal living room"
+                          "alt": "3-seater sofa in the modern minimal living room"
                         },
                         {
                           "id": "g-living-modern-2",
                           "title": "Coffee table",
                           "url": "/assets/images/background.png",
-                          "alt": "Walnut coffee table with brass accents"
+                          "alt": "Walnut coffee table with brushed brass accents"
                         },
                         {
                           "id": "g-living-modern-3",
                           "title": "TV wall",
                           "url": "/assets/images/background.png",
-                          "alt": "Modular TV unit with integrated lighting"
+                          "alt": "Modular media console with integrated cove lighting"
+                        },
+                        {
+                          "id": "g-living-modern-4",
+                          "title": "Glazing detail",
+                          "url": "/assets/images/background.png",
+                          "alt": "Floor-to-ceiling glazing framed by acoustic linen drapes"
+                        },
+                        {
+                          "id": "g-living-modern-5",
+                          "title": "Flooring close-up",
+                          "url": "/assets/images/background.png",
+                          "alt": "Engineered oak flooring with matte clear coat"
                         }
                       ],
-                      "longDescription": "This modern minimal living room is designed around restful negative space and a single, confident accent. The L-shape sofa anchors the seating zone in genuine Italian top-grain leather, balanced by a walnut coffee table with brushed brass inlays. A wall-mounted modular TV unit with integrated cove lighting keeps storage hidden and sight lines clean. Acoustic linen drapes frame floor-to-ceiling glazing, while engineered oak flooring with a matte clear coat ties the palette together. The result is a calm, low-glare space ideal for evening conversations and weekend films, scaled for a 3 BHK Worli residence.",
+                      "longDescription": "The modern minimal living room is designed around restful negative space and a single accent. The L-shape sofa anchors the seating zone in genuine Italian top-grain leather, balanced by a walnut coffee table with brushed brass inlays. A wall-mounted modular TV unit with integrated cove lighting keeps storage hidden and sight lines clean. Acoustic linen drapes frame floor-to-ceiling glazing, while engineered oak flooring with a matte clear coat ties the palette together. The result is a calm, low-glare space ideal for evening conversation and weekend films, scaled for a 3BHK Worli residence.",
                       "materials": [
                         {
                           "id": "mat-floor",
                           "label": "Flooring",
-                          "material": "Engineered oak plank",
-                          "finish": "Matte clear lacquer",
-                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)",
-                          "note": "10 mm wear layer · 2400 mm planks"
-                        },
-                        {
-                          "id": "mat-wall-feature",
-                          "label": "Feature wall",
-                          "material": "Diamond-quilted wallpaper",
-                          "finish": "Champagne satin",
-                          "swatch": "linear-gradient(135deg, #d6c9a8, #a89572)"
-                        },
-                        {
-                          "id": "mat-sofa",
-                          "label": "Sofa upholstery",
-                          "material": "Italian top-grain leather",
-                          "finish": "Charcoal pull-up",
-                          "swatch": "linear-gradient(135deg, #2c2c2e, #4a4a4d)",
-                          "note": "Pull-up patina deepens with use"
-                        },
-                        {
-                          "id": "mat-coffee-table",
-                          "label": "Coffee table",
-                          "material": "American walnut veneer",
-                          "finish": "Hand-rubbed oil",
-                          "swatch": "linear-gradient(135deg, #5a3a23, #2f1d10)"
-                        },
-                        {
-                          "id": "mat-tv-unit",
-                          "label": "TV unit modules",
-                          "material": "BWP-grade plywood + PU lacquer",
-                          "finish": "Matte graphite",
-                          "swatch": "linear-gradient(135deg, #2a2c30, #14161a)",
-                          "note": "Soft-close push-to-open drawers"
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
                         },
                         {
                           "id": "mat-accent",
-                          "label": "Hardware accents",
-                          "material": "Solid brass",
-                          "finish": "Brushed champagne",
+                          "label": "Hardware",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
                           "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        },
+                        {
+                          "id": "mat-sofa",
+                          "label": "Upholstery",
+                          "material": "Linen weave",
+                          "finish": "Sand",
+                          "swatch": "linear-gradient(135deg, #d8c6a0, #a08864)"
+                        },
+                        {
+                          "id": "mat-wall-feature",
+                          "label": "Walls",
+                          "material": "Warm plaster",
+                          "finish": "Smooth",
+                          "swatch": "linear-gradient(135deg, #d9c8b0, #b8a48a)"
                         }
                       ]
                     },
@@ -371,13 +422,79 @@
                       "roomSize": "large",
                       "isDefault": true,
                       "description": "A serene bedroom with warm tones and modular wardrobes.",
+                      "longDescription": "The master bedroom is designed around calm, low-glare rest. An upholstered king bed anchors the room in soft linen, framed by a fluted oak headboard wall with integrated cove lighting. A full-height modular wardrobe keeps storage hidden behind handleless shutters, while matched bedside tables and a quiet pendant pair balance the composition. Engineered oak flooring with a matte clear coat ties the warm palette together, scaled for a 4BHK Ashok Nagar residence.",
                       "panorama": {
                         "type": "equirectangular",
                         "url": "/assets/bangalore/rooms/bedroom.jpg",
                         "width": 8192,
                         "height": 4096
                       },
-                      "hotspots": []
+                      "hotspots": [
+                        {
+                          "id": "hs-bed-king",
+                          "label": "King Bed",
+                          "type": "product",
+                          "yaw": 0.0,
+                          "pitch": -10.0,
+                          "description": "Upholstered king bed in soft linen with a fluted oak headboard.",
+                          "sku": "Linen · Oat",
+                          "pricingRef": { "type": "sku", "code": "BED-KING-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-wardrobe",
+                          "label": "Modular Wardrobe",
+                          "type": "module",
+                          "yaw": 90.0,
+                          "pitch": 0.0,
+                          "description": "Full-height handleless modular wardrobe with soft-close shutters.",
+                          "sku": "Oak · 4-door",
+                          "moduleCode": "MOD-WRD-400",
+                          "pricingRef": { "type": "module", "code": "MOD-WRD-400" }
+                        },
+                        {
+                          "id": "hs-nightstand",
+                          "label": "Bedside Tables (pair)",
+                          "type": "product",
+                          "yaw": -45.0,
+                          "pitch": -20.0,
+                          "description": "Pair of walnut bedside tables with brushed brass pulls.",
+                          "sku": "Walnut · Brass",
+                          "pricingRef": { "type": "sku", "code": "TBL-NIGHT-001", "quantity": 2 }
+                        },
+                        {
+                          "id": "hs-pendant",
+                          "label": "Pendant Lights (pair)",
+                          "type": "product",
+                          "yaw": 30.0,
+                          "pitch": 20.0,
+                          "description": "Pair of glass pendant lights in brushed brass.",
+                          "sku": "Brass · Glass",
+                          "pricingRef": { "type": "sku", "code": "LMP-PEND-001", "quantity": 2 }
+                        },
+                        {
+                          "id": "hs-bench",
+                          "label": "Bed Bench",
+                          "type": "product",
+                          "yaw": 15.0,
+                          "pitch": -30.0,
+                          "description": "Linen-upholstered bench at the foot of the bed.",
+                          "sku": "Linen · Oat",
+                          "pricingRef": { "type": "sku", "code": "BNC-BED-001", "quantity": 1 }
+                        }
+                      ],
+                      "gallery": [
+                        { "id": "g-bed-1", "title": "Bed angle", "url": "/assets/images/background.png", "alt": "King bed with fluted oak headboard" },
+                        { "id": "g-bed-2", "title": "Wardrobe", "url": "/assets/images/background.png", "alt": "Full-height modular wardrobe" },
+                        { "id": "g-bed-3", "title": "Bedside detail", "url": "/assets/images/background.png", "alt": "Walnut bedside table with brass pulls" },
+                        { "id": "g-bed-4", "title": "Lighting", "url": "/assets/images/background.png", "alt": "Glass pendant lights over bedside" },
+                        { "id": "g-bed-5", "title": "Flooring close-up", "url": "/assets/images/background.png", "alt": "Engineered oak flooring with matte clear coat" }
+                      ],
+                      "materials": [
+                        { "id": "mat-bed-floor", "label": "Flooring", "material": "Oak veneer", "finish": "Matte", "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)" },
+                        { "id": "mat-bed-hardware", "label": "Hardware", "material": "Brushed brass", "finish": "Champagne", "swatch": "linear-gradient(135deg, #c9a464, #8d7236)" },
+                        { "id": "mat-bed-uph", "label": "Upholstery", "material": "Linen weave", "finish": "Oat", "swatch": "linear-gradient(135deg, #d8c6a0, #a08864)" },
+                        { "id": "mat-bed-walls", "label": "Walls", "material": "Warm plaster", "finish": "Smooth", "swatch": "linear-gradient(135deg, #d9c8b0, #b8a48a)" }
+                      ]
                     }
                   ]
                 },

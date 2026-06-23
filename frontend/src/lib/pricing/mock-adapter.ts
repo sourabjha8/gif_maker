@@ -23,10 +23,50 @@ function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Exact demo prices (in paise) for the living-room showcase items.
+// subtotalMinor = list price, totalMinor = after bundle discount.
+const DEMO_PRICES: Record<string, { subtotalMinor: number; totalMinor: number }> = {
+  'sku:SOF-3S-001':     { subtotalMinor: 13_800_000, totalMinor: 12_800_000 },
+  'sku:TBL-COFFEE-001': { subtotalMinor:  4_500_000, totalMinor:  4_250_000 },
+  'sku:LMP-FLOOR-001':  { subtotalMinor:  2_000_000, totalMinor:  1_890_000 },
+  'sku:RUG-WOOL-001':   { subtotalMinor:  3_650_000, totalMinor:  3_400_000 },
+  'module:MOD-TV-200':  { subtotalMinor:  9_300_000, totalMinor:  8_600_000 },
+  'sku:CHR-ACCENT-001': { subtotalMinor: 18_000_000, totalMinor: 17_260_000 },
+  // Bedroom (Bangalore · Prestige Kingfisher Towers)
+  'sku:BED-KING-001':   { subtotalMinor: 16_500_000, totalMinor: 15_400_000 },
+  'module:MOD-WRD-400': { subtotalMinor: 14_200_000, totalMinor: 13_200_000 },
+  'sku:TBL-NIGHT-001':  { subtotalMinor:  4_800_000, totalMinor:  4_400_000 },
+  'sku:LMP-PEND-001':   { subtotalMinor:  2_600_000, totalMinor:  2_400_000 },
+  'sku:BNC-BED-001':    { subtotalMinor:  3_900_000, totalMinor:  3_600_000 },
+};
+
 function pricedFor(input: PricingRequest): PricingResponse {
   const ref = input.pricingRef;
-  const seed = hashCode(`${ref.type}:${ref.code}`);
   const quantity = ref.quantity ?? 1;
+  const key = `${ref.type}:${ref.code}`;
+
+  const demo = DEMO_PRICES[key];
+  if (demo) {
+    return {
+      status: 'priced',
+      currency: 'INR',
+      label: ref.code,
+      rows: [{
+        id: `${ref.code}-base`,
+        label: ref.code,
+        code: ref.code,
+        quantity,
+        unitAmountMinor: Math.round(demo.totalMinor / quantity),
+        totalAmountMinor: demo.totalMinor,
+      }],
+      subtotalMinor: demo.subtotalMinor,
+      totalMinor: demo.totalMinor,
+      source: 'mock',
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  const seed = hashCode(`${ref.type}:${ref.code}`);
 
   const baseUnit =
     ref.type === 'sku'
