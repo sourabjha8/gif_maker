@@ -32,12 +32,6 @@ const DEMO_PRICES: Record<string, { subtotalMinor: number; totalMinor: number }>
   'sku:RUG-WOOL-001':   { subtotalMinor:  3_650_000, totalMinor:  3_400_000 },
   'module:MOD-TV-200':  { subtotalMinor:  9_300_000, totalMinor:  8_600_000 },
   'sku:CHR-ACCENT-001': { subtotalMinor: 18_000_000, totalMinor: 17_260_000 },
-  // Bedroom (Bangalore · Prestige Kingfisher Towers)
-  'sku:BED-KING-001':   { subtotalMinor: 16_500_000, totalMinor: 15_400_000 },
-  'module:MOD-WRD-400': { subtotalMinor: 14_200_000, totalMinor: 13_200_000 },
-  'sku:TBL-NIGHT-001':  { subtotalMinor:  4_800_000, totalMinor:  4_400_000 },
-  'sku:LMP-PEND-001':   { subtotalMinor:  2_600_000, totalMinor:  2_400_000 },
-  'sku:BNC-BED-001':    { subtotalMinor:  3_900_000, totalMinor:  3_600_000 },
 };
 
 function pricedFor(input: PricingRequest): PricingResponse {

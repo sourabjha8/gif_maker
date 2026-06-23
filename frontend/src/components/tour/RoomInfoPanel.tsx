@@ -16,6 +16,7 @@ export interface RoomInfoPanelProps {
   totalRooms: number;
   pricingByHotspot: Record<string, PricingResponse | undefined>;
   onAddHotspot: (hotspot: Hotspot, pricing: PricingResponse | null) => void;
+  onRemoveHotspot: (hotspotId: string) => void;
   isInEstimate: (hotspotId: string) => boolean;
 }
 
@@ -30,6 +31,7 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
   totalRooms,
   pricingByHotspot,
   onAddHotspot,
+  onRemoveHotspot,
   isInEstimate,
 }) => {
   useEffect(() => {
@@ -43,17 +45,15 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
     (h: Hotspot) => h.pricingRef && pricingByHotspot[h.id]?.status === 'priced',
   );
 
-  const grandTotalMinor = pricedHotspots.reduce(
+  const itemsSubtotalMinor = pricedHotspots.reduce(
     (sum, h) => sum + (pricingByHotspot[h.id]?.totalMinor ?? 0),
     0,
   );
 
-  const subtotalMinor = pricedHotspots.reduce(
-    (sum, h) => sum + (pricingByHotspot[h.id]?.subtotalMinor ?? 0),
-    0,
-  );
+  const taxMinor = Math.round(itemsSubtotalMinor * 0.18);
+  const grandTotalMinor = itemsSubtotalMinor + taxMinor;
+  const allAdded = pricedHotspots.length > 0 && pricedHotspots.every(h => isInEstimate(h.id));
 
-  const discountMinor = grandTotalMinor - subtotalMinor;
 
   const summary = variant.longDescription ?? variant.description ?? 'Room summary will appear here.';
   const gallery: GalleryImage[] = variant.gallery ?? [];
@@ -93,7 +93,7 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
       >
         {/* Drag handle */}
         <div className="flex justify-center pt-3 pb-1 shrink-0">
-          <div className="w-10 h-1 rounded-full bg-white/20" />
+          <div className="w-10 h-1 rounded-pill bg-white/20" />
         </div>
 
         {/* Header */}
@@ -125,18 +125,21 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
             {grandTotalMinor > 0 && (
               <button
                 type="button"
-                onClick={() => pricedHotspots.forEach(h => onAddHotspot(h, pricingByHotspot[h.id] ?? null))}
-                className="
-                  flex items-center gap-tight h-11 px-element rounded-pill
-                  bg-neutral-900 border border-neutral-700
-                  text-neutral-50 hover:bg-neutral-800
-                  transition-all duration-200 active:scale-95
+                onClick={() => { if (!allAdded) pricedHotspots.forEach(h => onAddHotspot(h, pricingByHotspot[h.id] ?? null)); }}
+                disabled={allAdded}
+                className={`
+                  flex items-center gap-tight h-11 px-element rounded-pill border
+                  transition-all duration-200
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
-                "
+                  ${allAdded
+                    ? 'bg-primary-500/20 border-primary-400/40 text-primary-300 cursor-default'
+                    : 'bg-neutral-900/40 border-neutral-700/40 text-neutral-500 hover:text-neutral-200 hover:border-neutral-600 hover:bg-neutral-900/70 active:scale-95'
+                  }
+                `}
               >
                 <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-4 h-4 opacity-70" />
                 <Typography variant="bodySmall" weight="bold" colorClass="text-inherit">
-                  Add all · {formatINR(grandTotalMinor)}
+                  {allAdded ? 'Added all' : 'Add all'} · {formatINR(grandTotalMinor)}
                 </Typography>
               </button>
             )}
@@ -173,9 +176,41 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
               </Typography>
             </section>
 
-            {/* Gallery */}
+            {/* Materials & Finishes — editorial credibility section */}
+            {materials.length > 0 && (
+              <section className="py-group">
+                {/* Kicker + headline */}
+                <Typography variant="bodySmall" colorClass="text-neutral-500" className="uppercase tracking-widest mb-tight">
+                  Materials &amp; Finishes
+                </Typography>
+
+                {/* Swatch grid — non-interactive, editorial */}
+                <div className="flex flex-wrap gap-group">
+                  {materials.map((m: MaterialFinish) => (
+                    <div key={m.id} className="flex flex-col w-[130px]">
+                      {/* Texture swatch — square, no radius, no chrome. inline background is data-driven, no token alternative */}
+                      <div
+                        className="w-full aspect-square"
+                        style={{ background: m.swatch ?? 'linear-gradient(135deg,#2a2a2a,#1a1a1a)' }}
+                        aria-hidden="true"
+                      />
+                      {/* Category label */}
+                      <Typography variant="titleSmall" colorClass="text-neutral-100" className="mt-tight leading-tight">
+                        {m.label}
+                      </Typography>
+                      {/* Finish spec */}
+                      <Typography variant="bodySmall" colorClass="text-neutral-500" className="leading-tight">
+                        {m.material}{m.finish ? ` · ${m.finish}` : ''}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Gallery — hero + 3-thumbnail editorial layout */}
             {gallery.length > 0 && (
-              <section>
+              <section className="pb-element">
                 <div className="flex items-center justify-between mb-tight">
                   <Typography variant="bodySmall" colorClass="text-neutral-500" className="uppercase tracking-widest">
                     Gallery
@@ -184,54 +219,52 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
                     {gallery.length} photo{gallery.length !== 1 ? 's' : ''}
                   </Typography>
                 </div>
-                {/* Main image */}
-                <div className="w-full aspect-video rounded-card overflow-hidden border border-spatial-border bg-white/5 mb-tight">
-                  <img src={gallery[0].url} alt={gallery[0].title ?? ''} className="w-full h-full object-cover" draggable={false} />
+
+                {/* Hero image */}
+                <div className="w-full aspect-video overflow-hidden bg-white/5 mb-tight">
+                  <img
+                    src={gallery[0].url}
+                    alt={gallery[0].title ?? ''}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
                 </div>
-                {/* Thumbnails */}
+
+                {/* Thumbnails row — up to 3, last one gets "see all" if more exist */}
                 {gallery.length > 1 && (
-                  <div className="grid grid-cols-3 gap-tight">
-                    {gallery.slice(1, 4).map((img) => (
-                      <div key={img.id} className="aspect-video rounded-element overflow-hidden border border-spatial-border bg-white/5">
-                        <img src={img.url} alt={img.title ?? ''} className="w-full h-full object-cover" draggable={false} />
-                      </div>
-                    ))}
+                  <div className="flex gap-tight w-full">
+                    {gallery.slice(1, 4).map((img, idx) => {
+                      const isLast = idx === 2;
+                      const hasMore = gallery.length > 4;
+                      return (
+                        <div
+                          key={img.id}
+                          className="relative flex-1 aspect-video overflow-hidden bg-white/5"
+                        >
+                          <img
+                            src={img.url}
+                            alt={img.title ?? ''}
+                            className={`w-full h-full object-cover ${isLast && hasMore ? 'blur-sm scale-105' : ''}`}
+                            draggable={false}
+                          />
+                          {isLast && hasMore && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/40 px-tight">
+                              <Typography variant="bodySmall" weight="bold" colorClass="text-white" className="text-center leading-tight">
+                                See all {gallery.length} images
+                              </Typography>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
-              </section>
-            )}
-
-            {/* Materials & Finishes */}
-            {materials.length > 0 && (
-              <section className="pb-element">
-                <Typography variant="bodySmall" colorClass="text-neutral-500" className="uppercase tracking-widest mb-tight">
-                  Materials &amp; Finishes
-                </Typography>
-                <div className="flex gap-element flex-wrap">
-                  {materials.map((m: MaterialFinish) => (
-                    <div key={m.id} className="flex items-center gap-tight">
-                      <div
-                        className="w-10 h-10 rounded-element border border-spatial-border shrink-0"
-                        style={{ background: m.swatch ?? 'linear-gradient(135deg,#2a2a2a,#1a1a1a)' }}
-                        aria-hidden="true"
-                      />
-                      <div>
-                        <Typography variant="bodySmall" weight="medium" colorClass="text-neutral-200">
-                          {m.label}
-                        </Typography>
-                        <Typography variant="bodySmall" colorClass="text-neutral-500">
-                          {m.material}{m.finish ? ` · ${m.finish}` : ''}
-                        </Typography>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </section>
             )}
           </div>
 
           {/* Right column: assets + price breakdown */}
-          <div className="w-[420px] shrink-0 overflow-y-auto custom-scrollbar px-element py-element space-y-group">
+          <div className="w-[580px] shrink-0 overflow-y-auto custom-scrollbar px-element py-element space-y-group">
 
             {/* Assets */}
             <section>
@@ -274,23 +307,36 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
                         <Typography variant="titleSmall" weight="bold" colorClass="text-neutral-100" className="shrink-0">
                           {formatINR(p.totalMinor)}
                         </Typography>
-                        {/* Add button */}
-                        <button
-                          type="button"
-                          onClick={() => onAddHotspot(h, p)}
-                          disabled={added}
-                          className={`
-                            shrink-0 h-9 px-element rounded-pill border text-sm font-semibold
-                            transition-all duration-200 active:scale-95
-                            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
-                            ${added
-                              ? 'bg-primary-500/20 border-primary-400/40 text-primary-300 cursor-default'
-                              : 'bg-spatial-glass-elevated border-spatial-border text-neutral-200 hover:bg-white/10 hover:text-white'
-                            }
-                          `}
-                        >
-                          {added ? 'Added' : 'Add'}
-                        </button>
+                        {/* Add / Remove button */}
+                        {added ? (
+                          <button
+                            type="button"
+                            onClick={() => onRemoveHotspot(h.id)}
+                            className="
+                              shrink-0 h-11 px-element rounded-pill border text-sm font-semibold
+                              bg-red-500/15 border-red-400/40 text-red-300
+                              hover:bg-red-500/25 hover:text-red-200
+                              transition-all duration-200 active:scale-95
+                              focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400
+                            "
+                          >
+                            Remove
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => onAddHotspot(h, p)}
+                            className="
+                              shrink-0 h-11 px-element rounded-pill border text-sm font-semibold
+                              bg-spatial-glass-elevated border-spatial-border text-neutral-200
+                              hover:bg-white/10 hover:text-white
+                              transition-all duration-200 active:scale-95
+                              focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+                            "
+                          >
+                            Add
+                          </button>
+                        )}
                       </li>
                     );
                   })}
@@ -310,17 +356,15 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
                       Items subtotal ({pricedHotspots.length})
                     </Typography>
                     <Typography variant="bodyMedium" colorClass="text-neutral-100">
-                      {formatINR(subtotalMinor)}
+                      {formatINR(itemsSubtotalMinor)}
                     </Typography>
                   </div>
-                  {discountMinor < 0 && (
-                    <div className="flex justify-between">
-                      <Typography variant="bodyMedium" colorClass="text-neutral-300">Bundle discount</Typography>
-                      <Typography variant="bodyMedium" colorClass="text-primary-400">
-                        – {formatINR(Math.abs(discountMinor))}
-                      </Typography>
-                    </div>
-                  )}
+                  <div className="flex justify-between">
+                    <Typography variant="bodyMedium" colorClass="text-neutral-300">Est. GST (18%)</Typography>
+                    <Typography variant="bodyMedium" colorClass="text-neutral-100">
+                      {formatINR(taxMinor)}
+                    </Typography>
+                  </div>
                   <div className="pt-tight mt-tight border-t border-spatial-border flex justify-between">
                     <Typography variant="titleSmall" weight="bold" colorClass="text-neutral-50">
                       Room total

@@ -8,7 +8,6 @@ import {
   AlertBox,
   HotspotPanel,
   VideoModal,
-  VariantSwitcher,
   EstimateSidebar,
   ViewerIconDock,
   GalleryModal,
@@ -86,11 +85,11 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
   const [isRoomListOpen, setIsRoomListOpen] = useState(false);
-  const [isStyleSheetOpen, setIsStyleSheetOpen] = useState(true); // variant switcher visible by default
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   // Estimate store hooks.
   const addItem = useEstimateStore((s) => s.addItem);
+  const removeItem = useEstimateStore((s) => s.removeItem);
   const openEstimate = useEstimateStore((s) => s.open);
   const items = useEstimateStore((s) => s.items);
   const itemCount = useMemo(
@@ -225,11 +224,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     setIsViewerReady(false);
   }, []);
 
-  const handleVariantSelect = useCallback((variant: RoomVariant) => {
-    setResolved((prev) => (prev ? { ...prev, variant } : prev));
-    setActiveHotspotId(null);
-    setIsViewerReady(false);
-  }, []);
 
   const handlePrevRoom = useCallback(() => {
     if (!resolved) return;
@@ -298,16 +292,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onOpenRooms={() => setIsRoomListOpen(true)}
         />
 
-        {/* Mid: variant switcher (toggle via Palette icon) */}
-        {resolved && isStyleSheetOpen && (
-          <div className="flex justify-center w-full">
-            <VariantSwitcher
-              variants={resolved.room.variants}
-              activeVariantSlug={resolved.variant.slug}
-              onSelect={handleVariantSelect}
-            />
-          </div>
-        )}
+
 
         {/* Bottom row: room navigator — prev · room name · next */}
         <div className="flex justify-center w-full pointer-events-auto">
@@ -350,7 +335,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
       />
 
       {/* Estimate sidebar */}
-      <EstimateSidebar onViewSummary={onOpenEstimate} />
+      <EstimateSidebar />
 
       {/* Video modal (used by dock + hotspot panel) */}
       <VideoModal media={activeVideo} onClose={() => setActiveVideo(null)} />
@@ -399,6 +384,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           totalRooms={resolved.project.rooms.length}
           pricingByHotspot={pricingByHotspot}
           onAddHotspot={handleAddToEstimate}
+          onRemoveHotspot={(hotspotId) => removeItem(`${resolved.room.slug}:${hotspotId}`)}
           isInEstimate={isInEstimate}
         />
       )}

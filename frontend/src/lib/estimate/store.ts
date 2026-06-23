@@ -62,7 +62,7 @@ export const useEstimateStore = create<EstimateState>()(
       toggle: () => set((state) => ({ isOpen: !state.isOpen })),
     }),
     {
-      name: 'vxp-estimate-v1',
+      name: 'vxp-estimate-v2',
       storage: createJSONStorage(() => (typeof window !== 'undefined' ? window.localStorage : (undefined as unknown as Storage))),
       partialize: (state) => ({ items: state.items }) as Partial<EstimateState>,
       // Skip rehydration on server / first SSR pass so the snapshot used during
