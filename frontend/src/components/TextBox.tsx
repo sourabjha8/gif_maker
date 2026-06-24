@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Stack, Typography } from './UI';
-import { Eye, EyeOff } from '../assets/icons';
 
 export interface TextBoxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'size'> {
   label?: string;
@@ -64,7 +63,11 @@ export const TextBox = React.forwardRef<HTMLInputElement, TextBoxProps>(
               onClick={() => setShowPassword(!showPassword)}
               className="ml-2 text-neutral-500 hover:text-neutral-300 focus:outline-none transition-colors"
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              <img
+                src={showPassword ? '/assets/icons/eye_visibility_off.svg' : '/assets/icons/eye_visibility_on.svg'}
+                alt={showPassword ? 'Hide password' : 'Show password'}
+                className="w-5 h-5"
+              />
             </button>
           )}
         </div>
