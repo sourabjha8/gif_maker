@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Typography, ScreenLayout, StepHeader, ActionFooter, FloorTab, CityCard } from '../components';
-import { ChevronLeft } from '../assets/icons';
+const ChevronPreviousIcon = ({ size = 24, className }: { size?: number; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width={size} height={size} fill="currentColor" className={className}>
+    <path d="m418.15-480 162.93 162.92q8.3 8.31 8.5 20.89.19 12.57-8.5 21.27-8.7 8.69-21.08 8.69-12.38 0-21.08-8.69L359.15-454.69q-5.61-5.62-7.92-11.85-2.31-6.23-2.31-13.46t2.31-13.46q2.31-6.23 7.92-11.85l179.77-179.77q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L418.15-480Z" />
+  </svg>
+);
 import { getNavFloorLabels, getNavCityByFloor } from '../lib/content';
 
 export interface LocationSelectionProps {
@@ -70,7 +74,7 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, on
             <div className="flex items-center gap-element">
               {/* Floor Number */}
               <div className="flex items-center gap-tight">
-                <ChevronLeft size={12} className="text-primary-400" />
+                <ChevronPreviousIcon size={12} className="text-primary-400" />
                 <Typography variant="titleLarge" className="font-bold text-white">
                   {activeFloor.replace('F', '')}
                 </Typography>
