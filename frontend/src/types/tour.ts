@@ -124,7 +124,7 @@ export interface TileConfig {
 export interface Hotspot {
   id: string;
   label: string;
-  type: 'product' | 'module' | 'info' | 'navigation' | 'video';
+  type: 'product' | 'module' | 'info' | 'video';
   yaw: number;
   pitch: number;
   description?: string;
@@ -133,8 +133,6 @@ export interface Hotspot {
   sku?: string;
   moduleCode?: string;
   pricingRef?: PricingRef;
-  targetRoomSlug?: string;
-  targetVariantSlug?: string;
   videoRef?: string;
 }
 

@@ -130,14 +130,6 @@
                             "code": "CHR-ACCENT-001",
                             "quantity": 2
                           }
-                        },
-                        {
-                          "id": "hs-room-nav",
-                          "label": "Go to Kitchen",
-                          "type": "navigation",
-                          "yaw": 270.0,
-                          "pitch": -5.0,
-                          "targetRoomSlug": "kitchen"
                         }
                       ],
                       "media": [

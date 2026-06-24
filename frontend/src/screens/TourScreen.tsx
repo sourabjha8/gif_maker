@@ -331,7 +331,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         onClose={() => setActiveHotspotId(null)}
         onAddToEstimate={handleAddToEstimate}
         onPlayVideo={(media) => setActiveVideo(media)}
-        onNavigateRoom={handleNavigateRoom}
       />
 
       {/* Estimate sidebar */}

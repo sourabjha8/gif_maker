@@ -16,7 +16,6 @@ export interface HotspotPanelProps {
   onClose: () => void;
   onAddToEstimate?: (hotspot: Hotspot, pricing: PricingResponse | null) => void;
   onPlayVideo?: (media: MediaAsset) => void;
-  onNavigateRoom?: (roomSlug: string) => void;
   videoMedia?: MediaAsset;
 }
 
@@ -29,7 +28,6 @@ export const HotspotPanel: React.FC<HotspotPanelProps> = ({
   onClose,
   onAddToEstimate,
   onPlayVideo,
-  onNavigateRoom,
   videoMedia,
 }) => {
   // ESC closes
@@ -166,18 +164,6 @@ export const HotspotPanel: React.FC<HotspotPanelProps> = ({
             </div>
 
             <footer className="p-6 border-t border-spatial-border space-y-2">
-              {hotspot.type === 'navigation' && hotspot.targetRoomSlug ? (
-                <Button
-                  variant="primary"
-                  className="w-full"
-                  onClick={() => {
-                    onNavigateRoom?.(hotspot.targetRoomSlug as string);
-                  }}
-                >
-                  Go to {hotspot.label}
-                </Button>
-              ) : null}
-
               {hotspot.videoRef && videoMedia && onPlayVideo && (
                 <Button
                   variant="secondary"
