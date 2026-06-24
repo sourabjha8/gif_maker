@@ -65,6 +65,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({ onBegin }) => {
               size="medium"
               variant="primary"
               rightIcon
+              rightIconSrc="/assets/icons/arrow_forward.svg"
               className="px-8 shadow-card hover:shadow-modal"
             />
           </div>

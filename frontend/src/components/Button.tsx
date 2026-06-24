@@ -9,6 +9,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   iconOnly?: boolean;
   leftIcon?: boolean;
   rightIcon?: boolean;
+  rightIconSrc?: string;
   label?: string;
 }
 
@@ -23,6 +24,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   iconOnly = false,
   leftIcon = false,
   rightIcon = false,
+  rightIconSrc,
   label,
   disabled,
   className = '',
@@ -101,9 +103,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
 
       {/* Right Icon */}
       {(rightIcon && !iconOnly) && (
-         <img 
-           src={DEFAULT_ICON} 
-           alt="" 
+         <img
+           src={rightIconSrc ?? DEFAULT_ICON}
+           alt=""
            className="w-5 h-5 object-contain"
          />
       )}
