@@ -70,10 +70,10 @@ export const RoomNavigator: React.FC<RoomNavigatorProps> = ({
           disabled={isPrevDisabled}
         >
           <img
-            src="/assets/icons/default_icon.svg"
+            src="/assets/icons/chevron_previous.svg"
             alt=""
             aria-hidden="true"
-            className="w-4 h-4 opacity-80 rotate-90"
+            className="w-4 h-4 opacity-80"
           />
         </GlassIconButton>
       </span>
@@ -115,10 +115,10 @@ export const RoomNavigator: React.FC<RoomNavigatorProps> = ({
           disabled={isNextDisabled}
         >
           <img
-            src="/assets/icons/default_icon.svg"
+            src="/assets/icons/chevron_next.svg"
             alt=""
             aria-hidden="true"
-            className="w-4 h-4 opacity-80 -rotate-90"
+            className="w-4 h-4 opacity-80"
           />
         </GlassIconButton>
       </span>
