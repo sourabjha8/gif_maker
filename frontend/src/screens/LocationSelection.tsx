@@ -74,7 +74,6 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ onBack, on
             <div className="flex items-center gap-element">
               {/* Floor Number */}
               <div className="flex items-center gap-tight">
-                <ChevronPreviousIcon size={12} className="text-primary-400" />
                 <Typography variant="titleLarge" className="font-bold text-white">
                   {activeFloor.replace('F', '')}
                 </Typography>
