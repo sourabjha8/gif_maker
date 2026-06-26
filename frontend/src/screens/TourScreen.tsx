@@ -86,7 +86,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
   const [isRoomListOpen, setIsRoomListOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   // Estimate store hooks.
   const addItem = useEstimateStore((s) => s.addItem);
   const removeItem = useEstimateStore((s) => s.removeItem);
