@@ -1,0 +1,526 @@
+<style>
+  :root{
+    --bg:#141518; --bg-2:#101114;
+    --panel:rgba(255,255,255,0.038); --panel-2:rgba(255,255,255,0.062);
+    --hair:rgba(255,255,255,0.10); --hair-2:rgba(255,255,255,0.20);
+    --ink:#EAECEF; --dim:#9AA1AB; --mute:#676D76;
+    --accent:#17A8E5; --accent-soft:rgba(23,168,229,0.14); --accent-line:rgba(23,168,229,0.55);
+    --design:#3FBDF1; --design-soft:rgba(63,189,241,0.12);
+    --explore:#37C89B; --explore-soft:rgba(55,200,155,0.12);
+    --tour:#EFA23B; --tour-soft:rgba(239,162,59,0.14);
+    --radius:14px;
+    --sans:"Open Sans",-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
+    --mono:ui-monospace,"Cascadia Code",Consolas,"SF Mono",monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:
+      radial-gradient(1200px 600px at 82% -8%, rgba(23,168,229,0.10), transparent 60%),
+      radial-gradient(900px 500px at 0% 105%, rgba(55,200,155,0.06), transparent 55%),
+      var(--bg);
+    color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  a{color:var(--accent);text-decoration:none;}
+  code,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 22px 64px;}
+
+  /* Masthead */
+  .mast{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding-bottom:18px;border-bottom:1px solid var(--hair);}
+  .eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;margin:0 0 6px;}
+  .mast h1{margin:0;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-0.01em;text-wrap:balance;}
+  .mast p{margin:8px 0 0;color:var(--dim);font-size:14px;max-width:52ch;}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;}
+  .stat{background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:10px 14px;min-width:78px;}
+  .stat b{display:block;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;}
+  .stat span{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:0.08em;}
+
+  /* Search */
+  .searchbar{position:relative;margin:22px 0 6px;}
+  .searchbar .ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--mute);font-size:18px;}
+  #q{width:100%;padding:14px 108px 14px 44px;font-size:15px;font-family:var(--sans);color:var(--ink);
+    background:var(--panel-2);border:1px solid var(--hair-2);border-radius:var(--radius);outline:none;
+    transition:border-color .16s, box-shadow .16s;}
+  #q::placeholder{color:var(--mute);}
+  #q:focus{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft);}
+  .kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:6px;align-items:center;color:var(--mute);font-size:12px;}
+  .kbd kbd{font-family:var(--mono);background:var(--panel);border:1px solid var(--hair);border-bottom-width:2px;
+    border-radius:6px;padding:2px 7px;font-size:11px;color:var(--dim);}
+
+  /* Results */
+  #results{margin-top:12px;display:none;}
+  #results.on{display:block;}
+  .rgroup{margin-bottom:14px;}
+  .rgroup h3{margin:0 0 8px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mute);font-weight:600;}
+  .rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;}
+  .ritem{text-align:left;background:var(--panel);border:1px solid var(--hair);border-radius:11px;padding:10px 12px;
+    cursor:pointer;color:var(--ink);font-family:var(--sans);transition:border-color .14s,background .14s,transform .14s;}
+  .ritem:hover,.ritem:focus-visible{border-color:var(--hair-2);background:var(--panel-2);outline:none;transform:translateY(-1px);}
+  .ritem .rn{font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;}
+  .ritem .rp{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:3px;word-break:break-all;}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none;}
+  .nores{color:var(--mute);font-size:14px;padding:8px 2px;}
+
+  /* View tabs */
+  .views{display:flex;gap:6px;margin:26px 0 16px;border-bottom:1px solid var(--hair);}
+  .vtab{background:none;border:none;color:var(--dim);font-family:var(--sans);font-size:14px;font-weight:600;
+    padding:10px 4px;margin-right:18px;cursor:pointer;border-bottom:2px solid transparent;transition:color .14s;}
+  .vtab:hover{color:var(--ink);}
+  .vtab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .view{display:none;}
+  .view.on{display:block;animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  /* Flow */
+  .flow{display:flex;flex-direction:column;gap:12px;}
+  .strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .lane{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;border-radius:12px;
+    background:var(--panel);border:1px solid var(--hair);}
+  .lane.design{border-left:3px solid var(--design);}
+  .lane.explore{border-left:3px solid var(--explore);}
+  .tag{font-size:11px;font-weight:700;letter-spacing:0.04em;padding:3px 9px;border-radius:999px;}
+  .tag.d{color:var(--design);background:var(--design-soft);}
+  .tag.e{color:var(--explore);background:var(--explore-soft);}
+  .node{position:relative;text-align:left;background:var(--panel-2);border:1px solid var(--hair-2);border-radius:11px;
+    padding:9px 13px;cursor:pointer;color:var(--ink);font-family:var(--sans);line-height:1.2;
+    transition:border-color .14s,background .14s,transform .14s,box-shadow .14s;}
+  .node:hover{transform:translateY(-1px);border-color:var(--accent-line);}
+  .node:focus-visible{outline:none;border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft);}
+  .node .nn{font-size:14px;font-weight:600;}
+  .node .np{display:block;font-family:var(--mono);font-size:10.5px;color:var(--mute);margin-top:2px;}
+  .node[data-sel="1"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);background:var(--accent-soft);}
+  .node.tour[data-sel="1"]{border-color:var(--tour);box-shadow:0 0 0 3px var(--tour-soft);background:var(--tour-soft);}
+  .ch{color:var(--mute);font-size:17px;line-height:1;user-select:none;}
+  .toTour{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--tour);}
+  .branchhint{font-size:12px;color:var(--mute);display:inline-flex;align-items:center;gap:5px;}
+  .col{display:flex;flex-direction:column;gap:6px;}
+  .converge{border-top:1px dashed var(--hair);padding-top:14px;margin-top:2px;}
+
+  /* Detail */
+  #detail{margin-top:18px;background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:18px 20px;min-height:150px;}
+  .dhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .dhead .dt{font-size:19px;font-weight:700;letter-spacing:-0.01em;}
+  .dkind{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;
+    background:var(--accent-soft);color:var(--accent);}
+  .dpath{font-family:var(--mono);font-size:12px;color:var(--dim);background:var(--bg-2);border:1px solid var(--hair);
+    padding:3px 8px;border-radius:7px;}
+  .drow{display:flex;gap:14px;padding:7px 0;border-top:1px solid var(--hair);font-size:14px;}
+  .drow:first-of-type{border-top:none;}
+  .dk{flex:0 0 108px;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:0.06em;padding-top:2px;}
+  .dv{color:var(--dim);flex:1;min-width:0;}
+  .dv b{color:var(--ink);font-weight:600;}
+  .chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11.5px;color:var(--ink);
+    background:var(--panel-2);border:1px solid var(--hair);border-radius:7px;padding:3px 8px;margin:0 5px 5px 0;cursor:pointer;
+    transition:border-color .14s,background .14s;}
+  .chip:hover{border-color:var(--accent-line);background:var(--accent-soft);}
+  .chip.static{cursor:default;}
+  .chip.static:hover{border-color:var(--hair);background:var(--panel-2);}
+  .out{display:inline-flex;align-items:center;gap:6px;font-size:13px;margin:0 14px 4px 0;}
+  .out .lbl{color:var(--ink);font-weight:600;}
+  .out .arr{color:var(--mute);}
+  .out .dest{font-family:var(--mono);font-size:12px;color:var(--accent);}
+
+  /* Layers */
+  .layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+  .layer{background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);padding:16px 18px;}
+  .layer .lh{display:flex;align-items:center;justify-content:space-between;}
+  .layer .lt{font-size:16px;font-weight:700;}
+  .layer .lc{font-size:22px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .layer .lpath{font-family:var(--mono);font-size:12px;color:var(--design);margin:6px 0 10px;}
+  .layer .ld{font-size:13.5px;color:var(--dim);line-height:1.55;}
+  .layer ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px;}
+  .layer li{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--panel-2);border:1px solid var(--hair);
+    border-radius:6px;padding:2px 7px;cursor:pointer;transition:border-color .14s;}
+  .layer li:hover{border-color:var(--accent-line);color:var(--ink);}
+
+  /* Data flow */
+  .pipe{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;}
+  .pstep{background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:12px 14px;min-width:120px;cursor:pointer;
+    transition:border-color .14s,transform .14s;}
+  .pstep:hover{border-color:var(--accent-line);transform:translateY(-1px);}
+  .pstep b{display:block;font-size:14px;font-weight:600;}
+  .pstep span{font-size:11.5px;color:var(--mute);}
+  .pstep.hot{border-color:var(--tour);}
+  .pstep.cart{border-color:var(--design);}
+  .pnote{margin-top:16px;font-size:13.5px;color:var(--dim);line-height:1.6;}
+  .pnote b{color:var(--ink);}
+
+  .foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--hair);font-size:12px;color:var(--mute);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+  @media (max-width:560px){
+    .dk{flex-basis:100%;}
+    .mast h1{font-size:24px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+
+<h2 class="sr-only">Interactive system map of the Virtual XP Web app: search across every route, screen, component, library module and data source, explore the branching route flow, the layered architecture, and the pricing and content data flow.</h2>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div>
+      <p class="eyebrow">Virtual XP Web · system map</p>
+      <h1>Routes, screens &amp; components</h1>
+      <p>A browsable map of the 360° showroom pilot — the two navigation flows, the thin-route / fat-screen split, and where state and pricing move.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="searchbar">
+    <i class="ico" aria-hidden="true">⌕</i>
+    <input id="q" type="search" autocomplete="off" spellcheck="false"
+      placeholder="Search anything — routes, screens, components, lib, data…" aria-label="Search the system map" />
+    <span class="kbd"><kbd>/</kbd> focus <kbd>esc</kbd> clear</span>
+  </div>
+  <div id="results" role="region" aria-label="Search results"></div>
+
+  <nav class="views" role="tablist" aria-label="Views">
+    <button class="vtab" role="tab" data-view="flow" aria-selected="true">Route flow</button>
+    <button class="vtab" role="tab" data-view="layers" aria-selected="false">Architecture layers</button>
+    <button class="vtab" role="tab" data-view="data" aria-selected="false">Data &amp; pricing flow</button>
+  </nav>
+
+  <section class="view on" id="view-flow" role="tabpanel">
+    <div class="flow">
+      <div class="strip">
+        <button class="node" data-node="start"></button><span class="ch">›</span>
+        <button class="node" data-node="login"></button><span class="ch">›</span>
+        <button class="node" data-node="choose"></button>
+        <span class="branchhint">⑂ branches into two flows</span>
+      </div>
+
+      <div class="lane design">
+        <span class="tag d">walk-around</span>
+        <button class="node" data-node="roomType"></button><span class="ch">›</span>
+        <button class="node" data-node="roomFilter"></button><span class="ch">›</span>
+        <span class="toTour">◎ Tour</span>
+      </div>
+
+      <div class="lane explore">
+        <span class="tag e">explore</span>
+        <button class="node" data-node="location"></button><span class="ch">›</span>
+        <button class="node" data-node="city"></button><span class="ch">›</span>
+        <span class="col">
+          <button class="node" data-node="project"></button>
+          <button class="node" data-node="dolly"></button>
+        </span>
+        <span class="ch">›</span>
+        <span class="toTour">◎ Tour</span>
+      </div>
+
+      <div class="strip converge">
+        <button class="node tour" data-node="tour"></button><span class="ch">›</span>
+        <button class="node" data-node="estimate"></button>
+        <span class="branchhint">opens from the viewer dock &amp; hotspot panel</span>
+      </div>
+    </div>
+
+    <div id="detail" role="region" aria-live="polite"></div>
+  </section>
+
+  <section class="view" id="view-layers" role="tabpanel"></section>
+
+  <section class="view" id="view-data" role="tabpanel">
+    <div class="pipe" id="pipe"></div>
+    <p class="pnote">Money is handled in integer <b>paise</b> end-to-end. When an item is added to the estimate, its price is <b>snapshotted</b> — later API changes never mutate a saved cart. The proxy route keeps <code>PRICING_API_URL</code> / <code>PRICING_API_TOKEN</code> server-side and falls back to the mock adapter, so the client never sees a secret and never a 5xx.</p>
+  </section>
+
+  <div class="foot">
+    <span>Generated from the repo · read-only reference</span>
+    <span id="foot-count"></span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var esc=function(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");};
+
+  var ROUTES={
+    start:{t:"Start",kind:"route",path:"/",rf:"app/page.tsx",screen:"StartScreen",cat:"common",
+      comps:["StartScreen","AppFrame"],state:"none",
+      out:[["Begin","/login"]]},
+    login:{t:"Login",kind:"route",path:"/login",rf:"app/login/page.tsx",screen:"LoginScreen",cat:"common",
+      comps:["LoginScreen","AppFrame"],state:"none — no real auth in v1",
+      out:[["Continue","/choose"]]},
+    choose:{t:"Choose experience",kind:"route",path:"/choose",rf:"app/choose/page.tsx",screen:"ExperienceSelection",cat:"common",
+      comps:["ExperienceSelection","ExperienceCard","Navbar"],state:"local: selected mode",
+      out:[["walk-around","/room-type"],["explore","/location"]]},
+    roomType:{t:"Room type",kind:"route",path:"/room-type",rf:"app/room-type/page.tsx",screen:"RoomTypeSelection",cat:"design",
+      comps:["RoomTypeSelection","RoomCard","StepHeader"],state:"reads navigation.roomTypes",
+      out:[["Continue","/room-filter"]]},
+    roomFilter:{t:"Room filter",kind:"route",path:"/room-filter",rf:"app/room-filter/page.tsx",screen:"RoomFilterSelection",cat:"design",
+      comps:["RoomFilterSelection","StepIndicator"],state:"local: filter selections",
+      out:[["Explore","/mumbai/seabreeze-residences/living-room (hardcoded)"]]},
+    location:{t:"Location",kind:"route",path:"/location",rf:"app/location/page.tsx",screen:"LocationSelection",cat:"explore",
+      comps:["LocationSelection","CityCard","Navbar"],state:"reads navigation catalog",
+      out:[["Explore city","/{city}"]]},
+    city:{t:"City / projects",kind:"route",path:"/{city}",rf:"app/[city]/page.tsx",screen:"ProjectSelection",cat:"explore",
+      comps:["ProjectSelection","SocietyCard","FloorTab"],state:"param: city · getNavCityBySlug",
+      out:[["Continue","/{city}/{project}"],["View on map","/{city}/{project}/dolly"]]},
+    project:{t:"Project",kind:"route",path:"/{city}/{project}",rf:"app/[city]/[project]/page.tsx",screen:"ProjectSelection",cat:"explore",
+      comps:["ProjectSelection","SocietyCard"],state:"params: city, project",
+      out:[["Explore","/mumbai/seabreeze-residences/living-room (hardcoded)"]]},
+    dolly:{t:"Dolly (room picker)",kind:"route",path:"/{city}/{project}/dolly",rf:"app/[city]/[project]/dolly/page.tsx",screen:"DollyScreen",cat:"explore",
+      comps:["DollyScreen"],state:"params: city, project",
+      out:[["Select room","/{city}/{project}/{room}"]]},
+    tour:{t:"Tour — 360° viewer",kind:"route",path:"/{city}/{project}/{room}",rf:"app/[city]/[project]/[room]/page.tsx",screen:"TourScreen",cat:"tour",
+      comps:["TourViewer","TourTopBar","RoomNavigator","ViewerIconDock","HotspotPanel","RoomInfoPanel","RoomListSidebar","RoomsMenu","GalleryModal","VideoModal","EstimateSidebar","LoadingOverlay","AlertBox"],
+      state:"local: room / hotspot / video / panel toggles + pricing cache · Zustand estimate store · loadContent()+findBestVariant",
+      out:[["Back","router.back()"],["Open estimate","/estimate"]]},
+    estimate:{t:"Estimate",kind:"route",path:"/estimate",rf:"app/estimate/page.tsx",screen:"EstimatePage",cat:"common",
+      comps:["EstimatePage","EstimateSummary"],state:"Zustand estimate store (localStorage: vxp-estimate-v2)",
+      out:[["Back","router.back()"]]}
+  };
+  var ROUTE_ORDER=["start","login","choose","roomType","roomFilter","location","city","project","dolly","tour","estimate"];
+
+  var SCREENS={
+    StartScreen:"src/screens/StartScreen.tsx", LoginScreen:"src/screens/LoginScreen.tsx",
+    ExperienceSelection:"src/screens/ExperienceSelection.tsx", LocationSelection:"src/screens/LocationSelection.tsx",
+    ProjectSelection:"src/screens/ProjectSelection.tsx", RoomTypeSelection:"src/screens/RoomTypeSelection.tsx",
+    RoomFilterSelection:"src/screens/RoomFilterSelection.tsx", RoomSelection:"src/screens/RoomSelection.tsx",
+    DollyScreen:"src/screens/DollyScreen.tsx", TourScreen:"src/screens/TourScreen.tsx",
+    EstimatePage:"src/screens/EstimatePage.tsx"
+  };
+  var COMPS={
+    "AppFrame":"src/components/AppFrame.tsx","Navbar":"src/components/Navbar.tsx","Button":"src/components/Button.tsx",
+    "ScreenLayout":"src/components/ScreenLayout.tsx","ScreenBackground":"src/components/ScreenBackground.tsx",
+    "StepHeader":"src/components/StepHeader.tsx","StepIndicator":"src/components/StepIndicator.tsx",
+    "CityCard":"src/components/CityCard.tsx","SocietyCard":"src/components/SocietyCard.tsx",
+    "RoomCard":"src/components/RoomCard.tsx","ExperienceCard":"src/components/ExperienceCard.tsx",
+    "FloorTab":"src/components/FloorTab.tsx","GlassIconButton":"src/components/GlassIconButton.tsx",
+    "AlertBox":"src/components/AlertBox.tsx","LoadingOverlay":"src/components/LoadingOverlay.tsx",
+    "BackButton":"src/components/BackButton.tsx","CountBadge":"src/components/CountBadge.tsx",
+    "EstimateButton":"src/components/EstimateButton.tsx","StatusPill":"src/components/StatusPill.tsx",
+    "ActionFooter":"src/components/ActionFooter.tsx","TextBox":"src/components/TextBox.tsx",
+    "Tooltip":"src/components/Tooltip.tsx","UI":"src/components/UI.tsx",
+    "TourViewer":"src/components/tour/TourViewer.tsx","TourTopBar":"src/components/tour/TourTopBar.tsx",
+    "RoomNavigator":"src/components/tour/RoomNavigator.tsx","ViewerIconDock":"src/components/tour/ViewerIconDock.tsx",
+    "HotspotPanel":"src/components/tour/HotspotPanel.tsx","RoomInfoPanel":"src/components/tour/RoomInfoPanel.tsx",
+    "RoomListSidebar":"src/components/tour/RoomListSidebar.tsx","RoomsMenu":"src/components/tour/RoomsMenu.tsx",
+    "GalleryModal":"src/components/tour/GalleryModal.tsx","VideoModal":"src/components/tour/VideoModal.tsx",
+    "VariantSwitcher":"src/components/tour/VariantSwitcher.tsx","RoomDescriptionCard":"src/components/tour/RoomDescriptionCard.tsx",
+    "EstimateSidebar":"src/components/estimate/EstimateSidebar.tsx","EstimateSummary":"src/components/estimate/EstimateSummary.tsx"
+  };
+  var COMP_NOTE={
+    "TourViewer":"Client-only Photo Sphere Viewer + MarkersPlugin island (dynamic import, ssr:false). Destroys on unmount.",
+    "AppFrame":"Route chrome: full-viewport container + optional global Navbar. Sign-out → /.",
+    "HotspotPanel":"Shows a tapped hotspot's detail, pricing and add-to-estimate.",
+    "EstimateSidebar":"Slide-over cart, driven by the Zustand store.",
+    "ViewerIconDock":"Right-rail: gallery, rooms, estimate, mute.",
+    "RoomInfoPanel":"Bottom sheet with room + per-element pricing.",
+    "GalleryModal":"Variant gallery lightbox.","VideoModal":"HTML video modal.",
+    "RoomNavigator":"Prev · room name · next navigator.","TourTopBar":"Room / project title + rooms button."
+  };
+  var LIB={
+    "loadContent":{path:"src/lib/content.ts",kind:"lib",desc:"Loads + validates the static JSON (cached). Also findCity/Project/Room and findBestVariant fallback scoring.",links:["virtual-xp-content.json","content schemas"]},
+    "content schemas":{path:"src/lib/validation/schemas.ts",kind:"lib",desc:"Zod schemas for the whole content tree (floors + navigation) and pricing responses. App must not render invalid content.",links:["loadContent"]},
+    "estimate store":{path:"src/lib/estimate/store.ts",kind:"lib",desc:"Zustand + persist cart. Key vxp-estimate-v2, localStorage, skipHydration + manual rehydrate. selectEstimateSummary groups by room from price snapshots.",links:["TourScreen","EstimateSummary"]},
+    "pricing factory":{path:"src/lib/pricing/factory.ts",kind:"lib",desc:"Picks adapter from NEXT_PUBLIC_PRICING_MODE: mock (default) or proxy. direct is intentionally unsupported.",links:["mock adapter","proxy adapter"]},
+    "mock adapter":{path:"src/lib/pricing/mock-adapter.ts",kind:"lib",desc:"Deterministic hashed prices + fixed demo SKUs. Code PRICING-UNAVAILABLE exercises the empty state.",links:["pricing factory"]},
+    "proxy adapter":{path:"src/lib/pricing/proxy-adapter.ts",kind:"lib",desc:"Client-side adapter that POSTs to /api/pricing.",links:["/api/pricing","pricing factory"]},
+    "pricing format":{path:"src/lib/pricing/format.ts",kind:"lib",desc:"INR formatting + normalizeFromResponse snapshot builder (paise math).",links:["estimate store"]},
+    "/api/pricing":{path:"app/api/pricing/route.ts",kind:"api",desc:"Server route handler. Forwards to PRICING_API_URL with a server-only token; falls back to mock; never returns 5xx to the client.",links:["proxy adapter","mock adapter"]},
+    "virtual-xp-content.json":{path:"src/data/virtual-xp-content.json",kind:"data",desc:"Source of truth: floors→cities→projects→rooms→variants→hotspots/media/layers/panorama, plus the navigation catalog.",links:["loadContent","content schemas"]}
+  };
+
+  var CAT_COLOR={common:"var(--mute)",design:"var(--design)",explore:"var(--explore)",tour:"var(--tour)",
+    screen:"var(--accent)",component:"var(--accent)",lib:"#B79CF0",api:"#EFA23B",data:"var(--explore)"};
+  var KIND_LABEL={route:"Route",screen:"Screen",component:"Component",lib:"Library",api:"API route",data:"Data"};
+
+  /* Build unified search index */
+  var INDEX=[];
+  ROUTE_ORDER.forEach(function(id){var r=ROUTES[id];INDEX.push({id:"route:"+id,ref:id,name:r.t,kind:"route",path:r.path,cat:r.cat});});
+  Object.keys(SCREENS).forEach(function(n){INDEX.push({id:"screen:"+n,ref:n,name:n,kind:"screen",path:SCREENS[n],cat:"screen"});});
+  Object.keys(COMPS).forEach(function(n){INDEX.push({id:"comp:"+n,ref:n,name:n,kind:"component",path:COMPS[n],cat:"component"});});
+  Object.keys(LIB).forEach(function(n){var l=LIB[n];INDEX.push({id:"lib:"+n,ref:n,name:n,kind:l.kind,path:l.path,cat:l.kind});});
+
+  /* Reverse index: which routes reference a screen/component */
+  function routesUsing(name){
+    var hits=[];
+    ROUTE_ORDER.forEach(function(id){var r=ROUTES[id];
+      if(r.screen===name || r.comps.indexOf(name)>=0) hits.push(id);});
+    return hits;
+  }
+
+  /* Stats */
+  var counts={Routes:ROUTE_ORDER.length,Screens:Object.keys(SCREENS).length,Components:Object.keys(COMPS).length,"Lib + data":Object.keys(LIB).length};
+  var statsEl=document.getElementById("stats");
+  Object.keys(counts).forEach(function(k){var d=document.createElement("div");d.className="stat";
+    d.innerHTML="<b>"+counts[k]+"</b><span>"+esc(k)+"</span>";statsEl.appendChild(d);});
+  document.getElementById("foot-count").textContent=INDEX.length+" entities indexed";
+
+  /* ---------- Detail rendering ---------- */
+  var detail=document.getElementById("detail");
+  function chip(label,onclick,isStatic){
+    return '<button class="chip'+(isStatic?" static":"")+'" '+(onclick?'data-go="'+esc(onclick)+'"':"disabled")+'>'+esc(label)+'</button>';
+  }
+  function show(entry){
+    switchView("flow");
+    var html="";
+    if(entry.kind==="route"){
+      var r=ROUTES[entry.ref];
+      highlightNode(entry.ref);
+      var comps=r.comps.map(function(c){return chip(c, COMPS[c]?"comp:"+c:(SCREENS[c]?"screen:"+c:""));}).join("");
+      var outs=r.out.map(function(o){
+        var dest=o[1], destId=null;
+        for(var i=0;i<ROUTE_ORDER.length;i++){if(ROUTES[ROUTE_ORDER[i]].path===dest)destId="route:"+ROUTE_ORDER[i];}
+        return '<span class="out"><span class="lbl">'+esc(o[0])+'</span><span class="arr">→</span>'+
+          (destId?'<button class="dest" data-go="'+destId+'" style="background:none;border:none;cursor:pointer;padding:0;font-family:var(--mono);">'+esc(dest)+'</button>':'<span class="dest">'+esc(dest)+'</span>')+'</span>';
+      }).join("");
+      html=head(r.t,"route",r.path)+
+        row("Route file",'<code>'+esc(r.rf)+'</code>')+
+        row("Screen",chip(r.screen,SCREENS[r.screen]?"screen:"+r.screen:""))+
+        row("Renders",comps)+
+        row("State / data",'<b>'+esc(r.state)+'</b>')+
+        row("Navigates",outs);
+    } else if(entry.kind==="screen"){
+      var used=routesUsing(entry.ref).map(function(id){return chip(ROUTES[id].t,"route:"+id);}).join("")||"—";
+      html=head(entry.ref,"screen",entry.path)+
+        row("File",'<code>'+esc(entry.path)+'</code>')+
+        row("Mounted by",used)+
+        row("Role","Owns the UI + behaviour for its route; reached via the <code>@shared</code> alias.");
+    } else if(entry.kind==="component"){
+      var usedR=routesUsing(entry.ref).map(function(id){return chip(ROUTES[id].t,"route:"+id);}).join("")||"Shared UI kit — used across selection screens";
+      html=head(entry.ref,"component",entry.path)+
+        row("File",'<code>'+esc(entry.path)+'</code>')+
+        (COMP_NOTE[entry.ref]?row("What it does",esc(COMP_NOTE[entry.ref])):"")+
+        row("Used by",usedR);
+    } else { /* lib / api / data */
+      var l=LIB[entry.ref];
+      var links=(l.links||[]).map(function(n){
+        var target=null;
+        if(LIB[n])target="lib:"+n; else if(COMPS[n])target="comp:"+n; else if(SCREENS[n])target="screen:"+n;
+        return chip(n,target);
+      }).join("")||"—";
+      html=head(entry.ref,l.kind,l.path)+
+        row("File",'<code>'+esc(l.path)+'</code>')+
+        row("What it does",esc(l.desc))+
+        row("Connects to",links);
+    }
+    detail.innerHTML=html;
+    detail.querySelectorAll("[data-go]").forEach(function(b){
+      b.addEventListener("click",function(){goto(b.getAttribute("data-go"));});
+    });
+    detail.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+  function head(title,kind,path){
+    return '<div class="dhead"><span class="dt">'+esc(title)+'</span>'+
+      '<span class="dkind" style="color:'+CAT_COLOR[kind]+';background:transparent;border:1px solid currentColor;">'+esc(KIND_LABEL[kind]||kind)+'</span>'+
+      '<span class="dpath">'+esc(path)+'</span></div>';
+  }
+  function row(k,v){return '<div class="drow"><div class="dk">'+esc(k)+'</div><div class="dv">'+v+'</div></div>';}
+
+  function goto(id){
+    var entry=INDEX.filter(function(e){return e.id===id;})[0];
+    if(entry)show(entry);
+  }
+
+  /* ---------- Flow nodes ---------- */
+  var nodeEls=Array.prototype.slice.call(document.querySelectorAll(".node"));
+  nodeEls.forEach(function(n){
+    var id=n.getAttribute("data-node");var r=ROUTES[id];
+    n.style.borderLeftColor="";
+    n.innerHTML='<span class="nn">'+esc(r.t)+'</span><span class="np">'+esc(r.path)+'</span>';
+    n.setAttribute("aria-label",r.t+" route "+r.path);
+    n.addEventListener("click",function(){goto("route:"+id);});
+  });
+  function highlightNode(routeId){
+    nodeEls.forEach(function(n){n.setAttribute("data-sel",n.getAttribute("data-node")===routeId?"1":"0");});
+  }
+
+  /* ---------- Search ---------- */
+  var q=document.getElementById("q"), results=document.getElementById("results");
+  function score(e,term){
+    var n=e.name.toLowerCase(), p=(e.path||"").toLowerCase();
+    if(n===term)return 100; if(n.indexOf(term)===0)return 80;
+    if(n.indexOf(term)>=0)return 60; if(p.indexOf(term)>=0)return 40;
+    if(e.kind.indexOf(term)>=0)return 20; return 0;
+  }
+  function render(term){
+    term=term.trim().toLowerCase();
+    if(!term){results.className="";results.innerHTML="";return;}
+    results.className="on";
+    var matches=INDEX.map(function(e){return {e:e,s:score(e,term)};}).filter(function(m){return m.s>0;})
+      .sort(function(a,b){return b.s-a.s;});
+    if(!matches.length){results.innerHTML='<p class="nores">No matches for “'+esc(term)+'”. Try: tour, pricing, sidebar, estimate, [city], .json</p>';return;}
+    var groups={route:[],screen:[],component:[],lib:[],api:[],data:[]};
+    matches.forEach(function(m){(groups[m.e.kind]||(groups[m.e.kind]=[])).push(m.e);});
+    var order=["route","screen","component","lib","api","data"], html="";
+    order.forEach(function(k){
+      var arr=groups[k];if(!arr||!arr.length)return;
+      html+='<div class="rgroup"><h3>'+esc(KIND_LABEL[k]||k)+' · '+arr.length+'</h3><div class="rgrid">';
+      arr.slice(0,24).forEach(function(e){
+        html+='<button class="ritem" data-go="'+esc(e.id)+'"><span class="rn"><span class="dot" style="background:'+
+          (CAT_COLOR[e.cat]||"var(--accent)")+'"></span>'+esc(e.name)+'</span><span class="rp">'+esc(e.path||"")+'</span></button>';
+      });
+      html+='</div></div>';
+    });
+    results.innerHTML=html;
+    results.querySelectorAll("[data-go]").forEach(function(b){
+      b.addEventListener("click",function(){goto(b.getAttribute("data-go"));});
+    });
+  }
+  var tmr;
+  q.addEventListener("input",function(){clearTimeout(tmr);tmr=setTimeout(function(){render(q.value);},70);});
+  document.addEventListener("keydown",function(e){
+    if(e.key==="/"&&document.activeElement!==q){e.preventDefault();q.focus();q.select();}
+    else if(e.key==="Escape"&&document.activeElement===q){q.value="";render("");q.blur();}
+  });
+
+  /* ---------- Views ---------- */
+  var tabs=Array.prototype.slice.call(document.querySelectorAll(".vtab"));
+  function switchView(v){
+    tabs.forEach(function(t){t.setAttribute("aria-selected",t.getAttribute("data-view")===v?"true":"false");});
+    ["flow","layers","data"].forEach(function(name){
+      document.getElementById("view-"+name).classList.toggle("on",name===v);
+    });
+  }
+  tabs.forEach(function(t){t.addEventListener("click",function(){switchView(t.getAttribute("data-view"));});});
+
+  /* Layers view */
+  var layerDefs=[
+    {t:"Route pages",path:"app/**",c:counts.Routes,d:"Thin. Own the URL + params, wrap a screen in AppFrame, and pass router.push callbacks down.",items:ROUTE_ORDER.map(function(id){return {n:ROUTES[id].path,go:"route:"+id};})},
+    {t:"Screens",path:"src/screens/**",c:counts.Screens,d:"Fat. Own UI + behaviour. Imported via the @shared alias.",items:Object.keys(SCREENS).map(function(n){return {n:n,go:"screen:"+n};})},
+    {t:"Components",path:"src/components/**",c:counts.Components,d:"Shared UI kit + tour/ overlays + estimate/ panels.",items:Object.keys(COMPS).map(function(n){return {n:n,go:"comp:"+n};})},
+    {t:"Lib & data",path:"src/lib/** · src/data",c:counts["Lib + data"],d:"Content loader + Zod, pricing adapters, estimate store, the content JSON.",items:Object.keys(LIB).map(function(n){return {n:n,go:"lib:"+n};})}
+  ];
+  var lv=document.getElementById("view-layers");
+  var lhtml='<div class="layers">';
+  layerDefs.forEach(function(L){
+    lhtml+='<div class="layer"><div class="lh"><span class="lt">'+esc(L.t)+'</span><span class="lc">'+L.c+'</span></div>'+
+      '<div class="lpath">'+esc(L.path)+'</div><div class="ld">'+esc(L.d)+'</div><ul>'+
+      L.items.map(function(it){return '<li data-go="'+esc(it.go)+'">'+esc(it.n)+'</li>';}).join("")+'</ul></div>';
+  });
+  lhtml+='</div>';
+  lv.innerHTML=lhtml;
+  lv.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){goto(b.getAttribute("data-go"));});});
+
+  /* Data flow view */
+  var steps=[
+    {b:"content.json",s:"static source",go:"lib:virtual-xp-content.json"},
+    {b:"Zod validate",s:"lib/validation",go:"lib:content schemas"},
+    {b:"loadContent()",s:"cached",go:"lib:loadContent"},
+    {b:"TourScreen",s:"resolve variant",go:"screen:TourScreen",cls:"hot"},
+    {b:"pricing factory",s:"mock / proxy",go:"lib:pricing factory"},
+    {b:"/api/pricing",s:"proxy → upstream",go:"lib:/api/pricing"},
+    {b:"estimate store",s:"snapshot → cart",go:"lib:estimate store",cls:"cart"},
+    {b:"Estimate",s:"summary view",go:"route:estimate"}
+  ];
+  var pipe=document.getElementById("pipe"), phtml="";
+  steps.forEach(function(st,i){
+    phtml+='<button class="pstep '+(st.cls||"")+'" data-go="'+esc(st.go)+'"><b>'+esc(st.b)+'</b><span>'+esc(st.s)+'</span></button>';
+    if(i<steps.length-1)phtml+='<span class="ch" style="display:flex;align-items:center;">→</span>';
+  });
+  pipe.innerHTML=phtml;
+  pipe.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){goto(b.getAttribute("data-go"));});});
+
+  /* Default selection */
+  goto("route:tour");
+})();
+</script>
