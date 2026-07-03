@@ -25,6 +25,7 @@ interface RoomLabel {
 const ROOM_LABELS: RoomLabel[] = [
   { x: 26, y: 68, name: 'Living Room', roomSlug: 'living-room' },
   { x: 64, y: 30, name: 'Bedroom', roomSlug: 'bedroom' },
+  { x: 74, y: 18, name: 'Bedroom 2', roomSlug: 'bedroom-2' },
   { x: 41, y: 42, name: 'Kitchen' },
   { x: 20, y: 32, name: 'Bathroom' },
   { x: 53, y: 58, name: 'Dining' },

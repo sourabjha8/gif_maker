@@ -491,6 +491,35 @@
                   ]
                 },
                 {
+                  "id": "room-bedroom-2-blr",
+                  "slug": "bedroom-2",
+                  "name": "Bedroom 2",
+                  "type": "bedroom",
+                  "variants": [
+                    {
+                      "id": "var-bedroom-2-default",
+                      "slug": "default",
+                      "name": "Bedroom 2",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "isDefault": true,
+                      "description": "A well-appointed second bedroom with warm tones and modular storage.",
+                      "longDescription": "The second bedroom continues the warm palette of the residence. Clean lines, integrated storage, and carefully chosen lighting create a restful space suited to a 4BHK Ashok Nagar floor plan.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [],
+                      "materials": []
+                    }
+                  ]
+                },
+                {
                   "id": "room-living-blr",
                   "slug": "living-room",
                   "name": "Living Room",
