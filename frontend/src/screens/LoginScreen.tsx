@@ -65,7 +65,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onContinue }) => {
                 onClick={onContinue}
                 size="medium"
                 variant="primary"
-                disabled={!email || !password}
+                disabled={false}
                 className="w-full shadow-card hover:shadow-modal"
               />
             </div>

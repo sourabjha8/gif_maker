@@ -215,6 +215,7 @@ export const NavRoomSchema = z.object({
   name: z.string(),
   image: z.string(),
   icon: z.string(),
+  assets: z.array(z.string()).optional(),
 });
 
 // Filter groups store data only; the icon component is mapped by id in the screen.

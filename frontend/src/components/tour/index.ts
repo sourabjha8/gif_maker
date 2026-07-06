@@ -1,4 +1,5 @@
-export { TourViewer } from './TourViewer';
+// TourViewer is NOT re-exported here — it's browser/WebGL-only and must be
+// loaded exclusively via next/dynamic with ssr:false (see TourScreen.tsx).
 export { HotspotPanel } from './HotspotPanel';
 export { VideoModal } from './VideoModal';
 export { VariantSwitcher } from './VariantSwitcher';

@@ -629,12 +629,12 @@
       { "id": "balcony", "name": "Balcony", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" }
     ],
     "roomTypes": [
-      { "id": "master-bedroom", "name": "Master Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
-      { "id": "living-room", "name": "Living Room", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
-      { "id": "kids-bedroom", "name": "Kid's Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
-      { "id": "guest-bedroom", "name": "Guest Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
-      { "id": "kitchen", "name": "Kitchen", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" },
-      { "id": "bathroom", "name": "Bathroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg" }
+      { "id": "master-bedroom", "name": "Master Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["King Bed", "Wardrobe", "Dresser", "Bedside Table", "Ceiling Light", "Curtains"] },
+      { "id": "living-room", "name": "Living Room", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["Sofa Set", "Coffee Table", "TV Unit", "Wall Panel", "Lounge Chair"] },
+      { "id": "kids-bedroom", "name": "Kid's Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["Bunk Bed", "Study Desk", "Toy Storage", "Wardrobe"] },
+      { "id": "guest-bedroom", "name": "Guest Bedroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["Queen Bed", "Wardrobe", "Bedside Table"] },
+      { "id": "kitchen", "name": "Kitchen", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["Modular Cabinets", "Chimney", "Countertop", "Island Unit", "Sink Fixture"] },
+      { "id": "bathroom", "name": "Bathroom", "image": "/assets/images/background.png", "icon": "/assets/icons/default_icon.svg", "assets": ["Vanity Unit", "Shower Panel", "Bathtub", "Mirror Cabinet"] }
     ],
     "filterGroups": [
       { "id": "design", "label": "Design Style", "options": ["Modern", "Classic", "Industrial", "Minimalist"] },

@@ -1,27 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
 import { Typography } from '../UI';
 
 export interface TourTopBarProps {
-  /** Current room name shown in the centre pill. */
   roomName: string;
-  /** Project name (e.g. "Sunrise"). */
   projectName: string;
-  /** BHK type label (e.g. "3BHK"). */
   projectBhkType?: string;
-  /** Called when the back / project pill is tapped. */
   onBack?: () => void;
-  /** Opens the floating room-list sidebar. */
   onOpenRooms?: () => void;
-  /** Called when the Walkthrough button is tapped. */
   onWalkthrough?: () => void;
-  /**
-   * When true, plays the walkthrough transition: the back icon fades away and
-   * the project pill slides left, while the walkthrough button collapses
-   * vertically as its label fades out. Reverses when set back to false.
-   */
   isWalkthroughActive?: boolean;
 }
 
@@ -42,9 +30,9 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
   const backBtnRef = useRef<HTMLButtonElement>(null);
   const walkBtnRef = useRef<HTMLButtonElement>(null);
   const walkContentRef = useRef<HTMLDivElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const tlRef = useRef<{ play(): void; reverse(): void; kill(): void } | null>(null);
 
-  // Build the (paused) walkthrough timeline once the elements exist.
+  // Build the GSAP timeline lazily (dynamic import keeps gsap out of the server bundle).
   useEffect(() => {
     const leftGroup = leftGroupRef.current;
     const backBtn = backBtnRef.current;
@@ -52,26 +40,33 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
     const walkContent = walkContentRef.current;
     if (!leftGroup || !backBtn || !walkBtn || !walkContent) return;
 
-    const tl = gsap.timeline({ paused: true });
-    // Back icon fades + collapses, so the society pill slides left into its place.
-    tl.to(backBtn, { width: 0, opacity: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
-      .to(leftGroup, { gap: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
-      // Walkthrough label fades, then the pill collapses vertically.
-      .to(walkContent, { opacity: 0, duration: 0.25, ease: 'power2.out' }, 0)
-      .to(
-        walkBtn,
-        { height: 0, opacity: 0, borderWidth: 0, duration: 0.4, ease: 'power2.inOut' },
-        0.12,
-      );
+    let killed = false;
 
-    tlRef.current = tl;
+    import('gsap').then(({ gsap }) => {
+      if (killed) return;
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(backBtn, { width: 0, opacity: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
+        .to(leftGroup, { gap: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
+        .to(walkContent, { opacity: 0, duration: 0.25, ease: 'power2.out' }, 0)
+        .to(
+          walkBtn,
+          { height: 0, opacity: 0, borderWidth: 0, duration: 0.4, ease: 'power2.inOut' },
+          0.12,
+        );
+
+      tlRef.current = tl;
+    });
+
     return () => {
-      tl.kill();
+      killed = true;
+      tlRef.current?.kill();
       tlRef.current = null;
     };
   }, []);
 
-  // Play / reverse the transition when the active flag changes.
+  // Play / reverse when the flag changes.
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
@@ -81,7 +76,6 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
 
   return (
     <div ref={leftGroupRef} className="flex items-start justify-between w-full gap-element">
-      {/* Left — back button + project pill */}
       <div className="pointer-events-auto flex items-center gap-tight">
         <button
           ref={backBtnRef}
@@ -122,7 +116,6 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
         </button>
       </div>
 
-      {/* Right — Walkthrough button */}
       <button
         ref={walkBtnRef}
         type="button"

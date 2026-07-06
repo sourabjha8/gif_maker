@@ -8,6 +8,8 @@ export interface Room {
   name: string;
   image: string;
   icon: string;
+  /** Names of modules/products featured in this room, shown on card hover. */
+  assets?: string[];
 }
 
 /** A filter group used in the design-flow room filter screen. */

@@ -61,7 +61,7 @@ export const ProjectSelection: React.FC<ProjectSelectionProps> = ({
             Select a society
           </Typography>
 
-          <div className="flex flex-col gap-tight">
+          <div className="flex flex-col gap-element">
             {projectData.societies.map((society) => (
               <SocietyCard
                 key={society.name}
