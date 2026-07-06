@@ -82,6 +82,8 @@ export interface RoomVariant {
   /** Materials and finishes used in the room. */
   materials?: MaterialFinish[];
   gallery?: GalleryImage[];
+  /** Optional walkthrough video, crossfaded over the panorama on demand. */
+  walkthroughVideoUrl?: string;
 }
 
 export interface MaterialFinish {

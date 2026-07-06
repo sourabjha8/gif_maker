@@ -136,6 +136,7 @@ export const RoomVariantSchema = z.object({
   longDescription: z.string().optional(),
   materials: z.array(MaterialFinishSchema).optional(),
   gallery: z.array(GalleryImageSchema).optional(),
+  walkthroughVideoUrl: z.string().optional(),
 });
 
 // ─── Content Hierarchy ───────────────────────────────────────────

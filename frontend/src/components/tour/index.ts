@@ -10,3 +10,4 @@ export { RoomDescriptionCard } from './RoomDescriptionCard';
 export { RoomInfoPanel } from './RoomInfoPanel';
 export { RoomNavigator } from './RoomNavigator';
 export { TourTopBar } from './TourTopBar';
+export { WalkthroughVideo } from './WalkthroughVideo';

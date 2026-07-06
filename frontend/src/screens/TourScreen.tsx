@@ -16,6 +16,7 @@ import {
   RoomNavigator,
   TourTopBar,
   RoomListSidebar,
+  WalkthroughVideo,
 } from '../components';
 import {
   loadContent,
@@ -87,6 +88,8 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isRoomListOpen, setIsRoomListOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  // Walkthrough video transition.
+  const [isWalkthrough, setIsWalkthrough] = useState(false);
   // Estimate store hooks.
   const addItem = useEstimateStore((s) => s.addItem);
   const removeItem = useEstimateStore((s) => s.removeItem);
@@ -222,6 +225,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     setRoomSlug(targetRoomSlug);
     setActiveHotspotId(null);
     setIsViewerReady(false);
+    setIsWalkthrough(false);
   }, []);
 
 
@@ -265,6 +269,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
 
   const galleryImages = variant?.gallery ?? [];
   const hasMultipleRooms = (resolved?.project.rooms.length ?? 0) > 1;
+  const walkthroughVideoUrl = variant?.walkthroughVideoUrl;
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden select-none">
@@ -281,6 +286,15 @@ export const TourScreen: React.FC<TourScreenProps> = ({
 
       <LoadingOverlay isVisible={isLoading} message="Loading Environment..." />
 
+      {/* Walkthrough video — crossfades over the panorama, under the chrome */}
+      {walkthroughVideoUrl && (
+        <WalkthroughVideo
+          videoUrl={walkthroughVideoUrl}
+          isActive={isWalkthrough}
+          onExit={() => setIsWalkthrough(false)}
+        />
+      )}
+
       {/* Spatial UI overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between p-4 md:p-6 pb-safe">
         {/* Top bar */}
@@ -290,6 +304,8 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           projectBhkType={resolved?.project.bhkType}
           onBack={onBack}
           onOpenRooms={() => setIsRoomListOpen(true)}
+          onWalkthrough={walkthroughVideoUrl ? () => setIsWalkthrough(true) : undefined}
+          isWalkthroughActive={isWalkthrough}
         />
 
 
