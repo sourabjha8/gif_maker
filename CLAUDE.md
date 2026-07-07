@@ -137,9 +137,14 @@ Use a premium dark showroom aesthetic: glass panels, strong hierarchy, clear con
 
 ### Icons
 
-Until explicitly told otherwise, do **not** create new icon components as `.tsx` files (e.g. under `frontend/packages/shared/assets/icons/`). For every icon used anywhere in the project — not just one screen — use the shared SVG asset at `frontend/public/assets/icons/default_icon.svg` (referenced as `/assets/icons/default_icon.svg`).
+Strictly no icons made from scratch — never author a new SVG file, and never write inline SVG path/shape markup (in `.tsx` files, e.g. under `frontend/packages/shared/assets/icons/`, or anywhere else) to represent an icon.
 
-This applies to the whole project and is a standing rule for future work. Only add or author a dedicated icon file when the user explicitly asks for it.
+When a screen needs an icon, resolve it in this order:
+
+1. Look for an existing, semantically matching `.svg` file under `frontend/public/assets/icons/` (e.g. `close.svg` for a close/cancel action, `walkthrough.svg` for a play/walkthrough action, `cart.svg`, `music_on.svg` / `music_off.svg`, `chevron_next.svg` / `chevron_previous.svg`, etc.). If one fits, reference it directly (e.g. `/assets/icons/close.svg`).
+2. If nothing in that folder fits the meaning needed, fall back to the shared generic asset at `frontend/public/assets/icons/default_icon.svg` (referenced as `/assets/icons/default_icon.svg`).
+
+This applies to the whole project and is a standing rule for future work. Only author a brand-new icon file, or hand-write inline SVG markup, when the user explicitly asks for it.
 
 ### Accessibility
 

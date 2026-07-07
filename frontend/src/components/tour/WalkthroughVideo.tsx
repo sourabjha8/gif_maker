@@ -6,15 +6,20 @@ export interface WalkthroughVideoProps {
   videoUrl: string;
   isActive: boolean;
   onExit: () => void;
+  videoRef?: React.RefObject<HTMLVideoElement>;
+  onProgress?: (progress: { currentTime: number; duration: number }) => void;
 }
 
 export const WalkthroughVideo: React.FC<WalkthroughVideoProps> = ({
   videoUrl,
   isActive,
   onExit,
+  videoRef: externalVideoRef,
+  onProgress,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const internalVideoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = externalVideoRef ?? internalVideoRef;
 
   // Crossfade in/out using dynamically imported GSAP (keeps it out of the server bundle).
   useEffect(() => {
@@ -56,8 +61,7 @@ export const WalkthroughVideo: React.FC<WalkthroughVideoProps> = ({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-[5] bg-black opacity-0 invisible pointer-events-auto cursor-pointer"
-      onClick={onExit}
+      className="absolute inset-0 z-[5] bg-black opacity-0 invisible pointer-events-auto"
       aria-hidden={!isActive}
     >
       <video
@@ -67,6 +71,14 @@ export const WalkthroughVideo: React.FC<WalkthroughVideoProps> = ({
         playsInline
         preload="auto"
         onEnded={onExit}
+        onTimeUpdate={(e) => {
+          const v = e.currentTarget;
+          onProgress?.({ currentTime: v.currentTime, duration: v.duration || 0 });
+        }}
+        onLoadedMetadata={(e) => {
+          const v = e.currentTarget;
+          onProgress?.({ currentTime: v.currentTime, duration: v.duration || 0 });
+        }}
       />
     </div>
   );

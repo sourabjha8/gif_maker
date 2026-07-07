@@ -229,8 +229,12 @@ export function TourViewer({
   useEffect(() => {
     const plugin = markersPluginRef.current;
     if (!plugin) return;
-    plugin.setMarkers([...hotspotsToMarkers(hotspots), ...makeScatterMarkers(roomSlug)]);
-  }, [hotspots]);
+    plugin.setMarkers(
+      hotspots.length > 0
+        ? [...hotspotsToMarkers(hotspots), ...makeScatterMarkers(roomSlug)]
+        : [],
+    );
+  }, [hotspots, roomSlug]);
 
   return (
     <div

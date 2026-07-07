@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // @ts-ignore - next/dynamic is available at runtime in the Next.js app
 import dynamic from 'next/dynamic';
 import {
@@ -17,6 +17,7 @@ import {
   TourTopBar,
   RoomListSidebar,
   WalkthroughVideo,
+  WalkthroughSeekBar,
 } from '../components';
 import {
   loadContent,
@@ -90,6 +91,11 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   // Walkthrough video transition.
   const [isWalkthrough, setIsWalkthrough] = useState(false);
+  const walkthroughVideoRef = useRef<HTMLVideoElement>(null);
+  const [walkthroughProgress, setWalkthroughProgress] = useState({ currentTime: 0, duration: 0 });
+  // Chrome auto-hides 3s into an idle walkthrough so the video gets full focus,
+  // and returns instantly on the next cursor/touch/key movement.
+  const [isChromeIdle, setIsChromeIdle] = useState(false);
   // Estimate store hooks.
   const addItem = useEstimateStore((s) => s.addItem);
   const removeItem = useEstimateStore((s) => s.removeItem);
@@ -245,6 +251,38 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     handleNavigateRoom(rooms[idx + 1].slug);
   }, [resolved, handleNavigateRoom]);
 
+  // Fade the chrome out 3s into an idle walkthrough, and snap it back on the
+  // very next cursor/touch/key movement.
+  useEffect(() => {
+    if (!isWalkthrough) {
+      setIsChromeIdle(false);
+      return;
+    }
+
+    let idleTimer: ReturnType<typeof setTimeout>;
+    const resetIdleTimer = () => {
+      setIsChromeIdle(false);
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => setIsChromeIdle(true), 3000);
+    };
+
+    resetIdleTimer();
+    window.addEventListener('mousemove', resetIdleTimer);
+    window.addEventListener('mousedown', resetIdleTimer);
+    window.addEventListener('touchstart', resetIdleTimer);
+    window.addEventListener('touchmove', resetIdleTimer);
+    window.addEventListener('keydown', resetIdleTimer);
+
+    return () => {
+      clearTimeout(idleTimer);
+      window.removeEventListener('mousemove', resetIdleTimer);
+      window.removeEventListener('mousedown', resetIdleTimer);
+      window.removeEventListener('touchstart', resetIdleTimer);
+      window.removeEventListener('touchmove', resetIdleTimer);
+      window.removeEventListener('keydown', resetIdleTimer);
+    };
+  }, [isWalkthrough]);
+
   if (error) {
     return (
       <div className="w-full h-full bg-spatial-bg flex items-center justify-center p-4 relative">
@@ -277,7 +315,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         <TourViewer
           panoramaUrl={variant.panorama.url}
           roomSlug={resolved?.room.slug}
-          hotspots={variant.hotspots}
+          hotspots={isWalkthrough ? [] : variant.hotspots}
           onReady={() => setIsViewerReady(true)}
           onError={(err) => setError(err)}
           onHotspotSelect={handleHotspotSelect}
@@ -292,36 +330,76 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           videoUrl={walkthroughVideoUrl}
           isActive={isWalkthrough}
           onExit={() => setIsWalkthrough(false)}
+          videoRef={walkthroughVideoRef}
+          onProgress={setWalkthroughProgress}
         />
       )}
 
       {/* Spatial UI overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between p-4 md:p-6 pb-safe">
-        {/* Top bar */}
-        <TourTopBar
-          roomName={resolved?.room.name ?? 'Loading...'}
-          projectName={resolved?.project.name ?? ''}
-          projectBhkType={resolved?.project.bhkType}
-          onBack={onBack}
-          onOpenRooms={() => setIsRoomListOpen(true)}
-          onWalkthrough={walkthroughVideoUrl ? () => setIsWalkthrough(true) : undefined}
-          isWalkthroughActive={isWalkthrough}
-        />
+        {/* Top bar — fades out 3s into an idle walkthrough */}
+        <div
+          className={`transition-opacity duration-500 ease-in-out ${
+            isChromeIdle ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <TourTopBar
+            roomName={resolved?.room.name ?? 'Loading...'}
+            projectName={resolved?.project.name ?? ''}
+            projectBhkType={resolved?.project.bhkType}
+            onBack={onBack}
+            onOpenRooms={() => setIsRoomListOpen(true)}
+            onWalkthrough={
+              walkthroughVideoUrl
+                ? () => {
+                    setActiveHotspotId(null);
+                    setIsWalkthrough(true);
+                  }
+                : undefined
+            }
+            onExitWalkthrough={() => setIsWalkthrough(false)}
+            isWalkthroughActive={isWalkthrough}
+          />
+        </div>
 
 
 
-        {/* Bottom row: room navigator — prev · room name · next */}
-        <div className="flex justify-center w-full pointer-events-auto">
-          {variant ? (
-            <RoomNavigator
-              roomName={resolved?.room.name ?? 'Room'}
-              onPrev={handlePrevRoom}
-              onNext={handleNextRoom}
-              onOpenInfo={() => setIsInfoOpen(true)}
-              isPrevDisabled={!hasMultipleRooms}
-              isInfoOpen={isInfoOpen}
-            />
-          ) : null}
+        {/* Bottom row: room navigator, swapped for a seek bar during the walkthrough */}
+        <div className="relative flex justify-center w-full min-h-[48px]">
+          <div
+            className={`absolute inset-x-0 flex justify-center pointer-events-auto transition-all duration-500 ease-in-out ${
+              isWalkthrough
+                ? 'opacity-0 translate-y-6 pointer-events-none'
+                : 'opacity-100 translate-y-0'
+            }`}
+          >
+            {variant ? (
+              <RoomNavigator
+                roomName={resolved?.room.name ?? 'Room'}
+                onPrev={handlePrevRoom}
+                onNext={handleNextRoom}
+                onOpenInfo={() => setIsInfoOpen(true)}
+                isPrevDisabled={!hasMultipleRooms}
+                isInfoOpen={isInfoOpen}
+              />
+            ) : null}
+          </div>
+
+          {walkthroughVideoUrl && (
+            <div
+              className={`absolute inset-x-0 flex justify-center pointer-events-auto transition-all duration-500 ease-in-out ${
+                isWalkthrough && !isChromeIdle
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-6 pointer-events-none'
+              }`}
+            >
+              <WalkthroughSeekBar
+                videoRef={walkthroughVideoRef}
+                currentTime={walkthroughProgress.currentTime}
+                duration={walkthroughProgress.duration}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -334,6 +412,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onOpenRoomsMenu={() => setIsRoomsMenuOpen(true)}
           onOpenEstimate={openEstimate}
           onToggleMute={() => setIsMuted((m) => !m)}
+          isWalkthrough={isWalkthrough}
         />
       )}
 

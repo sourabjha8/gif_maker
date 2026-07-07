@@ -36,5 +36,6 @@ export {
   RoomNavigator,
   TourTopBar,
   WalkthroughVideo,
+  WalkthroughSeekBar,
 } from './tour';
 export { EstimateSidebar, EstimateSummaryView } from './estimate';

@@ -12,3 +12,4 @@ export { RoomInfoPanel } from './RoomInfoPanel';
 export { RoomNavigator } from './RoomNavigator';
 export { TourTopBar } from './TourTopBar';
 export { WalkthroughVideo } from './WalkthroughVideo';
+export { WalkthroughSeekBar } from './WalkthroughSeekBar';

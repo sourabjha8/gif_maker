@@ -30,6 +30,7 @@ export interface ViewerIconDockProps {
   onOpenEstimate: () => void;
   onToggleMute: () => void;
   onVisualize?: () => void;
+  isWalkthrough?: boolean;
 }
 
 function useAutoDim(delayMs = 2000, initialDelayMs = 4000) {
@@ -66,12 +67,19 @@ export const ViewerIconDock: React.FC<ViewerIconDockProps> = ({
   onOpenEstimate,
   onToggleMute,
   onVisualize,
+  isWalkthrough = false,
 }) => {
   const { dimmed, restore, scheduledim } = useAutoDim();
 
   return (
     <div
-      className={`pointer-events-auto absolute right-element md:right-group top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20 transition-opacity duration-500 ${dimmed ? 'opacity-[0.45]' : 'opacity-100'}`}
+      className={`pointer-events-auto absolute right-element md:right-group top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20 transition-all duration-500 ease-in-out ${
+        isWalkthrough
+          ? 'opacity-0 translate-x-10 pointer-events-none'
+          : dimmed
+            ? 'opacity-[0.45]'
+            : 'opacity-100'
+      }`}
       onMouseEnter={restore}
       onMouseLeave={scheduledim}
       onTouchStart={restore}

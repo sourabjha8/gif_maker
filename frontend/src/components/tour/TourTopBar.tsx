@@ -10,6 +10,7 @@ export interface TourTopBarProps {
   onBack?: () => void;
   onOpenRooms?: () => void;
   onWalkthrough?: () => void;
+  onExitWalkthrough?: () => void;
   isWalkthroughActive?: boolean;
 }
 
@@ -20,6 +21,7 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
   onBack,
   onOpenRooms,
   onWalkthrough,
+  onExitWalkthrough,
   isWalkthroughActive = false,
 }) => {
   const projectLabel = projectBhkType
@@ -30,6 +32,8 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
   const backBtnRef = useRef<HTMLButtonElement>(null);
   const walkBtnRef = useRef<HTMLButtonElement>(null);
   const walkContentRef = useRef<HTMLDivElement>(null);
+  const walkTextRef = useRef<HTMLSpanElement>(null);
+  const walkIconRef = useRef<HTMLSpanElement>(null);
   const tlRef = useRef<{ play(): void; reverse(): void; kill(): void } | null>(null);
 
   // Build the GSAP timeline lazily (dynamic import keeps gsap out of the server bundle).
@@ -38,22 +42,45 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
     const backBtn = backBtnRef.current;
     const walkBtn = walkBtnRef.current;
     const walkContent = walkContentRef.current;
-    if (!leftGroup || !backBtn || !walkBtn || !walkContent) return;
+    const walkText = walkTextRef.current;
+    const walkIcon = walkIconRef.current;
+    if (!leftGroup || !backBtn || !walkBtn || !walkContent || !walkText || !walkIcon) return;
 
     let killed = false;
 
     import('gsap').then(({ gsap }) => {
       if (killed) return;
 
+      // Collapse the pill horizontally down to a circle matching the back
+      // button's footprint (h-11 / 44px) — GSAP's default auto->0 needs an
+      // explicit start width, and the padding must shrink in step with the
+      // width or the icon clips against the button's edge instead of
+      // staying centred in the resulting circle.
+      const fullWidth = walkBtn.getBoundingClientRect().width;
+      const collapsedWidth = walkBtn.getBoundingClientRect().height;
+      const textWidth = walkText.getBoundingClientRect().width;
+      const iconWidth = walkIcon.getBoundingClientRect().width;
+      const collapsedPaddingX = Math.max((collapsedWidth - iconWidth) / 2, 0);
+
+      gsap.set(walkBtn, { width: fullWidth });
+      gsap.set(walkText, { width: textWidth, overflow: 'hidden', display: 'inline-block' });
+
       const tl = gsap.timeline({ paused: true });
 
       tl.to(backBtn, { width: 0, opacity: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
         .to(leftGroup, { gap: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
-        .to(walkContent, { opacity: 0, duration: 0.25, ease: 'power2.out' }, 0)
+        .to(walkContent, { gap: 0, duration: 0.45, ease: 'power2.inOut' }, 0)
+        .to(walkText, { width: 0, opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0)
         .to(
           walkBtn,
-          { height: 0, opacity: 0, borderWidth: 0, duration: 0.4, ease: 'power2.inOut' },
-          0.12,
+          {
+            width: collapsedWidth,
+            paddingLeft: collapsedPaddingX,
+            paddingRight: collapsedPaddingX,
+            duration: 0.45,
+            ease: 'power2.inOut',
+          },
+          0,
         );
 
       tlRef.current = tl;
@@ -119,10 +146,10 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
       <button
         ref={walkBtnRef}
         type="button"
-        onClick={onWalkthrough}
-        aria-label="Start walkthrough"
+        onClick={() => (isWalkthroughActive ? onExitWalkthrough?.() : onWalkthrough?.())}
+        aria-label={isWalkthroughActive ? 'Exit walkthrough' : 'Start walkthrough'}
         className="
-          pointer-events-auto flex items-center h-11 px-element overflow-hidden shrink-0
+          pointer-events-auto flex items-center justify-center h-11 px-element overflow-hidden shrink-0
           rounded-pill
           bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-card
           text-neutral-50 hover:text-white hover:bg-white/10
@@ -131,15 +158,29 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
         "
       >
         <div ref={walkContentRef} className="flex items-center gap-tight">
-          <img
-            src="/assets/icons/default_icon.svg"
-            alt=""
-            aria-hidden="true"
-            className="w-4 h-4 opacity-80"
-          />
-          <Typography variant="bodySmall" weight="semiBold" colorClass="text-inherit">
-            Walkthrough
-          </Typography>
+          <span ref={walkIconRef} className="relative w-4 h-4 shrink-0">
+            <img
+              src="/assets/icons/walkthrough.svg"
+              alt=""
+              aria-hidden="true"
+              className={`absolute inset-0 w-4 h-4 transition-opacity duration-200 ${
+                isWalkthroughActive ? 'opacity-0' : 'opacity-80'
+              }`}
+            />
+            <img
+              src="/assets/icons/close.svg"
+              alt=""
+              aria-hidden="true"
+              className={`absolute inset-0 w-4 h-4 transition-opacity duration-200 ${
+                isWalkthroughActive ? 'opacity-90' : 'opacity-0'
+              }`}
+            />
+          </span>
+          <span ref={walkTextRef} className="whitespace-nowrap">
+            <Typography variant="bodySmall" weight="semiBold" colorClass="text-inherit">
+              Walkthrough
+            </Typography>
+          </span>
         </div>
       </button>
     </div>
