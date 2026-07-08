@@ -178,7 +178,7 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
           </span>
           <span ref={walkTextRef} className="whitespace-nowrap">
             <Typography variant="bodySmall" weight="semiBold" colorClass="text-inherit">
-              Walkthrough
+              Room Tour
             </Typography>
           </span>
         </div>

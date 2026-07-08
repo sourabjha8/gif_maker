@@ -17,8 +17,9 @@ export const WalkthroughSeekBar: React.FC<WalkthroughSeekBarProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
 
-  // Mirror the video element's real play/pause/rate state, since it can
+  // Mirror the video element's real play/pause/rate/mute state, since it can
   // change from sources other than this bar (autoplay, onEnded, etc.).
   useEffect(() => {
     const video = videoRef.current;
@@ -27,17 +28,21 @@ export const WalkthroughSeekBar: React.FC<WalkthroughSeekBarProps> = ({
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
     const handleRateChange = () => setPlaybackRate(video.playbackRate);
+    const handleVolumeChange = () => setIsMuted(video.muted);
 
     setIsPlaying(!video.paused);
     setPlaybackRate(video.playbackRate);
+    setIsMuted(video.muted);
 
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
     video.addEventListener('ratechange', handleRateChange);
+    video.addEventListener('volumechange', handleVolumeChange);
     return () => {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ratechange', handleRateChange);
+      video.removeEventListener('volumechange', handleVolumeChange);
     };
   }, [videoRef]);
 
@@ -65,6 +70,12 @@ export const WalkthroughSeekBar: React.FC<WalkthroughSeekBarProps> = ({
     const currentIndex = SPEED_CYCLE.indexOf(video.playbackRate as (typeof SPEED_CYCLE)[number]);
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % SPEED_CYCLE.length;
     video.playbackRate = SPEED_CYCLE[nextIndex];
+  }, [videoRef]);
+
+  const toggleMute = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
   }, [videoRef]);
 
   return (
@@ -108,10 +119,28 @@ export const WalkthroughSeekBar: React.FC<WalkthroughSeekBarProps> = ({
 
       <button
         type="button"
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Unmute walkthrough' : 'Mute walkthrough'}
+        className="
+          w-9 h-9 shrink-0 flex items-center justify-center rounded-pill
+          text-neutral-50 hover:bg-white/10 transition-colors duration-200 active:scale-95
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+        "
+      >
+        <img
+          src={isMuted ? '/assets/icons/music_off.svg' : '/assets/icons/music_on.svg'}
+          alt=""
+          aria-hidden="true"
+          className="w-4 h-4 opacity-80"
+        />
+      </button>
+
+      <button
+        type="button"
         onClick={cycleSpeed}
         aria-label={`Change playback speed, currently ${playbackRate}x`}
         className="
-          h-7 px-2 shrink-0 rounded-pill text-xs font-semibold
+          h-7 w-10 shrink-0 flex items-center justify-center rounded-pill text-xs font-semibold
           text-neutral-300 hover:bg-white/10 hover:text-white
           transition-colors duration-200 active:scale-95
           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
