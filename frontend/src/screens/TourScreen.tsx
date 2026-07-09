@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import {
   LoadingOverlay,
   AlertBox,
-  HotspotPanel,
+  HotspotSnippet,
   VideoModal,
   EstimateSidebar,
   ViewerIconDock,
@@ -34,6 +34,7 @@ import type {
   PricingResponse,
   RoomVariant,
 } from '../types';
+import type { Viewer } from '@photo-sphere-viewer/core';
 import { useEstimateStore } from '../lib/estimate';
 import { getPricingAdapter } from '../lib/pricing/factory';
 import { normalizeFromResponse } from '../lib/pricing/format';
@@ -71,6 +72,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   roomFilters,
 }) => {
   const [roomSlug, setRoomSlug] = useState(initialRoomSlug);
+  // Live Photo Sphere Viewer instance — used to anchor the hotspot snippet to
+  // its marker on screen.
+  const psvViewerRef = useRef<Viewer | null>(null);
   const [resolved, setResolved] = useState<ResolvedTour | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isViewerReady, setIsViewerReady] = useState(false);
@@ -319,6 +323,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onReady={() => setIsViewerReady(true)}
           onError={(err) => setError(err)}
           onHotspotSelect={handleHotspotSelect}
+          onViewerReady={(v) => { psvViewerRef.current = v; }}
         />
       )}
 
@@ -416,8 +421,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         />
       )}
 
-      {/* Hotspot detail panel */}
-      <HotspotPanel
+      {/* Hotspot product snippet — pops over the panorama, anchored to the marker */}
+      <HotspotSnippet
+        viewerRef={psvViewerRef}
         hotspot={activeHotspot}
         pricing={activeHotspot ? pricingByHotspot[activeHotspot.id] : undefined}
         pricingLoading={activeHotspot ? !!pricingLoading[activeHotspot.id] : false}
@@ -425,6 +431,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         videoMedia={activeVideoMedia}
         onClose={() => setActiveHotspotId(null)}
         onAddToEstimate={handleAddToEstimate}
+        onRemoveFromEstimate={(hotspot) =>
+          resolved && removeItem(`${resolved.room.slug}:${hotspot.id}`)
+        }
         onPlayVideo={(media) => setActiveVideo(media)}
       />
 

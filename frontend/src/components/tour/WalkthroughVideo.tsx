@@ -29,6 +29,7 @@ export const WalkthroughVideo: React.FC<WalkthroughVideoProps> = ({
 
     if (isActive) {
       video.currentTime = 0;
+      video.playbackRate = 1;
       const playPromise = video.play();
       if (playPromise) {
         playPromise.catch(() => {

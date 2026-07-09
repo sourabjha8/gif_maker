@@ -15,41 +15,12 @@ interface TourViewerProps {
   onReady?: () => void;
   onError?: (err: Error) => void;
   onHotspotSelect?: (hotspotId: string) => void;
+  /** Receives the live Viewer instance on init (and null on teardown). */
+  onViewerReady?: (viewer: Viewer | null) => void;
 }
 
 
-function hotspotsToMarkers(hotspots: Hotspot[]) {
-  return hotspots.map((h) => ({
-    id: h.id,
-    position: { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 },
-    html: `
-      <button
-        type="button"
-        aria-label="${h.label.replace(/"/g, '&quot;')}"
-        class="psv-hotspot psv-hotspot-${h.type} psv-marker-hotspot"
-        style="
-          width: 48px; height: 48px; min-width: 44px; min-height: 44px;
-          border-radius: 9999px;
-          background: rgba(23,168,229,0.18);
-          border: 1.5px solid rgba(23,168,229,0.85);
-          backdrop-filter: blur(8px);
-          color: white; font-size: 12px; font-weight: 600;
-          display:flex; align-items:center; justify-content:center;
-          box-shadow: 0 0 0 6px rgba(23,168,229,0.12), 0 6px 16px rgba(0,0,0,0.32);
-          cursor: pointer;
-          animation: ambient-pulse 2.4s ease-in-out infinite;
-        "
-      >
-        <span style="width:10px;height:10px;border-radius:9999px;background:#17A8E5;display:block;"></span>
-      </button>
-    `,
-    anchor: 'center center',
-    tooltip: { content: h.label, position: 'top' },
-    data: { hotspotId: h.id },
-  }));
-}
-
-/** Bullseye markers scattered around the room for layout preview. */
+/** Bullseye marker visual — used for every real hotspot. */
 const BULLSEYE_MARKER_HTML = `
   <button
     type="button"
@@ -75,23 +46,14 @@ const BULLSEYE_MARKER_HTML = `
   </button>
 `;
 
-const SCATTER_POSITIONS = [
-  { yaw:   0,   pitch:  0   },
-  { yaw:  45,   pitch: -10  },
-  { yaw: -60,   pitch:   5  },
-  { yaw: 120,   pitch: -15  },
-  { yaw: -150,  pitch:  10  },
-  { yaw: 200,   pitch:  -5  },
-  { yaw: -90,   pitch:   0  },
-];
-
-function makeScatterMarkers(roomSlug: string) {
-  return SCATTER_POSITIONS.map((pos, i) => ({
-    id: `${roomSlug}__element_${i + 1}`,
-    position: { yaw: (pos.yaw * Math.PI) / 180, pitch: (pos.pitch * Math.PI) / 180 },
+function makeHotspotMarkers(hotspots: Hotspot[]) {
+  return hotspots.map((h) => ({
+    id: h.id,
+    position: { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 },
     html: BULLSEYE_MARKER_HTML,
     anchor: 'center center',
-    data: { isScatter: true, roomSlug },
+    tooltip: { content: h.label, position: 'top' },
+    data: { hotspotId: h.id },
   }));
 }
 
@@ -114,6 +76,7 @@ export function TourViewer({
   onReady,
   onError,
   onHotspotSelect,
+  onViewerReady,
 }: TourViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Viewer | null>(null);
@@ -141,10 +104,11 @@ export function TourViewer({
         defaultYaw: 0,
         defaultPitch: 0,
         defaultTransition: { speed: '2rpm', rotation: true, effect: 'fade' },
-        plugins: [[MarkersPlugin, { markers: [...hotspotsToMarkers(hotspots), ...makeScatterMarkers(roomSlug), ...makeRoomLayers(roomSlug)] }]],
+        plugins: [[MarkersPlugin, { markers: [...makeHotspotMarkers(hotspots), ...makeRoomLayers(roomSlug)] }]],
       });
       viewerRef.current = viewer;
       markersPluginRef.current = viewer.getPlugin(MarkersPlugin) as MarkersPlugin;
+      onViewerReady?.(viewer);
 
       viewer.addEventListener('ready', () => {
         if (!destroyed) onReady?.();
@@ -152,6 +116,9 @@ export function TourViewer({
 
       markersPluginRef.current?.addEventListener('select-marker', ({ marker }: { marker: Marker }) => {
         const id = (marker.data as { hotspotId?: string } | undefined)?.hotspotId ?? marker.id;
+        // The hover tooltip otherwise lingers after a click, since the
+        // cursor is still resting on the marker when the snippet opens.
+        markersPluginRef.current?.hideMarkerTooltip(marker.id);
         hotspotSelectRef.current?.(id);
       });
     } catch (err) {
@@ -160,6 +127,7 @@ export function TourViewer({
 
     return () => {
       destroyed = true;
+      onViewerReady?.(null);
       if (viewerRef.current) {
         viewerRef.current.destroy();
         viewerRef.current = null;
@@ -229,12 +197,8 @@ export function TourViewer({
   useEffect(() => {
     const plugin = markersPluginRef.current;
     if (!plugin) return;
-    plugin.setMarkers(
-      hotspots.length > 0
-        ? [...hotspotsToMarkers(hotspots), ...makeScatterMarkers(roomSlug)]
-        : [],
-    );
-  }, [hotspots, roomSlug]);
+    plugin.setMarkers(makeHotspotMarkers(hotspots));
+  }, [hotspots]);
 
   return (
     <div

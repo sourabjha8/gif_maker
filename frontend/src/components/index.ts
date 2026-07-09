@@ -25,6 +25,7 @@ export * from './AlertBox';
 // Tour & Estimate
 export {
   HotspotPanel,
+  HotspotSnippet,
   VideoModal,
   VariantSwitcher,
   ViewerIconDock,
