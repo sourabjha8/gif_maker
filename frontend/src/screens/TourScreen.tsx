@@ -16,6 +16,7 @@ import {
   RoomNavigator,
   TourTopBar,
   RoomListSidebar,
+  AllRoomsOverlay,
   WalkthroughVideo,
   WalkthroughSeekBar,
 } from '../components';
@@ -91,6 +92,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
   const [isRoomListOpen, setIsRoomListOpen] = useState(false);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   // Walkthrough video transition.
@@ -459,6 +461,20 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           activeRoomSlug={resolved.room.slug}
           isOpen={isRoomListOpen}
           onClose={() => setIsRoomListOpen(false)}
+          onSelect={handleNavigateRoom}
+          onBrowseCatalog={() => { setIsRoomListOpen(false); setIsCatalogOpen(true); }}
+        />
+      )}
+
+      {/* All-rooms catalog overlay — opens from the room-list's "browse catalog" row */}
+      {resolved && (
+        <AllRoomsOverlay
+          projectName={resolved.project.name}
+          projectBhkType={resolved.project.bhkType}
+          rooms={resolved.project.rooms}
+          activeRoomSlug={resolved.room.slug}
+          isOpen={isCatalogOpen}
+          onClose={() => setIsCatalogOpen(false)}
           onSelect={handleNavigateRoom}
         />
       )}

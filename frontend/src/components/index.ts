@@ -32,6 +32,7 @@ export {
   GalleryModal,
   RoomsMenu,
   RoomListSidebar,
+  AllRoomsOverlay,
   RoomDescriptionCard,
   RoomInfoPanel,
   RoomNavigator,

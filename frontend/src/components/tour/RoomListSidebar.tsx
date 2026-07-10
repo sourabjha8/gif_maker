@@ -12,6 +12,7 @@ export interface RoomListSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (roomSlug: string) => void;
+  onBrowseCatalog?: () => void;
 }
 
 export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
@@ -22,6 +23,7 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
   isOpen,
   onClose,
   onSelect,
+  onBrowseCatalog,
 }) => {
   useEffect(() => {
     if (!isOpen) return;
@@ -63,8 +65,8 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
             <Typography variant="titleMedium" weight="bold" colorClass="text-neutral-50">
               {projectLabel}
             </Typography>
-            <Typography variant="bodySmall" colorClass="text-neutral-400" className="mt-0.5">
-              {rooms.length} rooms · tap a room to tour
+            <Typography variant="bodySmall" colorClass="text-neutral-500" className="uppercase tracking-widest mt-0.5">
+              {rooms.length} room{rooms.length !== 1 ? 's' : ''} · tap a room to tour
             </Typography>
           </div>
           <button
@@ -80,12 +82,20 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
               focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
             "
           >
-            <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-70" />
+            <img src="/assets/icons/close.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-70" />
           </button>
         </div>
 
+        <Typography
+          variant="bodySmall"
+          colorClass="text-neutral-500"
+          className="uppercase tracking-widest px-element pt-group pb-tight shrink-0"
+        >
+          Rooms in this property
+        </Typography>
+
         {/* Room list */}
-        <ul className="overflow-y-auto custom-scrollbar p-element space-y-tight flex-1">
+        <ul className="overflow-y-auto custom-scrollbar px-element pb-element space-y-tight flex-1">
           {rooms.map((room) => {
             const isActive = room.slug === activeRoomSlug;
 
@@ -109,7 +119,7 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
                     {room.thumbnail
                       ? <img src={room.thumbnail} alt="" className="w-full h-full object-cover" draggable={false} />
                       : <div className="w-full h-full flex items-center justify-center">
-                          <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-6 h-6 opacity-30" />
+                          <img src="/assets/icons/design_house.svg" alt="" aria-hidden className="w-6 h-6 opacity-30" />
                         </div>
                     }
                   </div>
@@ -123,7 +133,7 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
                       {isActive && (
                         <span className="shrink-0 px-1.5 py-0.5 rounded-pill bg-primary-500/30 border border-primary-400/40">
                           <Typography variant="bodySmall" colorClass="text-primary-300">
-                            current
+                            Now
                           </Typography>
                         </span>
                       )}
@@ -131,12 +141,31 @@ export const RoomListSidebar: React.FC<RoomListSidebarProps> = ({
                   </div>
 
                   {/* Chevron */}
-                  <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-40 shrink-0 -rotate-90" />
+                  <img src="/assets/icons/chevron_next.svg" alt="" aria-hidden className="w-4 h-4 opacity-40 shrink-0" />
                 </button>
               </li>
             );
           })}
         </ul>
+
+        {/* Catalog entry — plain text row, no card chrome */}
+        <button
+          type="button"
+          onClick={onBrowseCatalog}
+          className="
+            flex items-center gap-tight px-element h-11 shrink-0 text-left
+            border-t border-spatial-border
+            text-neutral-300 hover:text-white hover:bg-white/5
+            transition-all duration-200
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+          "
+        >
+          <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-4 h-4 opacity-60 shrink-0" />
+          <Typography variant="bodyMedium" colorClass="text-inherit" className="flex-1">
+            Browse all rooms in the catalog
+          </Typography>
+          <img src="/assets/icons/chevron_next.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-40 shrink-0" />
+        </button>
       </aside>
     </>
   );
