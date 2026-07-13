@@ -10,7 +10,7 @@ export default function RoomTypePage() {
     <AppFrame withNavbar>
       <RoomTypeSelection
         onBack={() => router.push('/choose')}
-        onContinue={() => router.push('/room-filter')}
+        onContinue={(roomTypeId) => router.push(`/room-filter?type=${roomTypeId}`)}
       />
     </AppFrame>
   );

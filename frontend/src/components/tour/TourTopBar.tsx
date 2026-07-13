@@ -12,6 +12,7 @@ export interface TourTopBarProps {
   onWalkthrough?: () => void;
   onExitWalkthrough?: () => void;
   isWalkthroughActive?: boolean;
+  isRoomListOpen?: boolean;
 }
 
 export const TourTopBar: React.FC<TourTopBarProps> = ({
@@ -23,6 +24,7 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
   onWalkthrough,
   onExitWalkthrough,
   isWalkthroughActive = false,
+  isRoomListOpen = false,
 }) => {
   const projectLabel = projectBhkType
     ? `${projectName} · ${projectBhkType}`
@@ -103,7 +105,16 @@ export const TourTopBar: React.FC<TourTopBarProps> = ({
 
   return (
     <div ref={leftGroupRef} className="flex items-start justify-between w-full gap-element">
-      <div className="pointer-events-auto flex items-center gap-tight">
+      <div
+        className={`
+          flex items-center gap-tight
+          transition-all duration-300 ease-out
+          ${isRoomListOpen
+            ? '-translate-x-6 opacity-0 pointer-events-none'
+            : 'translate-x-0 opacity-100 pointer-events-auto'
+          }
+        `}
+      >
         <button
           ref={backBtnRef}
           type="button"

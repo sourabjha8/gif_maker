@@ -90,7 +90,7 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
             return (
               <div key={group.id} className="flex flex-col gap-element">
                 <div className="flex items-center gap-tight">
-                  <div className="p-1.5 rounded-element bg-primary-500/10 border border-primary-500/20">
+                  <div className="p-1.5 rounded-full bg-primary-500/10 border border-primary-500/20">
                     <Icon size={16} className="text-primary-400" />
                   </div>
                   <Typography variant="titleSmall" className="text-neutral-300 uppercase tracking-wider font-semibold">
@@ -106,8 +106,9 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
                         key={option}
                         type="button"
                         onClick={() => handleSelect(group.id, option)}
+                        aria-pressed={isSelected}
                         className={`
-                          px-element py-2 rounded-element font-sans font-medium text-bodyMedium transition-all duration-300 cursor-pointer border
+                          px-element py-2.5 rounded-pill font-sans font-medium text-bodyMedium transition-all duration-300 cursor-pointer border
                           ${isSelected
                             ? 'bg-primary-500/20 border-primary-400 text-primary-300 shadow-[0_0_12px_rgba(63,189,241,0.2)]'
                             : 'bg-spatial-glass border-spatial-border text-neutral-400 hover:border-spatial-border-elevated hover:text-neutral-200'

@@ -11,12 +11,12 @@ import {
   EstimateSidebar,
   ViewerIconDock,
   GalleryModal,
+  VisualizeStylesModal,
   RoomsMenu,
   RoomInfoPanel,
   RoomNavigator,
   TourTopBar,
-  RoomListSidebar,
-  AllRoomsOverlay,
+  RoomBrowserPanel,
   WalkthroughVideo,
   WalkthroughSeekBar,
 } from '../components';
@@ -90,9 +90,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
 
   // New on-screen feature state.
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isVisualizeOpen, setIsVisualizeOpen] = useState(false);
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
-  const [isRoomListOpen, setIsRoomListOpen] = useState(false);
-  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [roomBrowserMode, setRoomBrowserMode] = useState<'closed' | 'list' | 'catalog'>('closed');
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   // Walkthrough video transition.
@@ -355,7 +355,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
             projectName={resolved?.project.name ?? ''}
             projectBhkType={resolved?.project.bhkType}
             onBack={onBack}
-            onOpenRooms={() => setIsRoomListOpen(true)}
+            onOpenRooms={() => setRoomBrowserMode('list')}
             onWalkthrough={
               walkthroughVideoUrl
                 ? () => {
@@ -366,6 +366,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
             }
             onExitWalkthrough={() => setIsWalkthrough(false)}
             isWalkthroughActive={isWalkthrough}
+            isRoomListOpen={roomBrowserMode !== 'closed'}
           />
         </div>
 
@@ -419,6 +420,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onOpenRoomsMenu={() => setIsRoomsMenuOpen(true)}
           onOpenEstimate={openEstimate}
           onToggleMute={() => setIsMuted((m) => !m)}
+          onVisualize={() => setIsVisualizeOpen(true)}
           isWalkthrough={isWalkthrough}
         />
       )}
@@ -452,30 +454,30 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         onClose={() => setIsGalleryOpen(false)}
       />
 
-      {/* Floating room-list sidebar — opens from the project pill */}
+      {/* Visualize — browse the current room's other styles + their galleries */}
       {resolved && (
-        <RoomListSidebar
-          projectName={resolved.project.name}
-          projectBhkType={resolved.project.bhkType}
-          rooms={resolved.project.rooms}
-          activeRoomSlug={resolved.room.slug}
-          isOpen={isRoomListOpen}
-          onClose={() => setIsRoomListOpen(false)}
-          onSelect={handleNavigateRoom}
-          onBrowseCatalog={() => { setIsRoomListOpen(false); setIsCatalogOpen(true); }}
+        <VisualizeStylesModal
+          roomName={resolved.room.name}
+          variants={resolved.room.variants}
+          activeVariantSlug={resolved.variant.slug}
+          isOpen={isVisualizeOpen}
+          onClose={() => setIsVisualizeOpen(false)}
         />
       )}
 
-      {/* All-rooms catalog overlay — opens from the room-list's "browse catalog" row */}
+      {/* Room browser — a single panel that opens as a floating drawer from
+          the project pill, then grows to fill the screen for the full
+          catalog + filters view. */}
       {resolved && (
-        <AllRoomsOverlay
+        <RoomBrowserPanel
           projectName={resolved.project.name}
           projectBhkType={resolved.project.bhkType}
           rooms={resolved.project.rooms}
           activeRoomSlug={resolved.room.slug}
-          isOpen={isCatalogOpen}
-          onClose={() => setIsCatalogOpen(false)}
+          mode={roomBrowserMode}
+          onClose={() => setRoomBrowserMode('closed')}
           onSelect={handleNavigateRoom}
+          onBrowseCatalog={() => setRoomBrowserMode('catalog')}
         />
       )}
 

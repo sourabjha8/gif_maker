@@ -294,6 +294,139 @@
                           "swatch": "linear-gradient(135deg, #c0c5c8, #6e7378)"
                         }
                       ]
+                    },
+                    {
+                      "id": "var-living-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A sleek contemporary take with matte grey upholstery and smoked-glass surfaces.",
+                      "longDescription": "The contemporary variant trades warmth for a cooler, gallery-like calm: a low-profile boucle sofa in matte grey anchors the seating zone, paired with a smoked-glass and chrome coffee table. Clean-lined joinery and a restrained palette keep the room feeling current without chasing any one trend too hard.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        { "id": "g-living-contemporary-1", "title": "Seating", "url": "/assets/images/background.png", "alt": "Matte grey boucle sofa in the contemporary living room" },
+                        { "id": "g-living-contemporary-2", "title": "Table detail", "url": "/assets/images/background.png", "alt": "Smoked glass and chrome coffee table" }
+                      ],
+                      "materials": [
+                        { "id": "mat-c-sofa", "label": "Upholstery", "material": "Matte boucle", "finish": "Grey", "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)" },
+                        { "id": "mat-c-table", "label": "Table", "material": "Smoked glass & chrome", "finish": "Polished", "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)" }
+                      ]
+                    },
+                    {
+                      "id": "var-living-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "An industrial-loft take with exposed brick and blackened steel fixtures.",
+                      "longDescription": "The industrial variant leans into exposed structure: a feature wall in raw brick, blackened steel shelf brackets, and factory-style pendant lighting. Furniture stays low and utilitarian so the architecture keeps doing the talking.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        { "id": "g-living-industrial-1", "title": "Feature wall", "url": "/assets/images/background.png", "alt": "Exposed brick feature wall" },
+                        { "id": "g-living-industrial-2", "title": "Fixtures", "url": "/assets/images/background.png", "alt": "Blackened steel shelf brackets" }
+                      ],
+                      "materials": [
+                        { "id": "mat-i-wall", "label": "Walls", "material": "Exposed brick", "finish": "Raw", "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)" },
+                        { "id": "mat-i-fixtures", "label": "Fixtures", "material": "Blackened steel", "finish": "Matte", "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)" }
+                      ]
+                    },
+                    {
+                      "id": "var-living-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take in Chesterfield leather and emerald velvet accents.",
+                      "longDescription": "The traditional variant is built around a tufted Chesterfield sofa in cognac leather, balanced by emerald velvet accent chairs and a dark hardwood floor. Detailed cornicing and warm brass fittings round out a room meant to feel established rather than trend-driven.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        { "id": "g-living-traditional-1", "title": "Seating", "url": "/assets/images/background.png", "alt": "Chesterfield leather sofa" },
+                        { "id": "g-living-traditional-2", "title": "Accent chair", "url": "/assets/images/background.png", "alt": "Emerald velvet accent chair" }
+                      ],
+                      "materials": [
+                        { "id": "mat-t-sofa", "label": "Upholstery", "material": "Chesterfield leather", "finish": "Cognac", "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)" },
+                        { "id": "mat-t-accent", "label": "Accent", "material": "Velvet", "finish": "Emerald", "swatch": "linear-gradient(135deg, #3f6b52, #234a36)" }
+                      ]
+                    },
+                    {
+                      "id": "var-living-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take in whitewashed oak and matte white walls.",
+                      "longDescription": "The minimalist variant strips the room back to essentials: whitewashed oak flooring, matte white walls, and a single low sofa with no visible hardware. Negative space is the feature, not an afterthought.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        { "id": "g-living-minimalist-1", "title": "Flooring", "url": "/assets/images/background.png", "alt": "Whitewashed oak flooring" },
+                        { "id": "g-living-minimalist-2", "title": "Walls", "url": "/assets/images/background.png", "alt": "Matte white walls" }
+                      ],
+                      "materials": [
+                        { "id": "mat-m-floor", "label": "Flooring", "material": "Whitewashed oak", "finish": "Matte", "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)" },
+                        { "id": "mat-m-wall", "label": "Walls", "material": "Matte white paint", "finish": "Flat", "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)" }
+                      ]
+                    },
+                    {
+                      "id": "var-living-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A Scandinavian take in pale ash wood and wool textiles.",
+                      "longDescription": "The Scandinavian variant favours light over mass: pale ash flooring, a wool-throw-draped sofa, and sheer linen curtains that let daylight carry the room. Hardware stays soft brass, kept deliberately understated against the pale palette.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        { "id": "g-living-scandinavian-1", "title": "Flooring", "url": "/assets/images/background.png", "alt": "Pale ash wood flooring" },
+                        { "id": "g-living-scandinavian-2", "title": "Textiles", "url": "/assets/images/background.png", "alt": "Wool throw on the sofa" }
+                      ],
+                      "materials": [
+                        { "id": "mat-s-floor", "label": "Flooring", "material": "Pale ash wood", "finish": "Matte", "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)" },
+                        { "id": "mat-s-textile", "label": "Textile", "material": "Wool throw", "finish": "Woven", "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)" }
+                      ]
                     }
                   ]
                 },
@@ -374,6 +507,2230 @@
                           "material": "304 stainless steel",
                           "finish": "Brushed",
                           "swatch": "linear-gradient(135deg, #c4c8cb, #6e7479)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-kitchen-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-kitchen-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-kitchen-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-kitchen-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-kitchen-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kitchen-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the kitchen.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-kitchen-classic.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-kitchen-classic-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kitchen-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style kitchen"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kitchen-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-kitchen-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-foyer",
+                  "slug": "foyer",
+                  "name": "Foyer",
+                  "type": "foyer",
+                  "variants": [
+                    {
+                      "id": "var-foyer-minimal",
+                      "slug": "minimal-stone",
+                      "name": "Minimal Stone",
+                      "designStyle": "minimalist",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "isDefault": true,
+                      "description": "A clean, light-filled entry with honed stone flooring and a slim console.",
+                      "longDescription": "The foyer sets a quiet, uncluttered tone before the rest of the home unfolds. A slim marble-top console with brass legs holds keys and mail, while an arched brass-framed mirror bounces daylight from the front door deeper into the plan. Honed limestone flooring in a pale neutral keeps the entry feeling larger than its footprint, and a single pendant overhead avoids visual clutter.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-foyer-console",
+                          "label": "Console Table",
+                          "type": "product",
+                          "yaw": 30.0,
+                          "pitch": -10.0,
+                          "description": "Slim marble-top console with brushed brass legs.",
+                          "sku": "Marble · Brass",
+                          "pricingRef": { "type": "sku", "code": "FOY-CONSOLE-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-foyer-mirror",
+                          "label": "Wall Mirror",
+                          "type": "product",
+                          "yaw": -40.0,
+                          "pitch": 5.0,
+                          "description": "Arched wall mirror in a slim brass frame.",
+                          "sku": "Brass · Arch",
+                          "pricingRef": { "type": "sku", "code": "FOY-MIRROR-001", "quantity": 1 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-foyer-floor", "label": "Flooring", "material": "Honed limestone", "finish": "Natural", "swatch": "linear-gradient(135deg, #efece6, #d9d4cb)" },
+                        { "id": "mat-foyer-console", "label": "Console", "material": "Carrara marble", "finish": "Polished", "swatch": "linear-gradient(135deg, #d9d4cb, #b8b0a3)" }
+                      ]
+                    },
+                    {
+                      "id": "var-foyer-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the foyer.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-foyer-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style foyer"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-foyer-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-foyer-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-foyer-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the foyer.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-foyer-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style foyer"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-foyer-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-foyer-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-foyer-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the foyer.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-foyer-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style foyer"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-foyer-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-foyer-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-foyer-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the foyer.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-foyer-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style foyer"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-foyer-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-foyer-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-foyer-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the foyer.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-foyer-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style foyer"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-foyer-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-foyer-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-master-bedroom",
+                  "slug": "master-bedroom",
+                  "name": "Master Bedroom",
+                  "type": "bedroom",
+                  "variants": [
+                    {
+                      "id": "var-master-signature",
+                      "slug": "signature-walnut",
+                      "name": "Signature Walnut",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "isDefault": true,
+                      "description": "An indulgent primary suite in deep walnut and brushed brass.",
+                      "longDescription": "The primary suite is scaled for a signature-tier fit-out: a king bed in linen upholstery sits against a walnut headboard wall, flanked by a full-height walk-in wardrobe with handleless shutters. A linen-upholstered bench closes the composition at the foot of the bed. Warm walnut tones and champagne brass hardware carry through from the living areas, keeping the whole 3BHK feeling considered rather than assembled room by room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-mb-bed",
+                          "label": "King Bed",
+                          "type": "product",
+                          "yaw": 0.0,
+                          "pitch": -10.0,
+                          "description": "Upholstered king bed with a fluted walnut headboard.",
+                          "sku": "Walnut · Linen",
+                          "pricingRef": { "type": "sku", "code": "MB-BED-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-mb-wardrobe",
+                          "label": "Walk-in Wardrobe",
+                          "type": "module",
+                          "yaw": 100.0,
+                          "pitch": 0.0,
+                          "description": "Full-height handleless modular wardrobe with soft-close shutters.",
+                          "moduleCode": "MOD-WRD-500",
+                          "pricingRef": { "type": "module", "code": "MOD-WRD-500" }
+                        },
+                        {
+                          "id": "hs-mb-bench",
+                          "label": "Bed Bench",
+                          "type": "product",
+                          "yaw": 20.0,
+                          "pitch": -25.0,
+                          "description": "Linen-upholstered bench at the foot of the bed.",
+                          "sku": "Linen · Oat",
+                          "pricingRef": { "type": "sku", "code": "MB-BENCH-001", "quantity": 1 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-mb-floor", "label": "Flooring", "material": "Walnut veneer", "finish": "Matte", "swatch": "linear-gradient(135deg, #e8c9a8, #cf9a6c)" },
+                        { "id": "mat-mb-hardware", "label": "Hardware", "material": "Brushed brass", "finish": "Champagne", "swatch": "linear-gradient(135deg, #cf9a6c, #9c5a34)" }
+                      ]
+                    },
+                    {
+                      "id": "var-master-bedroom-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the master bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-master-bedroom-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style master bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-master-bedroom-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-master-bedroom-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-master-bedroom-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the master bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-master-bedroom-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style master bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-master-bedroom-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-master-bedroom-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-master-bedroom-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the master bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-master-bedroom-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style master bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-master-bedroom-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-master-bedroom-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-master-bedroom-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the master bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-master-bedroom-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style master bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-master-bedroom-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-master-bedroom-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-master-bedroom-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the master bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-master-bedroom-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style master bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-master-bedroom-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-master-bedroom-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-guest-bedroom",
+                  "slug": "guest-bedroom",
+                  "name": "Guest Bedroom",
+                  "type": "bedroom",
+                  "variants": [
+                    {
+                      "id": "var-guest-coastal",
+                      "slug": "coastal-breeze",
+                      "name": "Coastal Breeze",
+                      "designStyle": "coastal",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "isDefault": true,
+                      "description": "A breezy guest room in soft sea-blues and driftwood tones.",
+                      "longDescription": "The guest room borrows a coastal palette to feel distinct from the rest of the residence: sea-mist walls, driftwood-finish bedside tables, and sky-blue linen bedding. A queen bed keeps the footprint modest, leaving room for a reading chair by the window for visiting family.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-gb-bed",
+                          "label": "Queen Bed",
+                          "type": "product",
+                          "yaw": 10.0,
+                          "pitch": -10.0,
+                          "description": "Queen bed in sky-blue linen upholstery.",
+                          "sku": "Linen · Sky",
+                          "pricingRef": { "type": "sku", "code": "GB-BED-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-gb-nightstand",
+                          "label": "Bedside Table",
+                          "type": "product",
+                          "yaw": -30.0,
+                          "pitch": -15.0,
+                          "description": "Driftwood-finish bedside table.",
+                          "sku": "Driftwood",
+                          "pricingRef": { "type": "sku", "code": "GB-NIGHT-001", "quantity": 1 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-gb-walls", "label": "Walls", "material": "Sea-mist paint", "finish": "Matte", "swatch": "linear-gradient(135deg, #cdd8dc, #8fa7b0)" },
+                        { "id": "mat-gb-linen", "label": "Bedding", "material": "Cotton linen", "finish": "Sky blue", "swatch": "linear-gradient(135deg, #dde6e9, #4f6b74)" }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-guest-bedroom-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the guest bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-guest-bedroom-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style guest bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-guest-bedroom-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-guest-bedroom-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-dining",
+                  "slug": "dining",
+                  "name": "Dining",
+                  "type": "dining",
+                  "variants": [
+                    {
+                      "id": "var-dining-classic",
+                      "slug": "classic-oak",
+                      "name": "Classic Oak",
+                      "designStyle": "classic",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "isDefault": true,
+                      "description": "A formal dining setting in solid oak with burgundy accents.",
+                      "longDescription": "The dining room seats six around a solid oak table, with matching chairs upholstered in burgundy velvet for a touch of formality. A brass-and-glass pendant is centred over the table, sized to light the tabletop without crowding sightlines across it.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-din-table",
+                          "label": "Dining Table (6-seater)",
+                          "type": "product",
+                          "yaw": 0.0,
+                          "pitch": -10.0,
+                          "description": "Solid oak dining table, seats six.",
+                          "sku": "Oak · 6-seater",
+                          "pricingRef": { "type": "sku", "code": "DIN-TBL-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-din-chairs",
+                          "label": "Dining Chairs (set of 6)",
+                          "type": "product",
+                          "yaw": 45.0,
+                          "pitch": -15.0,
+                          "description": "Oak-framed dining chairs upholstered in burgundy velvet.",
+                          "sku": "Oak · Burgundy",
+                          "pricingRef": { "type": "sku", "code": "DIN-CHR-001", "quantity": 6 }
+                        },
+                        {
+                          "id": "hs-din-pendant",
+                          "label": "Pendant Light",
+                          "type": "product",
+                          "yaw": 0.0,
+                          "pitch": 25.0,
+                          "description": "Brass-and-glass pendant centred over the table.",
+                          "sku": "Brass · Glass",
+                          "pricingRef": { "type": "sku", "code": "DIN-PEND-001", "quantity": 1 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-din-table", "label": "Table", "material": "Solid oak", "finish": "Matte", "swatch": "linear-gradient(135deg, #c9a464, #8d7236)" },
+                        { "id": "mat-din-accent", "label": "Upholstery", "material": "Burgundy velvet", "finish": "Matte", "swatch": "linear-gradient(135deg, #a8504f, #8a3b3b)" }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-dining-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-dining-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-dining-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-dining-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-dining-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-dining-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the dining.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-beige.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-beige-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-dining-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style dining"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-dining-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-dining-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-bathroom",
+                  "slug": "bathroom",
+                  "name": "Bathroom",
+                  "type": "bathroom",
+                  "variants": [
+                    {
+                      "id": "var-bath-industrial",
+                      "slug": "industrial-concrete",
+                      "name": "Industrial Concrete",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "premium",
+                      "roomSize": "small",
+                      "isDefault": true,
+                      "description": "A spa-like bathroom in micro-cement and matte black fittings.",
+                      "longDescription": "The bathroom trades tile for a seamless micro-cement finish underfoot and up the shower wall, paired with matte black steel fixtures for a quiet industrial edge. A backlit mirror cabinet doubles storage as lighting, keeping the small footprint from feeling cramped.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-bath-vanity",
+                          "label": "Vanity Unit",
+                          "type": "module",
+                          "yaw": 0.0,
+                          "pitch": -20.0,
+                          "description": "Floating vanity unit with integrated basin.",
+                          "moduleCode": "MOD-VAN-600",
+                          "pricingRef": { "type": "module", "code": "MOD-VAN-600" }
+                        },
+                        {
+                          "id": "hs-bath-mirror",
+                          "label": "Mirror Cabinet",
+                          "type": "product",
+                          "yaw": 30.0,
+                          "pitch": 0.0,
+                          "description": "Backlit mirror cabinet with matte black frame.",
+                          "sku": "Black · LED",
+                          "pricingRef": { "type": "sku", "code": "BATH-MIR-001", "quantity": 1 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-bath-floor", "label": "Flooring", "material": "Micro-cement", "finish": "Matte grey", "swatch": "linear-gradient(135deg, #c4c8cb, #6e7479)" },
+                        { "id": "mat-bath-fixtures", "label": "Fixtures", "material": "Matte black steel", "finish": "Matte", "swatch": "linear-gradient(135deg, #6e7378, #3a3d40)" }
+                      ]
+                    },
+                    {
+                      "id": "var-bathroom-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the bathroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bathroom-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style bathroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bathroom-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-bathroom-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bathroom-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the bathroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bathroom-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style bathroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bathroom-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-bathroom-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bathroom-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the bathroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bathroom-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style bathroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bathroom-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-bathroom-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bathroom-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the bathroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bathroom-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style bathroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bathroom-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-bathroom-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bathroom-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the bathroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bathroom-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style bathroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bathroom-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-bathroom-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-balcony",
+                  "slug": "balcony",
+                  "name": "Balcony",
+                  "type": "balcony",
+                  "variants": [
+                    {
+                      "id": "var-balcony-coastal",
+                      "slug": "coastal-teak",
+                      "name": "Coastal Teak",
+                      "designStyle": "coastal",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "isDefault": true,
+                      "description": "An open-air lounge in teak and greenery.",
+                      "longDescription": "The balcony is furnished as a small outdoor lounge rather than an afterthought: a pair of teak-and-rope chairs face the view, with a cluster of terracotta planters softening the railing line with live foliage.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-bal-lounge",
+                          "label": "Lounge Chairs (pair)",
+                          "type": "product",
+                          "yaw": 0.0,
+                          "pitch": -10.0,
+                          "description": "Pair of teak-and-rope lounge chairs.",
+                          "sku": "Teak · Rope",
+                          "pricingRef": { "type": "sku", "code": "BAL-CHR-001", "quantity": 2 }
+                        },
+                        {
+                          "id": "hs-bal-planter",
+                          "label": "Planters (set of 3)",
+                          "type": "product",
+                          "yaw": 60.0,
+                          "pitch": -20.0,
+                          "description": "Set of three terracotta planters with live foliage.",
+                          "sku": "Terracotta",
+                          "pricingRef": { "type": "sku", "code": "BAL-PLN-001", "quantity": 3 }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-bal-teak", "label": "Furniture", "material": "Teak wood", "finish": "Natural oil", "swatch": "linear-gradient(135deg, #cbbfa6, #9c8f6f)" },
+                        { "id": "mat-bal-greenery", "label": "Accent", "material": "Olive foliage", "finish": "Live plants", "swatch": "linear-gradient(135deg, #9c8f6f, #5f5637)" }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-balcony-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-balcony-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-balcony-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-balcony-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-balcony-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-balcony-modern",
+                      "slug": "modern",
+                      "name": "Modern",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A modern take on the balcony.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/panoramas/seabreeze-living-modern.jpg",
+                        "lowUrl": "/assets/panoramas/seabreeze-living-modern-low.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-balcony-modern-1",
+                          "title": "Modern view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Modern style balcony"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-balcony-modern-1",
+                          "label": "Primary finish",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-balcony-modern-2",
+                          "label": "Accent finish",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "room-kids-bedroom",
+                  "slug": "kids-bedroom",
+                  "name": "Kid's Bedroom",
+                  "type": "bedroom",
+                  "variants": [
+                    {
+                      "id": "var-kids-playful",
+                      "slug": "playful-bunk",
+                      "name": "Playful Bunk",
+                      "designStyle": "modern",
+                      "moduleType": "modular",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "isDefault": true,
+                      "description": "A bright, playful kid's room built around a modular bunk bed.",
+                      "longDescription": "The kids' room is built for two: a modular bunk bed with integrated stair-storage frees up floor space for play, paired with a fold-down study desk under the window for daylight during homework. A cheerful cobalt-and-mustard accent wall and washable rug bring in color without competing with the toy storage wall, which keeps everything behind flush, fingerprint-resistant shutters.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [
+                        {
+                          "id": "hs-kids-bunk",
+                          "label": "Bunk Bed",
+                          "type": "module",
+                          "yaw": 0.0,
+                          "pitch": -10.0,
+                          "description": "Modular bunk bed with an integrated storage staircase.",
+                          "moduleCode": "MOD-BUNK-700",
+                          "pricingRef": { "type": "module", "code": "MOD-BUNK-700" }
+                        },
+                        {
+                          "id": "hs-kids-desk",
+                          "label": "Study Desk",
+                          "type": "product",
+                          "yaw": 90.0,
+                          "pitch": -5.0,
+                          "description": "Fold-down study desk positioned under the window.",
+                          "sku": "Birch · Fold-down",
+                          "pricingRef": { "type": "sku", "code": "KID-DESK-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-kids-storage",
+                          "label": "Toy Storage",
+                          "type": "module",
+                          "yaw": 200.0,
+                          "pitch": 0.0,
+                          "description": "Wall-height toy storage behind flush, fingerprint-resistant shutters.",
+                          "moduleCode": "MOD-TOY-701",
+                          "pricingRef": { "type": "module", "code": "MOD-TOY-701" }
+                        }
+                      ],
+                      "materials": [
+                        { "id": "mat-kids-wall", "label": "Accent wall", "material": "Cobalt paint", "finish": "Matte", "swatch": "linear-gradient(135deg, #4a6fa5, #2c4a75)" },
+                        { "id": "mat-kids-rug", "label": "Rug", "material": "Washable cotton", "finish": "Mustard", "swatch": "linear-gradient(135deg, #e0b24a, #b8862f)" }
+                      ]
+                    },
+                    {
+                      "id": "var-kids-bedroom-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the kid's bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kids-bedroom-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style kid's bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kids-bedroom-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-kids-bedroom-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kids-bedroom-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the kid's bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kids-bedroom-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style kid's bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kids-bedroom-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-kids-bedroom-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kids-bedroom-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the kid's bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kids-bedroom-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style kid's bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kids-bedroom-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-kids-bedroom-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kids-bedroom-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the kid's bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kids-bedroom-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style kid's bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kids-bedroom-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-kids-bedroom-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-kids-bedroom-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the kid's bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-kids-bedroom-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style kid's bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-kids-bedroom-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-kids-bedroom-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
                         }
                       ]
                     }
@@ -488,6 +2845,211 @@
                         { "id": "mat-bed-uph", "label": "Upholstery", "material": "Linen weave", "finish": "Oat", "swatch": "linear-gradient(135deg, #d8c6a0, #a08864)" },
                         { "id": "mat-bed-walls", "label": "Walls", "material": "Warm plaster", "finish": "Smooth", "swatch": "linear-gradient(135deg, #d9c8b0, #b8a48a)" }
                       ]
+                    },
+                    {
+                      "id": "var-bedroom-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-bedroom-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-bedroom-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-bedroom-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-bedroom-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the bedroom.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style bedroom"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-bedroom-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -518,6 +3080,211 @@
                       "hotspots": [],
                       "gallery": [],
                       "materials": []
+                    },
+                    {
+                      "id": "var-bedroom-2-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the bedroom 2.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-2-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style bedroom 2"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-2-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-bedroom-2-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-2-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the bedroom 2.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-2-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style bedroom 2"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-2-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-bedroom-2-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-2-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the bedroom 2.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-2-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style bedroom 2"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-2-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-bedroom-2-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-2-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the bedroom 2.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-2-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style bedroom 2"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-2-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-bedroom-2-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-bedroom-2-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the bedroom 2.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/bedroom_2.png",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-bedroom-2-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style bedroom 2"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-bedroom-2-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-bedroom-2-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -544,6 +3311,211 @@
                         "height": 4096
                       },
                       "hotspots": []
+                    },
+                    {
+                      "id": "var-living-room-contemporary",
+                      "slug": "contemporary",
+                      "name": "Contemporary",
+                      "designStyle": "contemporary",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "large",
+                      "description": "A contemporary take on the living room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-living-room-contemporary-1",
+                          "title": "Contemporary view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Contemporary style living room"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-living-room-contemporary-1",
+                          "label": "Primary finish",
+                          "material": "Matte boucle",
+                          "finish": "Grey",
+                          "swatch": "linear-gradient(135deg, #c9c9c9, #8a8a8a)"
+                        },
+                        {
+                          "id": "mat-living-room-contemporary-2",
+                          "label": "Accent finish",
+                          "material": "Smoked glass & chrome",
+                          "finish": "Polished",
+                          "swatch": "linear-gradient(135deg, #d6d6d6, #9aa0a3)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-living-room-industrial",
+                      "slug": "industrial",
+                      "name": "Industrial",
+                      "designStyle": "industrial",
+                      "moduleType": "custom",
+                      "luxuryLevel": "essential",
+                      "roomSize": "medium",
+                      "description": "A industrial take on the living room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-living-room-industrial-1",
+                          "title": "Industrial view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Industrial style living room"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-living-room-industrial-1",
+                          "label": "Primary finish",
+                          "material": "Exposed brick",
+                          "finish": "Raw",
+                          "swatch": "linear-gradient(135deg, #a85c4a, #6b3a2e)"
+                        },
+                        {
+                          "id": "mat-living-room-industrial-2",
+                          "label": "Accent finish",
+                          "material": "Blackened steel",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #4a4a4a, #1f1f1f)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-living-room-traditional",
+                      "slug": "traditional",
+                      "name": "Traditional",
+                      "designStyle": "traditional",
+                      "moduleType": "modular",
+                      "luxuryLevel": "signature",
+                      "roomSize": "large",
+                      "description": "A traditional take on the living room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-living-room-traditional-1",
+                          "title": "Traditional view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Traditional style living room"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-living-room-traditional-1",
+                          "label": "Primary finish",
+                          "material": "Chesterfield leather",
+                          "finish": "Cognac",
+                          "swatch": "linear-gradient(135deg, #7a4a2e, #4a2a15)"
+                        },
+                        {
+                          "id": "mat-living-room-traditional-2",
+                          "label": "Accent finish",
+                          "material": "Velvet",
+                          "finish": "Emerald",
+                          "swatch": "linear-gradient(135deg, #3f6b52, #234a36)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-living-room-minimalist",
+                      "slug": "minimalist",
+                      "name": "Minimalist",
+                      "designStyle": "minimalist",
+                      "moduleType": "standard",
+                      "luxuryLevel": "essential",
+                      "roomSize": "small",
+                      "description": "A minimalist take on the living room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-living-room-minimalist-1",
+                          "title": "Minimalist view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Minimalist style living room"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-living-room-minimalist-1",
+                          "label": "Primary finish",
+                          "material": "Whitewashed oak",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #f0ece2, #d8d0c0)"
+                        },
+                        {
+                          "id": "mat-living-room-minimalist-2",
+                          "label": "Accent finish",
+                          "material": "Matte white paint",
+                          "finish": "Flat",
+                          "swatch": "linear-gradient(135deg, #f5f5f3, #e2e2df)"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "var-living-room-scandinavian",
+                      "slug": "scandinavian",
+                      "name": "Scandinavian",
+                      "designStyle": "scandinavian",
+                      "moduleType": "modular",
+                      "luxuryLevel": "premium",
+                      "roomSize": "medium",
+                      "description": "A scandinavian take on the living room.",
+                      "panorama": {
+                        "type": "equirectangular",
+                        "url": "/assets/bangalore/rooms/living-room.jpg",
+                        "width": 8192,
+                        "height": 4096
+                      },
+                      "hotspots": [],
+                      "gallery": [
+                        {
+                          "id": "g-living-room-scandinavian-1",
+                          "title": "Scandinavian view",
+                          "url": "/assets/images/background.png",
+                          "alt": "Scandinavian style living room"
+                        }
+                      ],
+                      "materials": [
+                        {
+                          "id": "mat-living-room-scandinavian-1",
+                          "label": "Primary finish",
+                          "material": "Pale ash wood",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #e8dcc4, #c9b896)"
+                        },
+                        {
+                          "id": "mat-living-room-scandinavian-2",
+                          "label": "Accent finish",
+                          "material": "Wool throw",
+                          "finish": "Woven",
+                          "swatch": "linear-gradient(135deg, #dce6ea, #a9bcc3)"
+                        }
+                      ]
                     }
                   ]
                 }
