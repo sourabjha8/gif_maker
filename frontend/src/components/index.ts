@@ -36,6 +36,7 @@ export {
   RoomDescriptionCard,
   RoomInfoPanel,
   RoomNavigator,
+  RoomMinimap,
   TourTopBar,
   WalkthroughVideo,
   WalkthroughSeekBar,

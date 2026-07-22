@@ -15,6 +15,7 @@ import {
   RoomsMenu,
   RoomInfoPanel,
   RoomNavigator,
+  RoomMinimap,
   TourTopBar,
   RoomBrowserPanel,
   WalkthroughVideo,
@@ -422,6 +423,16 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onToggleMute={() => setIsMuted((m) => !m)}
           onVisualize={() => setIsVisualizeOpen(true)}
           isWalkthrough={isWalkthrough}
+        />
+      )}
+
+      {/* Floor-plan minimap — game-style orientation aid, bottom-left */}
+      {resolved && (
+        <RoomMinimap
+          rooms={resolved.project.rooms.map((r) => ({ slug: r.slug, name: r.name }))}
+          activeRoomSlug={resolved.room.slug}
+          viewerRef={psvViewerRef}
+          hidden={isWalkthrough}
         />
       )}
 
