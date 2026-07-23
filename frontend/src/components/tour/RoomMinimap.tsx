@@ -93,12 +93,14 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
   activeRoomSlug,
   viewerRef,
   hidden = false,
+  dimmed,
+  onRestore,
+  onScheduleDim,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const fovRef = useRef<SVGGElement>(null);
   const lastYaw = useRef<number | null>(null);
-  const { dimmed, restore, scheduledim } = useAutoDim();
 
   const cells = useMemo(() => buildPlan(rooms), [rooms]);
   const activeCell = useMemo(
@@ -182,10 +184,10 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
               ? 'opacity-[0.45] scale-100 pointer-events-auto'
               : 'opacity-100 scale-100 pointer-events-auto'
         }`}
-        onMouseEnter={restore}
-        onMouseLeave={scheduledim}
-        onTouchStart={restore}
-        onTouchEnd={scheduledim}
+        onMouseEnter={onRestore}
+        onMouseLeave={onScheduleDim}
+        onTouchStart={onRestore}
+        onTouchEnd={onScheduleDim}
       >
         <GlassIconButton
           label="Floor plan"
