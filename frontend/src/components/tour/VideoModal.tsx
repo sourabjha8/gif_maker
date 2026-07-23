@@ -44,10 +44,10 @@ export const VideoModal: React.FC<VideoModalProps> = ({ media, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-spatial-glass-elevated border border-spatial-border rounded-card shadow-modal overflow-hidden"
+        className="relative w-full max-w-3xl max-h-[calc(min(100dvh,100vw)_-_2rem)] flex flex-col bg-spatial-glass-elevated border border-spatial-border rounded-card shadow-modal overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex items-center justify-between p-4 border-b border-spatial-border">
+        <header className="shrink-0 flex items-center justify-between p-4 border-b border-spatial-border">
           <Typography variant="titleMedium" weight="semiBold" colorClass="text-neutral-50">
             <span id="video-title">{media.title}</span>
           </Typography>
@@ -61,7 +61,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ media, onClose }) => {
             ×
           </button>
         </header>
-        <div className="bg-black aspect-video">
+        <div className="bg-black aspect-video w-full max-h-[calc(min(100dvh,100vw)*0.7)] shrink-0">
           <video
             ref={videoRef}
             src={media.url}
@@ -69,13 +69,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({ media, onClose }) => {
             controls
             playsInline
             preload="metadata"
-            className="w-full h-full"
+            className="w-full h-full object-contain"
           >
             {media.mimeType && <source src={media.url} type={media.mimeType} />}
           </video>
         </div>
         {media.description && (
-          <div className="p-4">
+          <div className="p-4 min-h-0 overflow-y-auto custom-scrollbar">
             <Typography variant="bodySmall" colorClass="text-neutral-300">
               {media.description}
             </Typography>

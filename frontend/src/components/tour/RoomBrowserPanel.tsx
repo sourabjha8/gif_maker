@@ -310,10 +310,10 @@ export const RoomBrowserPanel: React.FC<RoomBrowserPanelProps> = ({
         aria-label={isCatalog ? 'All rooms' : 'Room list'}
         aria-hidden={!isOpen}
         className={`
-          fixed z-[160] top-2 left-2 h-[calc(100dvh-16px)] flex flex-col overflow-hidden
+          fixed z-[160] top-2 left-[max(0.5rem,env(safe-area-inset-left))] h-[calc(min(100dvh,100vw)_-_16px)] flex flex-col overflow-hidden
           bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-card
           transition-all duration-500 ease-out
-          ${isCatalog ? 'w-[calc(100vw-16px)]' : 'w-[340px]'}
+          ${isCatalog ? 'w-[calc(max(100dvh,100vw)_-_1rem_-_env(safe-area-inset-left)_-_env(safe-area-inset-right))]' : 'w-[min(340px,calc(max(100dvh,100vw)_-_1rem_-_env(safe-area-inset-left)))]'}
           ${isOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-4 pointer-events-none'}
         `}
       >

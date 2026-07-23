@@ -76,7 +76,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
   return (
     <div
       className={`
-        fixed inset-0 z-[170] flex items-center justify-center p-6
+        fixed inset-0 z-[170] flex items-center justify-center p-3 sm:p-6
         bg-black/60 transition-opacity duration-300
         ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}
@@ -89,7 +89,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
         aria-hidden={!isOpen}
         onClick={(e) => e.stopPropagation()}
         className={`
-          w-full max-w-[860px] h-[min(600px,calc(100dvh-48px))] flex flex-col overflow-hidden
+          w-full max-w-[860px] h-[min(600px,calc(min(100dvh,100vw)_-_48px))] flex flex-col overflow-hidden
           bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-card
           transition-all duration-300 ease-out
           ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.98]'}
@@ -149,7 +149,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
                   No styles match “{searchQuery}”.
                 </Typography>
               ) : (
-                <div className="grid grid-cols-4 gap-element">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-element">
                   {visibleVariants.map((variant) => {
                     const isApplied = variant.slug === activeVariantSlug;
                     const thumbnail = thumbnailFor(variant);

@@ -83,7 +83,7 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
         aria-hidden={!isOpen}
         className={`
           fixed bottom-0 left-0 right-0 z-[135]
-          h-[88dvh]
+          h-[calc(min(100dvh,100vw)*0.88)]
           flex flex-col
           bg-spatial-glass backdrop-blur-3xl border-t border-spatial-border shadow-modal
           rounded-t-container
@@ -160,11 +160,13 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
           </div>
         </header>
 
-        {/* Body — two columns */}
-        <div className="flex-1 overflow-hidden flex gap-0 min-h-0">
+        {/* Body — two columns on desktop; on phones it stacks into one
+            scroll column with the price/assets block on top (room + price is
+            the priority), summary/gallery below. */}
+        <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-0 overflow-y-auto lg:overflow-hidden custom-scrollbar">
 
           {/* Left column: summary · gallery · materials */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar px-element py-element space-y-group border-r border-spatial-border">
+          <div className="order-2 lg:order-1 lg:flex-1 overflow-visible lg:overflow-y-auto custom-scrollbar px-element py-element space-y-group lg:border-r border-spatial-border">
 
             {/* Summary */}
             <section>
@@ -264,7 +266,7 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
           </div>
 
           {/* Right column: assets + price breakdown */}
-          <div className="w-[580px] shrink-0 overflow-y-auto custom-scrollbar px-element py-element space-y-group">
+          <div className="order-1 lg:order-2 w-full lg:w-[580px] shrink-0 overflow-visible lg:overflow-y-auto custom-scrollbar px-element py-element space-y-group border-b lg:border-b-0 border-spatial-border">
 
             {/* Assets */}
             <section>

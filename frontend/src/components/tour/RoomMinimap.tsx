@@ -90,6 +90,7 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
   hidden = false,
 }) => {
   const [expanded, setExpanded] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const fovRef = useRef<SVGGElement>(null);
   const lastYaw = useRef<number | null>(null);
 
@@ -114,6 +115,18 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
+  }, [expanded]);
+
+  // Clicking anywhere outside the panel collapses it.
+  useEffect(() => {
+    if (!expanded) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setExpanded(false);
+      }
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
   }, [expanded]);
 
   // Rotate the "you" marker's FOV cone to match the live camera yaw. Mutates
@@ -148,7 +161,8 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
 
   return (
     <div
-      className={`pointer-events-none absolute left-4 bottom-4 md:left-6 md:bottom-6 z-30 transition-all duration-500 ease-in-out ${
+      ref={rootRef}
+      className={`pointer-events-none absolute left-[max(1rem,env(safe-area-inset-left))] bottom-[max(1rem,env(safe-area-inset-bottom))] md:left-[max(1.5rem,env(safe-area-inset-left))] md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-30 transition-all duration-500 ease-in-out ${
         hidden ? 'opacity-0 translate-y-6 pointer-events-none' : 'opacity-100 translate-y-0'
       }`}
     >
@@ -181,7 +195,7 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
       <div
         role="group"
         aria-label={`Floor plan — you are in ${activeName}`}
-        className={`absolute left-0 bottom-0 origin-bottom-left w-[300px] sm:w-[380px] rounded-card bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal overflow-hidden transition-all duration-300 ease-[cubic-bezier(.22,.61,.36,1)] ${
+        className={`absolute left-0 bottom-0 origin-bottom-left w-[min(360px,calc(min(100dvh,100vw)*1.25_-_180px))] rounded-card bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal overflow-hidden transition-all duration-300 ease-[cubic-bezier(.22,.61,.36,1)] ${
           expanded
             ? 'opacity-100 scale-100 pointer-events-auto'
             : 'opacity-0 scale-95 pointer-events-none'

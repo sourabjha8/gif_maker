@@ -74,7 +74,10 @@ export const HotspotSnippet: React.FC<HotspotSnippetProps> = ({
 
         if (visible) {
           const { x, y } = viewer.dataHelper.sphericalCoordsToViewerCoords(pos);
-          const vw = window.innerWidth;
+          // Clamp within the viewer's own box, not the window — under the
+          // forced-landscape rotation the viewer's width is the screen height,
+          // so window.innerWidth would clamp the card to the wrong extent.
+          const vw = viewer.container.clientWidth || window.innerWidth;
           const w = card.offsetWidth;
           const h = card.offsetHeight;
 

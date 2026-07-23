@@ -49,8 +49,11 @@ export const EstimateSidebar: React.FC<EstimateSidebarProps> = () => {
         aria-labelledby="estimate-title"
         aria-hidden={!isOpen}
         className={`
-          fixed top-2 bottom-2 right-2 z-[150]
-          w-full sm:w-[400px]
+          fixed z-[150]
+          top-[max(0.5rem,env(safe-area-inset-top))]
+          bottom-[max(0.5rem,env(safe-area-inset-bottom))]
+          right-[max(0.5rem,env(safe-area-inset-right))]
+          w-[calc(100vw_-_1rem)] sm:w-[400px]
           flex flex-col
           bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal
           rounded-container

@@ -40,6 +40,7 @@ import type { Viewer } from '@photo-sphere-viewer/core';
 import { useEstimateStore } from '../lib/estimate';
 import { getPricingAdapter } from '../lib/pricing/factory';
 import { normalizeFromResponse } from '../lib/pricing/format';
+import { useForcedLandscape, usePanoramaPointerRemap } from '../components/tour/useForcedLandscape';
 
 // Photo Sphere Viewer needs window/WebGL — only load on the client.
 const TourViewer = dynamic(
@@ -74,6 +75,10 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   roomFilters,
 }) => {
   const [roomSlug, setRoomSlug] = useState(initialRoomSlug);
+  // On a portrait phone the whole tour is CSS-rotated into landscape; the
+  // pointer remap keeps the panorama's drag/hit-testing correct under it.
+  const isForcedLandscape = useForcedLandscape();
+  usePanoramaPointerRemap(isForcedLandscape);
   // Live Photo Sphere Viewer instance — used to anchor the hotspot snippet to
   // its marker on screen.
   const psvViewerRef = useRef<Viewer | null>(null);
@@ -317,6 +322,16 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   const walkthroughVideoUrl = variant?.walkthroughVideoUrl;
 
   return (
+    <div
+      className={
+        isForcedLandscape
+          ? // Force landscape on portrait phones: rotate the whole tour 90°
+            // to fill the screen. The `transform` also makes this element the
+            // containing block for the fixed modals inside, so they rotate too.
+            'fixed left-0 top-[100dvh] w-[100dvh] h-[100vw] origin-top-left [transform:rotate(-90deg)] overflow-hidden'
+          : 'w-full h-full'
+      }
+    >
     <div className="relative w-full h-full bg-black overflow-hidden select-none">
       {variant && variant.panorama.url && (
         <TourViewer
@@ -343,8 +358,22 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         />
       )}
 
-      {/* Spatial UI overlay */}
-      <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between p-4 md:p-6 pb-safe">
+      {/* Spatial UI overlay — padding tracks the notch/home-indicator safe
+          areas and tightens on short landscape phones so the chrome never
+          eats into the room. */}
+      <div
+        className="
+          absolute inset-0 z-10 pointer-events-none flex flex-col justify-between
+          pt-[max(0.75rem,env(safe-area-inset-top))]
+          pb-[max(0.75rem,env(safe-area-inset-bottom))]
+          pl-[max(0.75rem,env(safe-area-inset-left))]
+          pr-[max(0.75rem,env(safe-area-inset-right))]
+          md:pt-[max(1.5rem,env(safe-area-inset-top))]
+          md:pb-[max(1.5rem,env(safe-area-inset-bottom))]
+          md:pl-[max(1.5rem,env(safe-area-inset-left))]
+          md:pr-[max(1.5rem,env(safe-area-inset-right))]
+        "
+      >
         {/* Top bar — fades out 3s into an idle walkthrough */}
         <div
           className={`transition-opacity duration-500 ease-in-out ${
@@ -520,6 +549,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           isInEstimate={isInEstimate}
         />
       )}
+    </div>
     </div>
   );
 };

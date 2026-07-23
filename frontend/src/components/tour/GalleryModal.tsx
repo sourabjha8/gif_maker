@@ -38,7 +38,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ images, isOpen, onCl
 
   return (
     <div
-      className="fixed inset-0 z-[170] flex flex-col bg-black/85 backdrop-blur-md p-4 sm:p-8"
+      className="fixed inset-0 z-[170] flex flex-col bg-black/85 backdrop-blur-md py-4 sm:py-8 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="gallery-title"

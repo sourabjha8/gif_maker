@@ -73,7 +73,7 @@ export const ViewerIconDock: React.FC<ViewerIconDockProps> = ({
 
   return (
     <div
-      className={`pointer-events-auto absolute right-element md:right-group top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20 transition-all duration-500 ease-in-out ${
+      className={`pointer-events-auto absolute right-[max(1rem,env(safe-area-inset-right))] md:right-[max(1.5rem,env(safe-area-inset-right))] top-1/2 -translate-y-1/2 flex flex-col items-center gap-tight z-20 transition-all duration-500 ease-in-out ${
         isWalkthrough
           ? 'opacity-0 translate-x-10 pointer-events-none'
           : dimmed

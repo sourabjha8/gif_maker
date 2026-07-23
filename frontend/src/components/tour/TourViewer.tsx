@@ -203,6 +203,7 @@ export function TourViewer({
   return (
     <div
       ref={containerRef}
+      data-psv-root
       className="absolute inset-0 w-full h-full pointer-events-auto"
     />
   );

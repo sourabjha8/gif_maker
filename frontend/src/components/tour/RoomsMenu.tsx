@@ -42,7 +42,7 @@ export const RoomsMenu: React.FC<RoomsMenuProps> = ({
         aria-modal="true"
         aria-label="Rooms"
         aria-hidden={!isOpen}
-        className={`fixed top-0 left-0 z-[120] h-full w-full sm:w-[360px] bg-spatial-glass backdrop-blur-3xl border-r border-spatial-border shadow-modal flex flex-col transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 z-[120] h-full w-full sm:w-[360px] pl-[env(safe-area-inset-left)] bg-spatial-glass backdrop-blur-3xl border-r border-spatial-border shadow-modal flex flex-col transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
