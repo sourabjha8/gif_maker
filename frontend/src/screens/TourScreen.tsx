@@ -66,6 +66,37 @@ interface ResolvedTour {
   variant: RoomVariant;
 }
 
+// Shared idle-dim state for every floating chrome group (top bar, room
+// navigator, right-rail dock, map trigger). Lifted here — rather than each
+// group keeping its own independent timer — so hovering/touching ANY one of
+// them wakes ALL of them back to full opacity, not just the one under the
+// cursor.
+function useAutoDim(delayMs = 2000, initialDelayMs = 4000) {
+  const [dimmed, setDimmed] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const startTimer = useCallback((ms: number) => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setDimmed(true), ms);
+  }, []);
+
+  const restore = useCallback(() => {
+    if (timer.current) clearTimeout(timer.current);
+    setDimmed(false);
+  }, []);
+
+  const scheduledim = useCallback(() => {
+    startTimer(delayMs);
+  }, [startTimer, delayMs]);
+
+  useEffect(() => {
+    startTimer(initialDelayMs);
+    return () => { if (timer.current) clearTimeout(timer.current); };
+  }, [startTimer, initialDelayMs]);
+
+  return { dimmed, restore, scheduledim };
+}
+
 export const TourScreen: React.FC<TourScreenProps> = ({
   onBack,
   onOpenEstimate,
@@ -79,6 +110,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
   // pointer remap keeps the panorama's drag/hit-testing correct under it.
   const isForcedLandscape = useForcedLandscape();
   usePanoramaPointerRemap(isForcedLandscape);
+  const { dimmed: chromeDimmed, restore: restoreChrome, scheduledim: scheduleDimChrome } = useAutoDim();
   // Live Photo Sphere Viewer instance — used to anchor the hotspot snippet to
   // its marker on screen.
   const psvViewerRef = useRef<Viewer | null>(null);
@@ -397,6 +429,11 @@ export const TourScreen: React.FC<TourScreenProps> = ({
             onExitWalkthrough={() => setIsWalkthrough(false)}
             isWalkthroughActive={isWalkthrough}
             isRoomListOpen={roomBrowserMode !== 'closed'}
+            estimateCount={itemCount}
+            onOpenEstimate={openEstimate}
+            dimmed={chromeDimmed}
+            onRestore={restoreChrome}
+            onScheduleDim={scheduleDimChrome}
           />
         </div>
 
@@ -419,6 +456,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
                 onOpenInfo={() => setIsInfoOpen(true)}
                 isPrevDisabled={!hasMultipleRooms}
                 isInfoOpen={isInfoOpen}
+                dimmed={chromeDimmed}
+                onRestore={restoreChrome}
+                onScheduleDim={scheduleDimChrome}
               />
             ) : null}
           </div>
@@ -445,13 +485,14 @@ export const TourScreen: React.FC<TourScreenProps> = ({
       {resolved && (
         <ViewerIconDock
           isMuted={isMuted}
-          estimateCount={itemCount}
           onOpenGallery={() => setIsGalleryOpen(true)}
           onOpenRoomsMenu={() => setIsRoomsMenuOpen(true)}
-          onOpenEstimate={openEstimate}
           onToggleMute={() => setIsMuted((m) => !m)}
           onVisualize={() => setIsVisualizeOpen(true)}
           isWalkthrough={isWalkthrough}
+          dimmed={chromeDimmed}
+          onRestore={restoreChrome}
+          onScheduleDim={scheduleDimChrome}
         />
       )}
 
@@ -462,6 +503,9 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           activeRoomSlug={resolved.room.slug}
           viewerRef={psvViewerRef}
           hidden={isWalkthrough}
+          dimmed={chromeDimmed}
+          onRestore={restoreChrome}
+          onScheduleDim={scheduleDimChrome}
         />
       )}
 

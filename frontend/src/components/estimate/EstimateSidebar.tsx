@@ -65,7 +65,7 @@ export const EstimateSidebar: React.FC<EstimateSidebarProps> = () => {
         <header className="shrink-0 px-element pt-element pb-tight border-b border-spatial-border">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-tight">
-              <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-5 h-5 opacity-50" />
+              <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-6 h-6 opacity-50" />
               <Typography variant="titleLarge" weight="bold" colorClass="text-neutral-50">
                 <span id="estimate-title">Your Cart</span>
               </Typography>

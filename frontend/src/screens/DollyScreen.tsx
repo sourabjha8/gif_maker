@@ -192,7 +192,7 @@ export const DollyScreen: React.FC<DollyScreenProps> = ({
           src="/assets/icons/default_icon.svg"
           alt=""
           aria-hidden="true"
-          className="w-5 h-5 opacity-80"
+          className="w-6 h-6 opacity-80"
           draggable={false}
         />
       </button>

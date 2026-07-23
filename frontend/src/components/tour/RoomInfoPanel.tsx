@@ -292,7 +292,7 @@ export const RoomInfoPanel: React.FC<RoomInfoPanelProps> = ({
                       <li key={h.id} className="flex items-center gap-element p-tight rounded-card border border-spatial-border bg-spatial-glass-elevated">
                         {/* Icon */}
                         <div className="w-12 h-12 rounded-element border border-spatial-border bg-white/5 shrink-0 flex items-center justify-center">
-                          <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-5 h-5 opacity-30" />
+                          <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-6 h-6 opacity-30" />
                         </div>
                         {/* Info */}
                         <div className="flex-1 min-w-0">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { GlassIconButton } from '../GlassIconButton';
 import { Typography } from '../UI';
 
@@ -12,32 +12,11 @@ export interface RoomNavigatorProps {
   isPrevDisabled?: boolean;
   isNextDisabled?: boolean;
   isInfoOpen?: boolean;
-}
-
-function useAutoDim(delayMs = 2000, initialDelayMs = 4000) {
-  const [dimmed, setDimmed] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const startTimer = useCallback((ms: number) => {
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setDimmed(true), ms);
-  }, []);
-
-  const restore = useCallback(() => {
-    if (timer.current) clearTimeout(timer.current);
-    setDimmed(false);
-  }, []);
-
-  const scheduledim = useCallback(() => {
-    startTimer(delayMs);
-  }, [startTimer, delayMs]);
-
-  useEffect(() => {
-    startTimer(initialDelayMs);
-    return () => { if (timer.current) clearTimeout(timer.current); };
-  }, [startTimer, initialDelayMs]);
-
-  return { dimmed, restore, scheduledim };
+  /** Shared idle-dim state — lifted to TourScreen so every chrome group
+   * dims/restores together instead of independently. */
+  dimmed: boolean;
+  onRestore: () => void;
+  onScheduleDim: () => void;
 }
 
 export const RoomNavigator: React.FC<RoomNavigatorProps> = ({
@@ -48,17 +27,19 @@ export const RoomNavigator: React.FC<RoomNavigatorProps> = ({
   isPrevDisabled = false,
   isNextDisabled = false,
   isInfoOpen = false,
+  dimmed,
+  onRestore,
+  onScheduleDim,
 }) => {
-  const { dimmed, restore, scheduledim } = useAutoDim();
   const chevronClass = `transition-opacity duration-500 ${dimmed ? 'opacity-[0.45]' : 'opacity-100'}`;
 
   return (
     <div
       className="inline-flex items-center gap-tight"
-      onMouseEnter={restore}
-      onMouseLeave={scheduledim}
-      onTouchStart={restore}
-      onTouchEnd={scheduledim}
+      onMouseEnter={onRestore}
+      onMouseLeave={onScheduleDim}
+      onTouchStart={onRestore}
+      onTouchEnd={onScheduleDim}
     >
       <span className={chevronClass}>
         <GlassIconButton

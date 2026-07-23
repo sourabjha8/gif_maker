@@ -91,10 +91,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     >
       {/* Left Icon or Icon Only */}
       {(leftIcon || iconOnly) && (
-         <img 
-           src={DEFAULT_ICON} 
-           alt="" 
-           className="w-5 h-5 object-contain"
+         <img
+           src={DEFAULT_ICON}
+           alt=""
+           className="w-6 h-6 object-contain"
          />
       )}
 
@@ -106,7 +106,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
          <img
            src={rightIconSrc ?? DEFAULT_ICON}
            alt=""
-           className="w-5 h-5 object-contain"
+           className="w-6 h-6 object-contain"
          />
       )}
     </button>

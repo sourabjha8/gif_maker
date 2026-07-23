@@ -21,6 +21,11 @@ export interface RoomMinimapProps {
   viewerRef?: React.MutableRefObject<Viewer | null>;
   /** Fade + lift the whole control away (e.g. during a walkthrough). */
   hidden?: boolean;
+  /** Shared idle-dim state — lifted to TourScreen so every chrome group
+   * dims/restores together instead of independently. */
+  dimmed: boolean;
+  onRestore: () => void;
+  onScheduleDim: () => void;
 }
 
 // ── Floor-plan geometry ──────────────────────────────────────────────
@@ -93,6 +98,7 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
   const rootRef = useRef<HTMLDivElement>(null);
   const fovRef = useRef<SVGGElement>(null);
   const lastYaw = useRef<number | null>(null);
+  const { dimmed, restore, scheduledim } = useAutoDim();
 
   const cells = useMemo(() => buildPlan(rooms), [rooms]);
   const activeCell = useMemo(
@@ -166,13 +172,20 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
         hidden ? 'opacity-0 translate-y-6 pointer-events-none' : 'opacity-100 translate-y-0'
       }`}
     >
-      {/* Collapsed trigger */}
+      {/* Collapsed trigger — idle-dims like the right-rail icon dock, and
+          restores to full opacity on hover/touch. */}
       <div
         className={`absolute left-0 bottom-0 transition-all duration-300 ease-[cubic-bezier(.22,.61,.36,1)] ${
           expanded
             ? 'opacity-0 scale-90 pointer-events-none'
-            : 'opacity-100 scale-100 pointer-events-auto'
+            : dimmed
+              ? 'opacity-[0.45] scale-100 pointer-events-auto'
+              : 'opacity-100 scale-100 pointer-events-auto'
         }`}
+        onMouseEnter={restore}
+        onMouseLeave={scheduledim}
+        onTouchStart={restore}
+        onTouchEnd={scheduledim}
       >
         <GlassIconButton
           label="Floor plan"
@@ -186,7 +199,7 @@ export const RoomMinimap: React.FC<RoomMinimapProps> = ({
             src="/assets/icons/map.svg"
             alt=""
             aria-hidden="true"
-            className="w-5 h-5 opacity-90"
+            className="w-6 h-6 opacity-90"
           />
         </GlassIconButton>
       </div>

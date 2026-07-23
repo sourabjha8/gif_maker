@@ -66,7 +66,7 @@ export const TextBox = React.forwardRef<HTMLInputElement, TextBoxProps>(
               <img
                 src={showPassword ? '/assets/icons/eye_visibility_off.svg' : '/assets/icons/eye_visibility_on.svg'}
                 alt={showPassword ? 'Hide password' : 'Show password'}
-                className="w-5 h-5"
+                className="w-6 h-6"
               />
             </button>
           )}
