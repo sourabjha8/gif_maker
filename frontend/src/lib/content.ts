@@ -208,21 +208,84 @@ export function getDesignFlowRoom(roomTypeId: string): ContentRoom | undefined {
   return project && findRoom(project, roomTypeId);
 }
 
+// ─── Variant Facets (multi-select filtering) ─────────────────────
+// The refine screen filters the real room-design variants directly by their
+// own attributes, so the filter options are derived from the actual data
+// rather than the decorative navigation.filterGroups taxonomy.
+
+export type VariantFacetKey = 'designStyle' | 'moduleType' | 'luxuryLevel' | 'roomSize';
+
+export interface VariantFacet {
+  key: VariantFacetKey;
+  label: string;
+  /** Raw lowercase option values present in the data, in display order. */
+  options: string[];
+}
+
+/** Facet display labels, in the order they should appear in the UI. */
+const VARIANT_FACET_LABELS: { key: VariantFacetKey; label: string }[] = [
+  { key: 'designStyle', label: 'Style' },
+  { key: 'moduleType', label: 'Package' },
+  { key: 'luxuryLevel', label: 'Grade' },
+  { key: 'roomSize', label: 'Room Size' },
+];
+
+/** Preferred value ordering for facets that read as a scale rather than a list. */
+const FACET_VALUE_ORDER: Partial<Record<VariantFacetKey, string[]>> = {
+  moduleType: ['standard', 'modular', 'custom'],
+  luxuryLevel: ['essential', 'premium', 'signature'],
+  roomSize: ['small', 'medium', 'large'],
+};
+
+function sortFacetValues(key: VariantFacetKey, values: string[]): string[] {
+  const order = FACET_VALUE_ORDER[key];
+  return [...values].sort((a, b) => {
+    if (order) {
+      const ia = order.indexOf(a);
+      const ib = order.indexOf(b);
+      if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    }
+    return a.localeCompare(b);
+  });
+}
+
+/** All variants of a design-flow room type (empty if it has no content data). */
+export function getRoomVariants(roomTypeId: string): RoomVariant[] {
+  return getDesignFlowRoom(roomTypeId)?.variants ?? [];
+}
+
+/** Facets (with the real option values) available for a design-flow room type. */
+export function getRoomVariantFacets(roomTypeId: string): VariantFacet[] {
+  const variants = getRoomVariants(roomTypeId);
+  if (!variants.length) return [];
+  return VARIANT_FACET_LABELS.map(({ key, label }) => {
+    const values = new Set<string>();
+    variants.forEach((v) => {
+      const val = v[key];
+      if (val) values.add(val);
+    });
+    return { key, label, options: sortFacetValues(key, Array.from(values)) };
+  }).filter((f) => f.options.length > 0);
+}
+
 /**
- * Real variants of a design-flow room type that match every currently active
- * filter-bar selection. Groups with no selection are wildcards. Returns all
- * variants (or none, if the room has no content data) when no filter is active.
+ * Variants matching a multi-select facet query. Within a facet, any selected
+ * value matches (OR); across facets, all must match (AND). Facets with no
+ * selection are wildcards, so an empty query returns every variant.
  */
-export function getMatchingVariants(roomTypeId: string, selections: Record<string, string>): RoomVariant[] {
-  const room = getDesignFlowRoom(roomTypeId);
-  if (!room) return [];
-
-  const filters = mapFilterSelectionsToRoomFilters(selections);
-  const activeFields = Object.entries(filters);
-  if (activeFields.length === 0) return room.variants;
-
-  return room.variants.filter((variant) =>
-    activeFields.every(([field, value]) => variant[field as keyof RoomVariant] === value)
+export function filterRoomVariants(
+  roomTypeId: string,
+  selections: Partial<Record<VariantFacetKey, string[]>>,
+): RoomVariant[] {
+  const variants = getRoomVariants(roomTypeId);
+  const active = (Object.entries(selections) as [VariantFacetKey, string[] | undefined][])
+    .filter((entry): entry is [VariantFacetKey, string[]] => Boolean(entry[1]?.length));
+  if (active.length === 0) return variants;
+  return variants.filter((v) =>
+    active.every(([key, vals]) => {
+      const val = v[key];
+      return val != null && vals.includes(val);
+    }),
   );
 }
 
