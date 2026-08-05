@@ -126,7 +126,7 @@ export interface TileConfig {
 export interface Hotspot {
   id: string;
   label: string;
-  type: 'product' | 'module' | 'info' | 'video';
+  type: 'product' | 'module' | 'info' | 'video' | 'room-portal' | 'reposition' | 'view-angle';
   yaw: number;
   pitch: number;
   description?: string;
@@ -136,6 +136,11 @@ export interface Hotspot {
   moduleCode?: string;
   pricingRef?: PricingRef;
   videoRef?: string;
+  /** For type: 'room-portal' — the room slug this marker navigates to. */
+  targetRoomSlug?: string;
+  /** For type: 'reposition' — the camera angle (degrees) this marker looks toward. */
+  targetYaw?: number;
+  targetPitch?: number;
 }
 
 export interface PricingRef {

@@ -31,7 +31,7 @@ export const PricingRefSchema = z.object({
 export const HotspotSchema = z.object({
   id: z.string(),
   label: z.string(),
-  type: z.enum(['product', 'module', 'info', 'video']),
+  type: z.enum(['product', 'module', 'info', 'video', 'room-portal', 'reposition', 'view-angle']),
   yaw: z.number(),
   pitch: z.number(),
   description: z.string().optional(),
@@ -41,6 +41,9 @@ export const HotspotSchema = z.object({
   moduleCode: z.string().optional(),
   pricingRef: PricingRefSchema.optional(),
   videoRef: z.string().optional(),
+  targetRoomSlug: z.string().optional(),
+  targetYaw: z.number().optional(),
+  targetPitch: z.number().optional(),
 });
 
 // ─── Media ───────────────────────────────────────────────────────

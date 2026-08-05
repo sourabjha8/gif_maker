@@ -245,10 +245,24 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     }
   }, [resolved, fetchPricingFor]);
 
+  const handleNavigateRoom = useCallback((targetRoomSlug: string) => {
+    setRoomSlug(targetRoomSlug);
+    setActiveHotspotId(null);
+    setIsViewerReady(false);
+    setIsWalkthrough(false);
+  }, []);
+
   // Hotspot select callback (stable identity for TourViewer).
   const handleHotspotSelect = useCallback((hotspotId: string) => {
+    const hotspot = resolved?.variant.hotspots.find((h) => h.id === hotspotId);
+    // Room-change portals navigate directly — they never open the
+    // product/pricing hotspot panel.
+    if (hotspot?.type === 'room-portal' && hotspot.targetRoomSlug) {
+      handleNavigateRoom(hotspot.targetRoomSlug);
+      return;
+    }
     setActiveHotspotId(hotspotId);
-  }, []);
+  }, [resolved, handleNavigateRoom]);
 
   const handleAddToEstimate = useCallback(
     (hotspot: Hotspot, pricing: PricingResponse | null) => {
@@ -270,14 +284,6 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     },
     [resolved, addItem],
   );
-
-  const handleNavigateRoom = useCallback((targetRoomSlug: string) => {
-    setRoomSlug(targetRoomSlug);
-    setActiveHotspotId(null);
-    setIsViewerReady(false);
-    setIsWalkthrough(false);
-  }, []);
-
 
   const handlePrevRoom = useCallback(() => {
     if (!resolved) return;

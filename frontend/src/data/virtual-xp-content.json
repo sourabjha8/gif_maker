@@ -130,6 +130,61 @@
                             "code": "CHR-ACCENT-001",
                             "quantity": 2
                           }
+                        },
+                        {
+                          "id": "hs-portal-kitchen",
+                          "label": "Kitchen",
+                          "type": "room-portal",
+                          "yaw": 110.0,
+                          "pitch": -2.0,
+                          "targetRoomSlug": "kitchen"
+                        },
+                        {
+                          "id": "hs-portal-foyer",
+                          "label": "Foyer",
+                          "type": "room-portal",
+                          "yaw": -110.0,
+                          "pitch": -2.0,
+                          "targetRoomSlug": "foyer"
+                        },
+                        {
+                          "id": "hs-reposition-window",
+                          "label": "Window seat",
+                          "type": "reposition",
+                          "yaw": 150.0,
+                          "pitch": -55.0,
+                          "targetYaw": 170.0,
+                          "targetPitch": -5.0
+                        },
+                        {
+                          "id": "hs-reposition-sofa",
+                          "label": "Sofa view",
+                          "type": "reposition",
+                          "yaw": -20.0,
+                          "pitch": -55.0,
+                          "targetYaw": 45.0,
+                          "targetPitch": -10.0
+                        },
+                        {
+                          "id": "hs-view-angle-1",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": 80.0,
+                          "pitch": 10.0
+                        },
+                        {
+                          "id": "hs-view-angle-2",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": -80.0,
+                          "pitch": 10.0
+                        },
+                        {
+                          "id": "hs-view-angle-3",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": 0.0,
+                          "pitch": 20.0
                         }
                       ],
                       "media": [
@@ -2830,6 +2885,27 @@
                           "description": "Linen-upholstered bench at the foot of the bed.",
                           "sku": "Linen · Oat",
                           "pricingRef": { "type": "sku", "code": "BNC-BED-001", "quantity": 1 }
+                        },
+                        {
+                          "id": "hs-view-angle-1",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": 150.0,
+                          "pitch": 10.0
+                        },
+                        {
+                          "id": "hs-view-angle-2",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": -150.0,
+                          "pitch": 10.0
+                        },
+                        {
+                          "id": "hs-view-angle-3",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": -90.0,
+                          "pitch": 15.0
                         }
                       ],
                       "gallery": [
@@ -3310,7 +3386,56 @@
                         "width": 8192,
                         "height": 4096
                       },
-                      "hotspots": []
+                      "hotspots": [
+                        {
+                          "id": "hs-portal-bedroom",
+                          "label": "Bedroom",
+                          "type": "room-portal",
+                          "yaw": 110.0,
+                          "pitch": -2.0,
+                          "targetRoomSlug": "bedroom"
+                        },
+                        {
+                          "id": "hs-portal-bedroom-2",
+                          "label": "Bedroom 2",
+                          "type": "room-portal",
+                          "yaw": -110.0,
+                          "pitch": -2.0,
+                          "targetRoomSlug": "bedroom-2"
+                        },
+                        {
+                          "id": "hs-reposition-window",
+                          "label": "Window seat",
+                          "type": "reposition",
+                          "yaw": 150.0,
+                          "pitch": -55.0,
+                          "targetYaw": 170.0,
+                          "targetPitch": -5.0
+                        },
+                        {
+                          "id": "hs-reposition-sofa",
+                          "label": "Sofa view",
+                          "type": "reposition",
+                          "yaw": -20.0,
+                          "pitch": -55.0,
+                          "targetYaw": 45.0,
+                          "targetPitch": -10.0
+                        },
+                        {
+                          "id": "hs-view-angle-1",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": 80.0,
+                          "pitch": 10.0
+                        },
+                        {
+                          "id": "hs-view-angle-2",
+                          "label": "Change viewing angle",
+                          "type": "view-angle",
+                          "yaw": -80.0,
+                          "pitch": 10.0
+                        }
+                      ]
                     },
                     {
                       "id": "var-living-room-contemporary",

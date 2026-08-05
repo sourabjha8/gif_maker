@@ -15,11 +15,12 @@ const ChevronPreviousIcon = ({ size = 24, className }: { size?: number; classNam
 interface ActionFooterProps {
   onBack?: () => void;
   onPrimaryAction?: () => void;
-  primaryLabel: string;
+  primaryLabel?: string;
   isPrimaryDisabled?: boolean;
   isBackDisabled?: boolean;
   isLoading?: boolean;
   showBack?: boolean;
+  showPrimary?: boolean;
   primaryIcon?: React.ReactNode;
   className?: string;
 }
@@ -36,6 +37,7 @@ export const ActionFooter: React.FC<ActionFooterProps> = ({
   isBackDisabled = false,
   isLoading = false,
   showBack = true,
+  showPrimary = true,
   primaryIcon = <ArrowForwardIcon size={18} />,
   className = '',
 }) => {
@@ -57,22 +59,24 @@ export const ActionFooter: React.FC<ActionFooterProps> = ({
       )}
 
       {/* Primary Action CTA */}
-      <button
-        type="button"
-        onClick={onPrimaryAction}
-        disabled={isPrimaryDisabled || isLoading}
-        className={`
-          flex items-center gap-tight px-group h-11 min-w-[44px] rounded-pill font-sans font-bold text-bodyMedium transition-all duration-200
-          ${isPrimaryDisabled || isLoading
-            ? 'bg-neutral-700 text-neutral-400 cursor-not-allowed opacity-60'
-            : 'bg-primary-500 text-white hover:bg-primary-400 shadow-card hover:shadow-modal cursor-pointer'
-          }
-        `}
-      >
-        <span>{primaryLabel}</span>
-        {!isLoading && primaryIcon}
-        {isLoading && <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />}
-      </button>
+      {showPrimary && (
+        <button
+          type="button"
+          onClick={onPrimaryAction}
+          disabled={isPrimaryDisabled || isLoading}
+          className={`
+            flex items-center gap-tight px-group h-11 min-w-[44px] rounded-pill font-sans font-bold text-bodyMedium transition-all duration-200
+            ${isPrimaryDisabled || isLoading
+              ? 'bg-neutral-700 text-neutral-400 cursor-not-allowed opacity-60'
+              : 'bg-primary-500 text-white hover:bg-primary-400 shadow-card hover:shadow-modal cursor-pointer'
+            }
+          `}
+        >
+          <span>{primaryLabel}</span>
+          {!isLoading && primaryIcon}
+          {isLoading && <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />}
+        </button>
+      )}
     </div>
   );
 };

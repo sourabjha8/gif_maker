@@ -20,7 +20,7 @@ interface TourViewerProps {
 }
 
 
-/** Bullseye marker visual — used for every real hotspot. */
+/** Bullseye marker visual — used for every product/module/info/video hotspot. */
 const BULLSEYE_MARKER_HTML = `
   <button
     type="button"
@@ -46,15 +46,114 @@ const BULLSEYE_MARKER_HTML = `
   </button>
 `;
 
+/** Escapes text dropped into a marker's inner HTML string (content-sourced, but kept safe). */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * Room-change portal — an upright labeled marker anchored at a doorway/opening.
+ * Position says "exit here" before the label is read; the chevron says "through".
+ */
+function portalMarkerHtml(label: string): string {
+  return `
+    <button type="button" aria-label="Go to ${escapeHtml(label)}" class="psv-marker-portal">
+      <span class="psv-marker-portal__plate">
+        <span class="psv-marker-portal__label">${escapeHtml(label)}</span>
+        <svg class="psv-marker-portal__chev" viewBox="0 0 24 24" width="14" height="14">
+          <polyline points="9 6 15 12 9 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="psv-marker-portal__stem"></span>
+      <span class="psv-marker-portal__base"></span>
+    </button>
+  `;
+}
+
+/**
+ * Reposition node — a flat disc lying on the floor plane, rendered as a
+ * perspective ellipse (not a camera-facing circle) so it reads as painted on
+ * the floor rather than a floating UI dot. Jump-able only: clicking it pans
+ * the camera toward its target angle, it never changes room/panorama.
+ */
+const REPOSITION_MARKER_HTML = `
+  <button type="button" aria-label="Look this way" class="psv-marker-reposition">
+    <span class="psv-marker-reposition__ring"></span>
+    <span class="psv-marker-reposition__core"></span>
+  </button>
+`;
+
+/**
+ * View-angle marker — a solid numbered badge (same footprint as the bullseye
+ * hotspot). Numbered rather than iconed so multiple view-angle points in the
+ * same room stay distinguishable. Not wired to any behavior yet — purely a
+ * visual placeholder for the eventual "change viewing angle" feature.
+ */
+function viewAngleMarkerHtml(number: number): string {
+  return `
+    <button type="button" aria-label="Change viewing angle ${number}" class="psv-marker-view-angle">
+      <span class="psv-marker-view-angle__number">${number}</span>
+    </button>
+  `;
+}
+
 function makeHotspotMarkers(hotspots: Hotspot[]) {
-  return hotspots.map((h) => ({
-    id: h.id,
-    position: { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 },
-    html: BULLSEYE_MARKER_HTML,
-    anchor: 'center center',
-    tooltip: { content: h.label, position: 'top' },
-    data: { hotspotId: h.id },
-  }));
+  let viewAngleCount = 0;
+  return hotspots.map((h) => {
+    const position = { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 };
+    const data = {
+      hotspotId: h.id,
+      hotspotType: h.type,
+      targetRoomSlug: h.targetRoomSlug,
+      targetYaw: h.targetYaw,
+      targetPitch: h.targetPitch,
+    };
+
+    if (h.type === 'room-portal') {
+      return {
+        id: h.id,
+        position,
+        html: portalMarkerHtml(h.label),
+        anchor: 'bottom center' as const,
+        data,
+      };
+    }
+
+    if (h.type === 'reposition') {
+      return {
+        id: h.id,
+        position,
+        html: REPOSITION_MARKER_HTML,
+        anchor: 'center center' as const,
+        tooltip: { content: h.label, position: 'top' as const },
+        data,
+      };
+    }
+
+    if (h.type === 'view-angle') {
+      viewAngleCount += 1;
+      return {
+        id: h.id,
+        position,
+        html: viewAngleMarkerHtml(viewAngleCount),
+        anchor: 'center center' as const,
+        data,
+      };
+    }
+
+    return {
+      id: h.id,
+      position,
+      html: BULLSEYE_MARKER_HTML,
+      anchor: 'center center' as const,
+      tooltip: { content: h.label, position: 'top' as const },
+      data,
+    };
+  });
 }
 
 const BEDROOM_TV_LAYER = {
@@ -115,10 +214,28 @@ export function TourViewer({
       }, { once: true });
 
       markersPluginRef.current?.addEventListener('select-marker', ({ marker }: { marker: Marker }) => {
-        const id = (marker.data as { hotspotId?: string } | undefined)?.hotspotId ?? marker.id;
+        const data = marker.data as
+          | { hotspotId?: string; hotspotType?: Hotspot['type']; targetYaw?: number; targetPitch?: number }
+          | undefined;
+        const id = data?.hotspotId ?? marker.id;
         // The hover tooltip otherwise lingers after a click, since the
         // cursor is still resting on the marker when the snippet opens.
         markersPluginRef.current?.hideMarkerTooltip(marker.id);
+
+        // Reposition markers only change the camera angle — handled entirely
+        // here, never bubbled up (no room/hotspot-panel state to update).
+        if (data?.hotspotType === 'reposition' && typeof data.targetYaw === 'number' && typeof data.targetPitch === 'number') {
+          viewerRef.current?.animate({
+            yaw: (data.targetYaw * Math.PI) / 180,
+            pitch: (data.targetPitch * Math.PI) / 180,
+            speed: '600ms',
+          });
+          return;
+        }
+
+        // View-angle badges are a visual placeholder only — no behavior yet.
+        if (data?.hotspotType === 'view-angle') return;
+
         hotspotSelectRef.current?.(id);
       });
     } catch (err) {

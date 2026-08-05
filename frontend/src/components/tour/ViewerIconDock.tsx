@@ -54,6 +54,11 @@ export const ViewerIconDock: React.FC<ViewerIconDockProps> = ({
       onTouchStart={onRestore}
       onTouchEnd={onScheduleDim}
     >
+      {/* Change viewing angle — visual only for now, not wired up yet. */}
+      <GlassIconButton label="Change viewing angle" tooltip tooltipPosition="left">
+        <img src="/assets/icons/orbital.svg" alt="" aria-hidden className="w-5 h-5 opacity-90" />
+      </GlassIconButton>
+
       <GlassIconButton label="Visualize room" tooltip tooltipPosition="left" onClick={onVisualize} />
 
       <GlassIconButton

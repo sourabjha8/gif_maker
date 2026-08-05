@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Typography, ScreenLayout, StepHeader, ActionFooter, LoadingOverlay } from '../components';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Typography, ScreenLayout, StepHeader, ActionFooter, RoomCard, LoadingOverlay } from '../components';
 import { getRoomVariantFacets, filterRoomVariants } from '../lib/content';
 import type { VariantFacet, VariantFacetKey } from '../lib/content';
-import type { RoomVariant } from '../types';
+import type { RoomVariant, Room } from '../types';
 
 export interface RoomFilterSelectionProps {
   /** The room type chosen on the previous screen (e.g. "living-room"). */
@@ -12,12 +12,6 @@ export interface RoomFilterSelectionProps {
 }
 
 type Selections = Partial<Record<VariantFacetKey, string[]>>;
-
-/** Which facets get their own quick-access dropdown pill in the bar. */
-const QUICK_FACETS: VariantFacetKey[] = ['designStyle', 'moduleType'];
-
-/** Options above this count get a search field inside the popover. */
-const SEARCH_THRESHOLD = 8;
 
 const FALLBACK_THUMB = '/assets/images/background.png';
 
@@ -68,96 +62,6 @@ const CheckboxRow: React.FC<{ label: string; checked: boolean; onToggle: () => v
     </Typography>
   </button>
 );
-
-// ─── Dropdown popover (Style / Package pills) ────────────────────
-
-const FilterPopover: React.FC<{
-  facet: VariantFacet;
-  selected: string[];
-  onToggle: (value: string) => void;
-  onClear: () => void;
-  onClose: () => void;
-}> = ({ facet, selected, onToggle, onClear, onClose }) => {
-  const [query, setQuery] = useState('');
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    document.addEventListener('mousedown', onDown);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.removeEventListener('mousedown', onDown);
-    };
-  }, [onClose]);
-
-  const showSearch = facet.options.length > SEARCH_THRESHOLD;
-  const visible = query
-    ? facet.options.filter((o) => titleCase(o).toLowerCase().includes(query.toLowerCase()))
-    : facet.options;
-
-  return (
-    <div
-      ref={ref}
-      role="dialog"
-      aria-label={`${facet.label} filter`}
-      className="absolute top-[calc(100%+8px)] left-0 z-[120] w-[min(280px,80vw)] rounded-card bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal p-tight animate-fade-in-down"
-    >
-      {showSearch && (
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={`Search ${facet.label.toLowerCase()}…`}
-          autoFocus
-          className="w-full mb-tight px-element py-2 rounded-element bg-spatial-glass-elevated border border-spatial-border text-neutral-100 text-bodyMedium placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-        />
-      )}
-
-      <div className="max-h-[240px] overflow-y-auto custom-scrollbar">
-        {visible.length === 0 ? (
-          <Typography variant="bodySmall" className="text-neutral-500 px-tight py-3">
-            No matches
-          </Typography>
-        ) : (
-          visible.map((option) => (
-            <CheckboxRow
-              key={option}
-              label={titleCase(option)}
-              checked={selected.includes(option)}
-              onToggle={() => onToggle(option)}
-            />
-          ))
-        )}
-      </div>
-
-      <div className="flex items-center justify-between gap-tight mt-tight pt-tight border-t border-spatial-border">
-        <button
-          type="button"
-          onClick={onClear}
-          disabled={selected.length === 0}
-          className={`px-element py-2 rounded-pill text-bodySmall font-medium transition-colors ${
-            selected.length === 0
-              ? 'text-neutral-600 cursor-not-allowed'
-              : 'text-neutral-300 hover:text-white cursor-pointer'
-          }`}
-        >
-          Clear
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-element py-2 rounded-pill text-bodySmall font-bold bg-primary-500 text-white hover:bg-primary-400 transition-colors cursor-pointer"
-        >
-          Apply
-        </button>
-      </div>
-    </div>
-  );
-};
 
 // ─── Filters slide-over drawer ───────────────────────────────────
 
@@ -311,50 +215,18 @@ const FiltersDrawer: React.FC<{
 };
 
 // ─── Design result card ──────────────────────────────────────────
+// Reuses the exact same RoomCard used on the "Select Room Type" screen, so
+// hover/selection behavior stays identical across both steps.
 
-const DesignCard: React.FC<{ variant: RoomVariant; selected: boolean; onClick: () => void }> = ({
-  variant,
-  selected,
-  onClick,
-}) => (
-  <button
-    type="button"
-    onClick={onClick}
-    aria-pressed={selected}
-    className={`
-      group relative flex flex-col rounded-card overflow-hidden border text-left
-      transition-all duration-300 cursor-pointer
-      focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
-      ${selected
-        ? 'border-primary-400 shadow-[0_0_20px_rgba(63,189,241,0.35)] -translate-y-1'
-        : 'border-spatial-border hover:border-spatial-border-elevated hover:-translate-y-0.5'
-      }
-    `}
-  >
-    <div className="relative w-full aspect-[4/3] overflow-hidden bg-white/5">
-      <img
-        src={thumbnailFor(variant)}
-        alt={variant.name}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        draggable={false}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
-
-      {/* 360° badge */}
-      <span className="absolute top-tight left-tight flex items-center gap-1 pl-1 pr-2 h-6 rounded-pill bg-black/40 backdrop-blur-md border border-white/10">
-        <img src="/assets/icons/globe.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-80" />
-        <span className="text-[10px] font-bold text-white tracking-wide leading-none">360°</span>
-      </span>
-
-      {/* Name overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-tight">
-        <Typography variant="titleSmall" className="text-white font-bold drop-shadow-md truncate">
-          {variant.name}
-        </Typography>
-      </div>
-    </div>
-  </button>
-);
+function variantToCard(variant: RoomVariant): Room {
+  return {
+    id: variant.slug,
+    name: variant.name,
+    image: thumbnailFor(variant),
+    icon: '/assets/icons/default_icon.svg',
+    assets: variant.materials?.map((m) => m.material),
+  };
+}
 
 // ─── Applied-filter chip ─────────────────────────────────────────
 
@@ -368,47 +240,6 @@ const Chip: React.FC<{ label: string; onRemove: () => void }> = ({ label, onRemo
     <span>{label}</span>
     <img src="/assets/icons/close.svg" alt="" aria-hidden className="w-2.5 h-2.5 opacity-80" />
   </button>
-);
-
-// ─── Filter-bar dropdown pill ────────────────────────────────────
-
-const FilterPill: React.FC<{
-  label: string;
-  count: number;
-  open: boolean;
-  onClick: () => void;
-  children?: React.ReactNode;
-}> = ({ label, count, open, onClick, children }) => (
-  <div className="relative shrink-0">
-    <button
-      type="button"
-      onClick={onClick}
-      aria-expanded={open}
-      className={`
-        flex items-center gap-tight px-element h-10 rounded-pill border text-bodyMedium font-medium
-        transition-all duration-200 cursor-pointer whitespace-nowrap
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
-        ${count > 0 || open
-          ? 'bg-primary-500/15 border-primary-400 text-primary-100'
-          : 'bg-spatial-glass border-spatial-border text-neutral-300 hover:border-spatial-border-elevated hover:text-white'
-        }
-      `}
-    >
-      <span>{label}</span>
-      {count > 0 && (
-        <span className="flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-primary-500 text-white text-[11px] font-bold leading-none">
-          {count}
-        </span>
-      )}
-      <img
-        src="/assets/icons/chevron_down.svg"
-        alt=""
-        aria-hidden
-        className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-      />
-    </button>
-    {open && children}
-  </div>
 );
 
 // ─── Screen ──────────────────────────────────────────────────────
@@ -427,10 +258,8 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
   onExplore,
 }) => {
   const facets = useMemo(() => getRoomVariantFacets(roomTypeId), [roomTypeId]);
-  const facetByKey = useMemo(() => new Map(facets.map((f) => [f.key, f])), [facets]);
 
   const [selections, setSelections] = useState<Selections>({});
-  const [openPill, setOpenPill] = useState<VariantFacetKey | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -487,10 +316,6 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
     }, 2500);
   };
 
-  const quickFacets = QUICK_FACETS.map((k) => facetByKey.get(k)).filter(
-    (f): f is VariantFacet => Boolean(f)
-  );
-
   return (
     <ScreenLayout>
       <StepHeader
@@ -505,25 +330,7 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
       <div className="w-full h-px bg-spatial-border mt-element mb-element shrink-0" />
 
       {/* ─── Filter Bar ─── */}
-      <div className="flex items-center gap-tight flex-wrap shrink-0 relative z-30">
-        {quickFacets.map((facet) => (
-          <FilterPill
-            key={facet.key}
-            label={facet.label}
-            count={selections[facet.key]?.length ?? 0}
-            open={openPill === facet.key}
-            onClick={() => setOpenPill((prev) => (prev === facet.key ? null : facet.key))}
-          >
-            <FilterPopover
-              facet={facet}
-              selected={selections[facet.key] ?? []}
-              onToggle={(value) => toggleValue(facet.key, value)}
-              onClear={() => clearFacet(facet.key)}
-              onClose={() => setOpenPill(null)}
-            />
-          </FilterPill>
-        ))}
-
+      <div className="flex items-center gap-tight flex-wrap shrink-0">
         {/* Filters drawer trigger */}
         <button
           type="button"
@@ -595,12 +402,12 @@ export const RoomFilterSelection: React.FC<RoomFilterSelectionProps> = ({
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-element pb-2 animate-fade-in-down">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-element pb-2 animate-fade-in-down">
             {results.map((variant) => (
-              <DesignCard
+              <RoomCard
                 key={variant.slug}
-                variant={variant}
-                selected={selectedVariantId === variant.slug}
+                room={variantToCard(variant)}
+                isSelected={selectedVariantId === variant.slug}
                 onClick={() =>
                   setSelectedVariantId(variant.slug === selectedVariantId ? null : variant.slug)
                 }

@@ -47,19 +47,17 @@ export const RoomTypeSelection: React.FC<RoomTypeSelectionProps> = ({
                 key={room.id}
                 room={room}
                 isSelected={selectedType === room.id}
-                onClick={() => setSelectedType(room.id === selectedType ? null : room.id)}
+                onClick={() => {
+                  setSelectedType(room.id);
+                  onContinue?.(room.id);
+                }}
               />
             ))}
           </div>
         </div>
       </div>
 
-      <ActionFooter
-        onBack={onBack}
-        onPrimaryAction={() => selectedType && onContinue?.(selectedType)}
-        primaryLabel="Continue"
-        isPrimaryDisabled={!selectedType}
-      />
+      <ActionFooter onBack={onBack} showPrimary={false} />
     </ScreenLayout>
   );
 };
