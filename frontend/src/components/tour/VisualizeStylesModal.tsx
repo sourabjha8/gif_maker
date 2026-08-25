@@ -154,47 +154,71 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
                     const isApplied = variant.slug === activeVariantSlug;
                     const thumbnail = thumbnailFor(variant);
                     return (
-                      <button
+                      <div
                         key={variant.id}
-                        type="button"
-                        onClick={() => openVariant(variant)}
                         className={`
-                          group relative aspect-[4/3] rounded-card border overflow-hidden text-left
+                          relative aspect-[4/3] rounded-card border overflow-hidden
                           bg-spatial-glass-elevated
                           transition-all duration-200
-                          focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
                           ${isApplied
                             ? 'border-primary-400'
                             : 'border-spatial-border hover:border-spatial-border-elevated'
                           }
                         `}
                       >
-                        {thumbnail
-                          ? <img src={thumbnail} alt="" className="absolute inset-0 w-full h-full object-cover" draggable={false} />
-                          : <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="absolute inset-0 m-auto w-8 h-8 opacity-30" />
-                        }
-                        <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent" aria-hidden />
-                        <span
-                          aria-hidden
+                        {/* Primary action — tapping anywhere on the tile opens this style. */}
+                        <button
+                          type="button"
+                          onClick={() => openVariant(variant)}
+                          className="absolute inset-0 text-left rounded-card focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                        >
+                          {thumbnail
+                            ? <img src={thumbnail} alt="" className="absolute inset-0 w-full h-full object-cover" draggable={false} />
+                            : <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="absolute inset-0 m-auto w-8 h-8 opacity-30" />
+                          }
+                          <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent" aria-hidden />
+                          <Typography
+                            variant="titleSmall"
+                            weight="semiBold"
+                            colorClass="text-white"
+                            className="absolute bottom-tight left-tight right-14 truncate"
+                          >
+                            {variant.name}
+                          </Typography>
+                        </button>
+
+                        {/* Secondary, quiet trigger — a separate action (upload a room photo to
+                            generate this style), never the tile's primary tap target. Visible at
+                            low opacity by default (not hover-only) so it still works on touch. */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Upload/generation flow not implemented yet — trigger only.
+                          }}
+                          aria-label={`Try ${variant.name} in your room`}
                           className="
-                            absolute top-2 right-2 w-7 h-7 rounded-pill
-                            bg-black/50 backdrop-blur-sm border border-white/20
-                            flex items-center justify-center
-                            opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100
-                            transition-opacity duration-200
+                            absolute bottom-tight right-tight z-10 max-w-[calc(100%-16px)]
+                            flex items-center gap-1 h-7 px-1.5 sm:pr-2.5 rounded-pill
+                            bg-white/10 backdrop-blur-sm border border-white/15
+                            text-neutral-300
+                            opacity-70 hover:opacity-100 hover:bg-white/15 hover:text-neutral-100
+                            focus-visible:opacity-100
+                            transition-all duration-200
+                            focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
                           "
                         >
-                          <img src="/assets/icons/eye_visibility_on.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-90" />
-                        </span>
-                        <Typography
-                          variant="titleSmall"
-                          weight="semiBold"
-                          colorClass="text-white"
-                          className="absolute bottom-tight left-tight right-tight truncate"
-                        >
-                          {variant.name}
-                        </Typography>
-                      </button>
+                          <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-80 shrink-0" />
+                          <Typography
+                            variant="bodySmall"
+                            weight="medium"
+                            colorClass="text-inherit"
+                            className="hidden sm:block truncate"
+                          >
+                            Try in your room
+                          </Typography>
+                        </button>
+                      </div>
                     );
                   })}
                 </div>
