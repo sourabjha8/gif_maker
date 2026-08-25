@@ -199,13 +199,27 @@ const DESIGN_FLOW_FLOOR_SLUG = '1f';
 const DESIGN_FLOW_CITY_SLUG = 'mumbai';
 const DESIGN_FLOW_PROJECT_SLUG = 'seabreeze-residences';
 
-/** The real ContentRoom (with variants) backing a design-flow room-type id, if any. */
-export function getDesignFlowRoom(roomTypeId: string): ContentRoom | undefined {
+function getDesignFlowProject(): ContentProject | undefined {
   const content = loadContent();
   const floor = findFloor(content, DESIGN_FLOW_FLOOR_SLUG);
   const city = floor && findCity(floor, DESIGN_FLOW_CITY_SLUG);
-  const project = city && findProject(city, DESIGN_FLOW_PROJECT_SLUG);
+  return city && findProject(city, DESIGN_FLOW_PROJECT_SLUG);
+}
+
+/** The real ContentRoom (with variants) backing a design-flow room-type id, if any. */
+export function getDesignFlowRoom(roomTypeId: string): ContentRoom | undefined {
+  const project = getDesignFlowProject();
   return project && findRoom(project, roomTypeId);
+}
+
+/**
+ * Every real room slug/name in the design-flow's pilot project — the fixed,
+ * known set an estimate item's room can be reassigned to (e.g. from the
+ * cart's room-edit picker), rather than an open-ended free-text field.
+ */
+export function getDesignFlowRoomList(): { slug: string; name: string }[] {
+  const project = getDesignFlowProject();
+  return project?.rooms.map((r) => ({ slug: r.slug, name: r.name })) ?? [];
 }
 
 // ─── Variant Facets (multi-select filtering) ─────────────────────

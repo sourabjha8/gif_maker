@@ -141,6 +141,8 @@ export interface Hotspot {
   /** For type: 'reposition' — the camera angle (degrees) this marker looks toward. */
   targetYaw?: number;
   targetPitch?: number;
+  /** For type: 'room-portal' — in-plane rotation (degrees) orienting the ground arrow toward its doorway. Defaults to 0. */
+  rotation?: number;
 }
 
 export interface PricingRef {

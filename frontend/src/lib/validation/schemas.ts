@@ -44,6 +44,7 @@ export const HotspotSchema = z.object({
   targetRoomSlug: z.string().optional(),
   targetYaw: z.number().optional(),
   targetPitch: z.number().optional(),
+  rotation: z.number().optional(),
 });
 
 // ─── Media ───────────────────────────────────────────────────────

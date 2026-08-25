@@ -190,6 +190,19 @@ export const TourScreen: React.FC<TourScreenProps> = ({
     return resolved.variant.media?.find((m) => m.id === activeHotspot.videoRef);
   }, [resolved, activeHotspot]);
 
+  // Every room's own best-variant panorama, for the current project —
+  // VirtualTourPlugin (client mode) needs every linked node's panorama
+  // upfront, not just the currently-active room's.
+  const roomPanoramas: Record<string, string> = useMemo(() => {
+    if (!resolved) return {};
+    const map: Record<string, string> = {};
+    for (const room of resolved.project.rooms) {
+      const variant = findBestVariant(room);
+      if (variant?.panorama.url) map[room.slug] = variant.panorama.url;
+    }
+    return map;
+  }, [resolved]);
+
   // Fetch pricing for a hotspot lazily.
   const fetchPricingFor = useCallback(
     async (hotspot: Hotspot) => {
@@ -376,10 +389,12 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           panoramaUrl={variant.panorama.url}
           roomSlug={resolved?.room.slug}
           hotspots={isWalkthrough ? [] : variant.hotspots}
+          roomPanoramas={roomPanoramas}
           onReady={() => setIsViewerReady(true)}
           onError={(err) => setError(err)}
           onHotspotSelect={handleHotspotSelect}
           onViewerReady={(v) => { psvViewerRef.current = v; }}
+          onVirtualTourNavigate={handleNavigateRoom}
         />
       )}
 

@@ -42,4 +42,8 @@ export type {
   EstimateItem,
   EstimateRoomGroup,
   EstimateSummary,
+  ResolvedProject,
+  RoomCategory,
+  ScopeRoom,
 } from './estimate';
+export { UNASSIGNED_ROOM_KEY } from './estimate';

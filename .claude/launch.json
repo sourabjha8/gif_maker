@@ -8,6 +8,10 @@
       "cwd": "C:\\Workspace\\vxp-web\\frontend",
       "port": 3000,
       "autoPort": false
+    },
+    {
+      "name": "proto-static",
+      "url": "http://localhost:8080"
     }
   ]
 }

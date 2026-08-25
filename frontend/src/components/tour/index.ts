@@ -12,6 +12,7 @@ export { RoomBrowserPanel } from './RoomBrowserPanel';
 export { RoomDescriptionCard } from './RoomDescriptionCard';
 export { RoomInfoPanel } from './RoomInfoPanel';
 export { RoomNavigator } from './RoomNavigator';
+export { RoomNavigationArrow } from './RoomNavigationArrow';
 export { RoomMinimap } from './RoomMinimap';
 export { TourTopBar } from './TourTopBar';
 export { WalkthroughVideo } from './WalkthroughVideo';

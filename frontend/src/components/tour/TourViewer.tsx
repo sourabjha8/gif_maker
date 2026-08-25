@@ -4,19 +4,26 @@ import React, { useEffect, useRef } from 'react';
 import { Viewer } from '@photo-sphere-viewer/core';
 import { MarkersPlugin } from '@photo-sphere-viewer/markers-plugin';
 import type { Marker } from '@photo-sphere-viewer/markers-plugin';
+import { VirtualTourPlugin } from '@photo-sphere-viewer/virtual-tour-plugin';
+import type { VirtualTourPluginConfig, VirtualTourNode, VirtualTourLink } from '@photo-sphere-viewer/virtual-tour-plugin';
 import '@photo-sphere-viewer/core/index.css';
 import '@photo-sphere-viewer/markers-plugin/index.css';
+import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
 import type { Hotspot } from '../../types';
 
 interface TourViewerProps {
   panoramaUrl: string;
   roomSlug?: string;
   hotspots?: Hotspot[];
+  /** Every room's panorama URL, keyed by slug — VirtualTourPlugin needs every linked node's panorama upfront. */
+  roomPanoramas?: Record<string, string>;
   onReady?: () => void;
   onError?: (err: Error) => void;
   onHotspotSelect?: (hotspotId: string) => void;
   /** Receives the live Viewer instance on init (and null on teardown). */
   onViewerReady?: (viewer: Viewer | null) => void;
+  /** Fired when a VirtualTourPlugin arrow (see makeVirtualTourConfig) navigates to another node/room. */
+  onVirtualTourNavigate?: (targetRoomSlug: string) => void;
 }
 
 
@@ -56,20 +63,26 @@ function escapeHtml(value: string): string {
 }
 
 /**
- * Room-change portal — an upright labeled marker anchored at a doorway/opening.
- * Position says "exit here" before the label is read; the chevron says "through".
+ * Room-change portal — a chevron trail lying flat on the ground plane
+ * (tilted back with rotateX so it reads as painted on the floor and
+ * receding toward the doorway, not a camera-facing icon), pointing in the
+ * travel direction via `rotation`. The destination name is a permanent
+ * label, not a hover tooltip. HTML/CSS port of RoomNavigationArrow.tsx —
+ * PSV markers are plain DOM strings, not mounted React components, so hover
+ * / active states are driven by CSS `:hover`/`:active` instead of React
+ * state.
  */
-function portalMarkerHtml(label: string): string {
+function portalMarkerHtml(label: string, rotation: number): string {
   return `
     <button type="button" aria-label="Go to ${escapeHtml(label)}" class="psv-marker-portal">
-      <span class="psv-marker-portal__plate">
-        <span class="psv-marker-portal__label">${escapeHtml(label)}</span>
-        <svg class="psv-marker-portal__chev" viewBox="0 0 24 24" width="14" height="14">
-          <polyline points="9 6 15 12 9 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+      <span class="psv-marker-portal__rotator" style="transform: rotate(${rotation}deg);">
+        <span class="psv-marker-portal__chevrons">
+          <span class="psv-marker-portal__chevron"></span>
+          <span class="psv-marker-portal__chevron"></span>
+          <span class="psv-marker-portal__chevron"></span>
+        </span>
       </span>
-      <span class="psv-marker-portal__stem"></span>
-      <span class="psv-marker-portal__base"></span>
+      <span class="psv-marker-portal__label">${escapeHtml(label)}</span>
     </button>
   `;
 }
@@ -117,8 +130,8 @@ function makeHotspotMarkers(hotspots: Hotspot[]) {
       return {
         id: h.id,
         position,
-        html: portalMarkerHtml(h.label),
-        anchor: 'bottom center' as const,
+        html: portalMarkerHtml(h.label, h.rotation ?? 0),
+        anchor: 'center center' as const,
         data,
       };
     }
@@ -168,14 +181,93 @@ function makeRoomLayers(roomSlug: string) {
   return [];
 }
 
+/**
+ * Fixed-orientation, permanently-labeled arrow — a custom element handed to
+ * VirtualTourPlugin's `arrowStyle.element`, reusing the same
+ * `.psv-marker-portal` visual as the CSS 'room-portal' marker. `renderMode`
+ * is '2d' specifically so this renders through MarkersPlugin's ordinary
+ * anchored-at-a-point positioning: '3d' mode continuously re-orients the
+ * arrow to face the current camera-to-target geometry, which reads as the
+ * arrow spinning/tracking the screen as you look around — not what a
+ * doorway sign should do.
+ */
+function makeArrowElement(link: VirtualTourLink): HTMLElement {
+  const { label = '', rotation = 0 } = (link.data ?? {}) as { label?: string; rotation?: number };
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = `
+    <div class="psv-marker-portal">
+      <span class="psv-marker-portal__rotator" style="transform: rotate(${rotation}deg);">
+        <span class="psv-marker-portal__chevrons">
+          <span class="psv-marker-portal__chevron"></span>
+          <span class="psv-marker-portal__chevron"></span>
+          <span class="psv-marker-portal__chevron"></span>
+        </span>
+      </span>
+      <span class="psv-marker-portal__label">${escapeHtml(label)}</span>
+    </div>
+  `;
+  return wrapper.firstElementChild as HTMLElement;
+}
+
+/**
+ * Builds a VirtualTourPlugin config from this room's own 'room-portal'
+ * hotspots — the same data that already drives the CSS ground-arrow — so
+ * every room with a room-portal connection gets this arrow too, with no
+ * per-room hardcoding. Returns null for a room with no room-portal
+ * hotspots, or if a linked room's panorama isn't available yet (client-mode
+ * VirtualTourPlugin needs every linked node's panorama upfront).
+ */
+function makeVirtualTourConfig(
+  roomSlug: string,
+  panoramaUrl: string,
+  hotspots: Hotspot[],
+  roomPanoramas: Record<string, string>,
+): VirtualTourPluginConfig | null {
+  const portals = hotspots.filter(
+    (h): h is Hotspot & { targetRoomSlug: string } => h.type === 'room-portal' && !!h.targetRoomSlug,
+  );
+  if (portals.length === 0) return null;
+
+  const targetNodes: VirtualTourNode[] = [];
+  const links: VirtualTourLink[] = [];
+  for (const h of portals) {
+    const targetPanorama = roomPanoramas[h.targetRoomSlug];
+    if (!targetPanorama) continue; // can't build a client-mode node without its panorama
+    links.push({
+      nodeId: h.targetRoomSlug,
+      position: { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 },
+      data: { label: h.label, rotation: h.rotation ?? 0 },
+    });
+    if (!targetNodes.some((n) => n.id === h.targetRoomSlug)) {
+      targetNodes.push({ id: h.targetRoomSlug, panorama: targetPanorama, name: h.label });
+    }
+  }
+  if (links.length === 0) return null;
+
+  return {
+    dataMode: 'client',
+    positionMode: 'manual',
+    renderMode: '2d',
+    startNodeId: roomSlug,
+    showLinkTooltip: false,
+    // size is required — PSV's ArrowsRenderer reads `arrowStyle.size.width`
+    // unconditionally in 2D mode; without it, adding the arrow throws
+    // silently before the element is ever appended to the scene.
+    arrowStyle: { element: makeArrowElement, size: { width: 80, height: 80 } },
+    nodes: [{ id: roomSlug, panorama: panoramaUrl, links }, ...targetNodes],
+  };
+}
+
 export function TourViewer({
   panoramaUrl,
   roomSlug = 'room',
   hotspots = [],
+  roomPanoramas = {},
   onReady,
   onError,
   onHotspotSelect,
   onViewerReady,
+  onVirtualTourNavigate,
 }: TourViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Viewer | null>(null);
@@ -184,6 +276,8 @@ export function TourViewer({
   hotspotSelectRef.current = onHotspotSelect;
   const onReadyRef = useRef(onReady);
   onReadyRef.current = onReady;
+  const virtualTourNavigateRef = useRef(onVirtualTourNavigate);
+  virtualTourNavigateRef.current = onVirtualTourNavigate;
   // Track which panorama the viewer was instantiated with so the
   // panorama-swap effect doesn't redundantly call setPanorama on mount
   // (which cancels the original in-flight texture load — visible as a
@@ -196,14 +290,30 @@ export function TourViewer({
     let destroyed = false;
 
     try {
+      const virtualTourConfig = makeVirtualTourConfig(roomSlug, panoramaUrl, hotspots, roomPanoramas);
+      const plugins: [typeof MarkersPlugin | typeof VirtualTourPlugin, unknown][] = [
+        // VirtualTourPlugin deletes MarkersPlugin's own `config.markers` at
+        // init if it's set here (with a console warning) — markers must be
+        // added via setMarkers() afterward instead. Do this unconditionally
+        // (not just when virtualTourConfig is set) so both paths match; the
+        // markers effect below runs on mount either way and sets them.
+        [MarkersPlugin, {}],
+      ];
+      if (virtualTourConfig) plugins.push([VirtualTourPlugin, virtualTourConfig]);
+
       const viewer = new Viewer({
         container: containerRef.current,
-        panorama: panoramaUrl,
+        // VirtualTourPlugin loads the initial panorama itself from its
+        // `startNodeId` node — passing `panorama` here too would start a
+        // second, competing load of the same texture, which cancels the
+        // first and leaves the viewer stuck on "ready" forever (same
+        // failure mode the setPanorama guard below exists to avoid).
+        ...(virtualTourConfig ? {} : { panorama: panoramaUrl }),
         navbar: false,
         defaultYaw: 0,
         defaultPitch: 0,
         defaultTransition: { speed: '2rpm', rotation: true, effect: 'fade' },
-        plugins: [[MarkersPlugin, { markers: [...makeHotspotMarkers(hotspots), ...makeRoomLayers(roomSlug)] }]],
+        plugins,
       });
       viewerRef.current = viewer;
       markersPluginRef.current = viewer.getPlugin(MarkersPlugin) as MarkersPlugin;
@@ -212,6 +322,13 @@ export function TourViewer({
       viewer.addEventListener('ready', () => {
         if (!destroyed) onReady?.();
       }, { once: true });
+
+      if (virtualTourConfig) {
+        const virtualTourPlugin = viewer.getPlugin(VirtualTourPlugin) as VirtualTourPlugin;
+        virtualTourPlugin?.addEventListener('node-changed', ({ node }: { node: VirtualTourNode }) => {
+          if (node.id !== roomSlug) virtualTourNavigateRef.current?.(node.id);
+        });
+      }
 
       markersPluginRef.current?.addEventListener('select-marker', ({ marker }: { marker: Marker }) => {
         const data = marker.data as
@@ -310,12 +427,14 @@ export function TourViewer({
     };
   }, []);
 
-  // Update markers when hotspot list changes.
+  // Update markers when hotspot list changes. Also covers the initial
+  // mount, since MarkersPlugin is now always constructed with no markers
+  // (see the VirtualTourPlugin conflict note above).
   useEffect(() => {
     const plugin = markersPluginRef.current;
     if (!plugin) return;
-    plugin.setMarkers(makeHotspotMarkers(hotspots));
-  }, [hotspots]);
+    plugin.setMarkers([...makeHotspotMarkers(hotspots), ...makeRoomLayers(roomSlug)]);
+  }, [hotspots, roomSlug]);
 
   return (
     <div

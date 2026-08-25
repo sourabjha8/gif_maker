@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Tour · Push to BLOCKS Flow — Working Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/.pnpm/next@15.5.19_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/.pnpm/next@15.5.19_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./app/globals.css ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -58,6 +68,7 @@
     --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --blur-sm: 8px;
     --blur-md: 12px;
+    --blur-2xl: 40px;
     --blur-3xl: 64px;
     --aspect-video: 16 / 9;
     --default-transition-duration: 150ms;
@@ -102,6 +113,7 @@
     --text-cta: 14px;
     --text-cta--line-height: 22px;
     --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.16);
     --shadow-element: 0 2px 4px rgba(0, 0, 0, 0.08);
     --animate-ambient-blur: ambient-pulse 2s ease-in-out infinite;
     --animate-fade-in: fade-in 3s ease-out forwards;
@@ -335,11 +347,17 @@
   .top-full {
     top: 100%;
   }
+  .top-tight {
+    top: var(--spacing-tight);
+  }
   .-right-1 {
     right: calc(var(--spacing) * -1);
   }
   .right-0 {
     right: 0;
+  }
+  .right-1\.5 {
+    right: calc(var(--spacing) * 1.5);
   }
   .right-2 {
     right: calc(var(--spacing) * 2);
@@ -449,6 +467,9 @@
   .z-\[11\] {
     z-index: 11;
   }
+  .z-\[60\] {
+    z-index: 60;
+  }
   .z-\[100\] {
     z-index: 100;
   }
@@ -511,6 +532,9 @@
   }
   .m-auto {
     margin: auto;
+  }
+  .-mx-1 {
+    margin-inline: calc(var(--spacing) * -1);
   }
   .mx-1 {
     margin-inline: var(--spacing);
@@ -746,6 +770,9 @@
   .h-screen {
     height: 100vh;
   }
+  .max-h-64 {
+    max-height: calc(var(--spacing) * 64);
+  }
   .max-h-\[calc\(min\(100dvh\,100vw\)\*0\.7\)\] {
     max-height: calc(min(100dvh, 100vw) * 0.7);
   }
@@ -944,6 +971,9 @@
   .min-w-\[120px\] {
     min-width: 120px;
   }
+  .min-w-\[200px\] {
+    min-width: 200px;
+  }
   .flex-1 {
     flex: 1;
   }
@@ -1060,6 +1090,9 @@
   }
   .scale-\[0\.98\] {
     scale: 0.98;
+  }
+  .-rotate-90 {
+    rotate: calc(90deg * -1);
   }
   .rotate-90 {
     rotate: 90deg;
@@ -1321,6 +1354,10 @@
   .border-l {
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
+  }
+  .border-dashed {
+    --tw-border-style: dashed;
+    border-style: dashed;
   }
   .border-none {
     --tw-border-style: none;
@@ -2165,6 +2202,11 @@
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
+  .backdrop-blur-2xl {
+    --tw-backdrop-blur: blur(var(--blur-2xl));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
   .backdrop-blur-3xl {
     --tw-backdrop-blur: blur(var(--blur-3xl));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
@@ -2219,6 +2261,10 @@
   }
   .delay-150 {
     transition-delay: 150ms;
+  }
+  .duration-100 {
+    --tw-duration: 100ms;
+    transition-duration: 100ms;
   }
   .duration-150 {
     --tw-duration: 150ms;
@@ -2471,6 +2517,16 @@
       }
     }
   }
+  .hover\:bg-primary-500\/30 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #17A8E5 30%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-primary-500) 30%, transparent);
+        }
+      }
+    }
+  }
   .hover\:bg-red-500\/25 {
     &:hover {
       @media (hover: hover) {
@@ -2505,6 +2561,13 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
         }
+      }
+    }
+  }
+  .hover\:text-neutral-50 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-neutral-50);
       }
     }
   }
@@ -2608,6 +2671,14 @@
       border-color: var(--color-spatial-bg);
     }
   }
+  .focus-visible\:bg-white\/10 {
+    &:focus-visible {
+      background-color: color-mix(in srgb, #fff 10%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+      }
+    }
+  }
   .focus-visible\:ring-1 {
     &:focus-visible {
       --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
@@ -2659,6 +2730,11 @@
       --tw-scale-y: 95%;
       --tw-scale-z: 95%;
       scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  .active\:scale-\[0\.98\] {
+    &:active {
+      scale: 0.98;
     }
   }
   .active\:bg-white\/10 {
@@ -3412,52 +3488,40 @@
   transform: rotateX(74deg) scale(1.3);
 }
 .psv-marker-view-angle {
-  position: relative;
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-spatial-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(63, 189, 241, 0.5);
-  box-shadow: var(--shadow-element);
-  cursor: pointer;
+  background: rgba(20, 20, 20, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-card);
   padding: 0;
+  cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.psv-marker-view-angle::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 50% 50%, rgba(23, 168, 229, 0.32) 0%, rgba(23, 168, 229, 0) 72%);
-  z-index: -1;
-  pointer-events: none;
-  animation: view-angle-halo 2.6s ease-in-out infinite;
+.psv-marker-view-angle__number {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fafafa;
+  user-select: none;
 }
-@keyframes view-angle-halo {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-.psv-marker-view-angle__icon {
-  width: 22px;
-  height: 22px;
-  opacity: 0.9;
-  transition: transform 0.4s ease, opacity 0.2s ease;
+.psv-marker-view-angle:hover,
+.psv-marker-view-angle:focus-visible {
+  background: rgba(30, 30, 30, 0.96);
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-modal), 0 0 12px rgba(23, 168, 229, 0.4);
+  transform: scale(1.08);
 }
 .psv-marker-view-angle:focus-visible {
   outline: 2px solid var(--color-primary-500);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 .psv-marker-view-angle:active {
-  transform: scale(0.94);
+  transform: scale(0.9);
 }
 .psv-tooltip {
   background: var(--color-spatial-glass);
@@ -3952,3 +4016,956 @@ body {
     }
   }
 }
+</style>
+<style>
+  html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; background: #000; font-family: var(--font-sans); }
+  * { box-sizing: border-box; }
+  button { font-family: inherit; }
+  select { font-family: inherit; }
+  .custom-scrollbar::-webkit-scrollbar { width: 12px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-spatial-border-elevated); border-radius: 100px; border-right: 6px solid transparent; background-clip: padding-box; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--color-primary-400); }
+  .custom-scrollbar { scrollbar-width: thin; scrollbar-color: var(--color-spatial-border-elevated) transparent; }
+  #app { width: 100%; height: 100%; }
+  .psv-overlay { display: none !important; }
+
+  .proto-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    background: #111; color: #999; font-size: 12px; text-align: center;
+    padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .proto-banner b { color: #6fd0ff; }
+  .proto-toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(12px);
+    z-index: 400; max-width: 90vw;
+    background: rgba(18,18,18,0.85); backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4); padding: 10px 18px;
+    color: #eee; font-size: 13px;
+    opacity: 0; pointer-events: none; transition: all .25s ease-out;
+  }
+  .proto-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  Working prototype — the <b>Push to BLOCKS</b> flow, starting from the 360° room where the designer opens the cart:
+  flat <b>Your Cart</b> → <b>Send for Quotation</b> search (name / society / INCO id) → resolving a unit builds a
+  <b>BHK room skeleton</b> and switches the same drawer into <b>Your design</b> (grouped by room, empty rooms visible,
+  Unassigned for anything that doesn't fit) → change BHK, add/remove rooms, reassign items via the anchored room
+  picker → <b>Push to BLOCKS</b> resets back to the default cart UI. One shared state, exactly like the real Zustand store.
+</div>
+
+<div id="app">
+  <div class="relative w-full h-full bg-black overflow-hidden select-none">
+
+    <div id="psv-root" class="absolute inset-0 w-full h-full pointer-events-auto"></div>
+
+    <div id="loadingOverlay" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center animate-fade-in">
+      <div class="flex flex-col items-center gap-group">
+        <div class="w-16 h-16 border-4 border-primary-500/20 border-t-primary-500 rounded-full animate-spin"></div>
+        <div class="font-sans text-base md:text-titleLarge leading-snug font-normal text-neutral-200 text-white font-medium tracking-wide animate-pulse">Loading Environment...</div>
+      </div>
+    </div>
+
+    <!-- Top bar: Back + Cart icon/badge (the entry point into the sidebar) -->
+    <div class="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between pt-[max(0.75rem,env(safe-area-inset-top))] pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] md:pt-[max(1.5rem,env(safe-area-inset-top))] md:pl-[max(1.5rem,env(safe-area-inset-left))] md:pr-[max(1.5rem,env(safe-area-inset-right))]">
+      <div class="flex items-start justify-between w-full gap-element">
+        <div class="flex items-center gap-tight pointer-events-auto">
+          <button id="backBtn" type="button" aria-label="Go back"
+            class="w-11 h-11 flex items-center justify-center overflow-hidden shrink-0 rounded-pill bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-card text-neutral-100 hover:text-white hover:bg-white/10 transition-colors duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+            <img src="../../public/assets/icons/default_icon.svg" alt="" aria-hidden="true" class="w-3.5 h-3.5 opacity-80 rotate-180">
+          </button>
+        </div>
+        <div class="flex items-center gap-tight shrink-0 pointer-events-auto">
+          <span class="relative pointer-events-auto">
+            <span class="relative group inline-flex">
+              <button id="cartBtn" type="button" aria-label="Cart" class="w-12 h-12 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full backdrop-blur-3xl border shadow-card transition-all duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 bg-spatial-glass text-neutral-100 border-spatial-border hover:text-white hover:bg-white/10 hover:border-spatial-border-elevated">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="20" height="20" fill="currentColor"><path d="M236.58-118.12q-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43-29.15 0-49.57-20.43Zm387.69 0q-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69q-29.16 0-49.58-20.43ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h427.7q12.76 0 21.38 8.61 8.61 8.62 8.61 21.39 0 12.77-8.61 21.38-8.62 8.62-21.38 8.62h-427.7q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H90q-12.77 0-21.38-8.62Q60-827.23 60-840t8.62-21.38Q77.23-870 90-870h61.15q10.24 0 19.08 5.42 8.85 5.43 13.46 15.27L211.85-790ZM342-517.69h280-280Z"/></svg>
+              </button>
+              <span role="tooltip" class="pointer-events-none absolute z-30 whitespace-nowrap bottom-full left-1/2 -translate-x-1/2 mb-2 rounded-pill bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-element px-element py-tight text-bodySmall text-neutral-100 opacity-0 group-hover:opacity-100 transition-opacity duration-200" id="cartTooltip">Cart</span>
+            </span>
+            <span id="cartBadge" class="absolute -top-1 -right-1 pointer-events-none" style="display:none;">
+              <span class="min-w-6 h-6 px-1.5 rounded-full bg-primary-500 text-white text-[11px] font-bold flex items-center justify-center" id="cartCount">0</span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Bottom: room name pill -->
+      <div class="relative flex justify-center w-full min-h-[48px]">
+        <div class="absolute inset-x-0 flex justify-center pointer-events-auto">
+          <button id="roomInfoBtn" type="button" aria-expanded="false" class="h-12 min-w-[120px] sm:min-w-[160px] px-4 sm:px-6 flex items-center justify-center rounded-card bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-card transition-all duration-200 hover:bg-white/10 hover:border-spatial-border-elevated active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+            <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-50 leading-none whitespace-nowrap">Living Room</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Hotspot snippet (live add point in this room) ═══ -->
+    <div id="snippetRoot" class="absolute top-0 left-0 z-40 will-change-transform" style="opacity:0; transition: opacity .16s ease; pointer-events:none;">
+      <div id="snippetCard" role="dialog" class="relative w-[240px] rounded-card bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal p-3 text-left">
+        <button type="button" id="snippetCloseBtn" aria-label="Close product details" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-pill text-neutral-300 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+          <img src="../../public/assets/icons/close.svg" alt="" aria-hidden="true" class="w-3.5 h-3.5 opacity-80">
+        </button>
+        <div class="font-sans text-sm md:text-bodyMedium leading-relaxed font-semibold text-neutral-50 pr-6 truncate" id="snippetLabel">—</div>
+        <div class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-400 mt-0.5 uppercase tracking-wide truncate" id="snippetMeta" style="display:none;"></div>
+        <div class="flex items-center justify-between gap-2.5 mt-2.5">
+          <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-bold text-neutral-50 whitespace-nowrap" id="snippetPrice">—</span>
+          <button type="button" id="snippetAddBtn" class="h-8 px-3.5 rounded-pill text-xs font-semibold whitespace-nowrap transition-colors active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 bg-primary-500 text-white hover:bg-primary-400">Add</button>
+        </div>
+        <span id="snippetTail" aria-hidden="true" class="absolute w-0 h-0" style="top:100%; border-width:7px; border-style:solid; border-color: rgba(18,18,18,0.6) transparent transparent transparent; transform: translateX(-50%);"></span>
+      </div>
+    </div>
+
+    <!-- ═══ EstimateSidebar (the cart itself) — verbatim from EstimateSidebar.tsx ═══ -->
+    <div id="estBackdrop" class="fixed inset-0 z-[140] bg-black/30 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+    <aside id="estSidebar" role="dialog" aria-modal="true" aria-labelledby="estimate-title"
+      class="fixed z-[150] top-[max(0.5rem,env(safe-area-inset-top))] bottom-[max(0.5rem,env(safe-area-inset-bottom))] right-[max(0.5rem,env(safe-area-inset-right))] w-[calc(100vw_-_1rem)] sm:w-[400px] flex flex-col bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-container transition-transform duration-300 ease-out translate-x-[calc(100%+8px)]">
+      <div class="relative flex-1 min-h-0">
+
+        <!-- ── CART / DESIGN SCOPE PAGE ── -->
+        <div id="cartPage" class="absolute inset-0 flex flex-col transition-opacity duration-300 opacity-100 delay-150">
+          <header class="shrink-0 px-element pt-element pb-tight border-b border-spatial-border">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-tight">
+                <img src="../../public/assets/icons/default_icon.svg" alt="" aria-hidden="true" class="w-6 h-6 opacity-50">
+                <span class="font-sans text-base md:text-titleLarge leading-snug font-bold text-neutral-50"><span id="estimate-title">Your Cart</span></span>
+                <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-400" id="estItemCountLabel" style="display:none;"></span>
+              </div>
+              <button type="button" id="estCloseBtn" aria-label="Close cart" class="w-11 h-11 rounded-pill flex items-center justify-center bg-spatial-glass-elevated border border-spatial-border text-neutral-300 hover:text-white hover:bg-white/10 transition-all duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">×</button>
+            </div>
+            <div id="estBreadcrumbWrap" class="mt-tight"></div>
+          </header>
+
+          <div class="flex-1 relative min-h-0">
+            <div id="estToast" class="absolute top-tight left-tight right-tight z-20 px-element py-tight rounded-element bg-spatial-glass-elevated border border-spatial-border-elevated shadow-modal backdrop-blur-2xl" style="display:none;"></div>
+            <div class="h-full overflow-y-auto custom-scrollbar" id="estItemsList"></div>
+          </div>
+
+          <footer id="estFooter" class="shrink-0 border-t border-spatial-border px-element py-element space-y-tight" style="display:none;">
+            <div class="flex items-center justify-between"><span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-neutral-300">Subtotal</span><span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-neutral-100" id="estSubtotal">₹0</span></div>
+            <div class="flex items-center justify-between"><span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-primary-400">Est. GST (18%)</span><span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-primary-400" id="estGst">₹0</span></div>
+            <div class="flex items-center justify-between pt-tight border-t border-spatial-border"><span class="font-sans text-[13px] md:text-titleSmall leading-snug font-bold text-neutral-50">Total</span><span class="font-sans text-[13px] md:text-titleSmall leading-snug font-bold text-neutral-50" id="estTotal">₹0</span></div>
+            <button type="button" id="estCtaBtn" class="w-full h-12 mt-tight rounded-pill bg-primary-500 text-white hover:bg-primary-400 shadow-card transition-all duration-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+              <span class="font-sans text-sm md:text-cta leading-tight font-bold text-inherit" id="estCtaLabel">Send for Quotation</span>
+            </button>
+          </footer>
+        </div>
+
+        <!-- ── QUOTATION PAGE ── -->
+        <div id="quotePage" class="absolute inset-0 flex flex-col transition-opacity duration-300 opacity-0 pointer-events-none">
+          <header class="shrink-0 flex items-center gap-element px-element pt-element pb-tight border-b border-spatial-border">
+            <button type="button" id="quoteBackBtn" class="flex items-center gap-tight shrink-0 text-neutral-300 hover:text-white transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-element">
+              <img src="../../public/assets/icons/chevron_previous.svg" alt="" aria-hidden="true" class="w-3.5 h-3.5 opacity-70">
+              <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">Cart</span>
+            </button>
+            <div class="flex-1 min-w-0">
+              <span class="font-sans text-base md:text-titleLarge leading-snug font-bold text-neutral-50 truncate block">Send for quotation</span>
+              <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-400" id="quoteItemCountLabel"></span>
+            </div>
+            <button type="button" id="quoteCloseBtn" aria-label="Close cart" class="w-11 h-11 rounded-pill flex items-center justify-center shrink-0 bg-spatial-glass-elevated border border-spatial-border text-neutral-300 hover:text-white hover:bg-white/10 transition-all duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">×</button>
+          </header>
+
+          <div class="shrink-0 px-element pt-element pb-tight">
+            <div class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-100 mb-tight">Which project is this for?</div>
+            <div class="relative">
+              <img src="../../public/assets/icons/default_icon.svg" alt="" aria-hidden="true" class="absolute left-element top-1/2 -translate-y-1/2 w-4 h-4 opacity-40">
+              <input type="text" id="quoteSearchInput" placeholder="Search by name, society, or INCO id…"
+                class="w-full h-11 pl-11 pr-element rounded-pill bg-spatial-glass-elevated border border-spatial-border text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+            </div>
+            <div class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500 mt-tight" id="quoteMatchCount" style="display:none;"></div>
+          </div>
+
+          <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-tight pb-tight" id="quoteResultsList"></div>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<div class="proto-toast" id="toast"></div>
+
+<script type="module">
+import { Viewer } from 'https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.14.1/+esm';
+import { MarkersPlugin } from 'https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.14.1/+esm';
+
+const ASSET = (p) => `../../public/assets/${p}`;
+const ROOM_SLUG = 'living-room', ROOM_LABEL = 'living-room';
+
+// Real hotspots from the living-room's "Modern Minimal" variant — the only
+// room whose panorama is actually loaded in this prototype. Items from other
+// rooms are pre-seeded below to represent modules added earlier in the tour.
+const HOTSPOTS = [
+  { id: `${ROOM_SLUG}:hs-sofa-1`, label: '3-Seater Sofa', sku: 'Linen · Sand', yaw: 45, pitch: -10, priceMinor: 18500000 },
+  { id: `${ROOM_SLUG}:hs-coffee-table`, label: 'Coffee Table', sku: 'Oak · Walnut top', yaw: 20, pitch: -20, priceMinor: 3200000 },
+  { id: `${ROOM_SLUG}:hs-tv-unit`, label: 'Media Console', moduleCode: 'MOD-TV-200', yaw: 180, pitch: 0, priceMinor: 9500000 },
+];
+
+const INR = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+const formatINR = (minor) => (minor == null ? '—' : INR.format(Math.round(minor) / 100));
+
+function toast(msg, ms = 2500) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('visible');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove('visible'), ms);
+}
+document.getElementById('backBtn').onclick = () => toast('Would navigate back to /room-filter');
+
+// ═══════════════════════════════════════════════════════════════════════
+// Room-skeleton logic — ported verbatim from lib/estimate/roomSkeleton.ts
+// ═══════════════════════════════════════════════════════════════════════
+const ROOM_CATEGORY_ORDER = ['living', 'bedroom', 'kitchen', 'washroom', 'balcony'];
+const CATEGORY_LABEL = { living: 'Living Room', bedroom: 'Bedroom', kitchen: 'Kitchen', washroom: 'Washroom', balcony: 'Balcony' };
+const BHK_OPTIONS = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
+const UNASSIGNED = 'unassigned';
+
+function nameForIndex(category, index, total) {
+  const label = CATEGORY_LABEL[category];
+  return total > 1 ? `${label} ${index}` : label;
+}
+function generateRoomSkeleton(bhkType) {
+  const bedroomCount = Math.max(1, parseInt(bhkType, 10) || 1);
+  const washroomCount = bedroomCount;
+  const rooms = [{ key: 'living-1', name: nameForIndex('living', 1, 1), category: 'living' }];
+  for (let i = 1; i <= bedroomCount; i++) rooms.push({ key: `bedroom-${i}`, name: nameForIndex('bedroom', i, bedroomCount), category: 'bedroom' });
+  rooms.push({ key: 'kitchen-1', name: nameForIndex('kitchen', 1, 1), category: 'kitchen' });
+  for (let i = 1; i <= washroomCount; i++) rooms.push({ key: `washroom-${i}`, name: nameForIndex('washroom', i, washroomCount), category: 'washroom' });
+  rooms.push({ key: 'balcony-1', name: nameForIndex('balcony', 1, 1), category: 'balcony' });
+  return rooms;
+}
+function sortRooms(rooms) {
+  return [...rooms].sort((a, b) => {
+    const catDiff = ROOM_CATEGORY_ORDER.indexOf(a.category) - ROOM_CATEGORY_ORDER.indexOf(b.category);
+    if (catDiff !== 0) return catDiff;
+    return a.key.localeCompare(b.key, undefined, { numeric: true });
+  });
+}
+function nextRoomInCategory(rooms, category) {
+  const existing = rooms.filter((r) => r.category === category);
+  const usedIndices = existing.map((r) => parseInt(r.key.split('-').pop() ?? '0', 10) || 0);
+  const nextIndex = (usedIndices.length > 0 ? Math.max(...usedIndices) : 0) + 1;
+  const totalAfterAdd = existing.length + 1;
+  return { key: `${category}-${nextIndex}`, name: nameForIndex(category, nextIndex, Math.max(totalAfterAdd, nextIndex)), category };
+}
+function categorizeTourRoomSlug(slug) {
+  const s = slug.toLowerCase();
+  if (s.includes('living')) return 'living';
+  if (s.includes('bedroom')) return 'bedroom';
+  if (s.includes('kitchen')) return 'kitchen';
+  if (s.includes('bath') || s.includes('washroom') || s.includes('toilet')) return 'washroom';
+  if (s.includes('balcony') || s.includes('utility')) return 'balcony';
+  return null;
+}
+function buildCategoryAssignment(items, rooms) {
+  const assignment = new Map();
+  const roomKeySet = new Set(rooms.map((r) => r.key));
+  const roomsByCategory = new Map(ROOM_CATEGORY_ORDER.map((c) => [c, rooms.filter((r) => r.category === c)]));
+  const slotsUsed = new Map();
+  for (const item of items) {
+    const slug = item.roomSlug;
+    if (roomKeySet.has(slug) || slug === UNASSIGNED || assignment.has(slug)) continue;
+    const category = categorizeTourRoomSlug(slug);
+    if (!category) { assignment.set(slug, UNASSIGNED); continue; }
+    const roomsOfCategory = roomsByCategory.get(category) ?? [];
+    const usedCount = slotsUsed.get(category) ?? 0;
+    if (usedCount < roomsOfCategory.length) { assignment.set(slug, roomsOfCategory[usedCount].key); slotsUsed.set(category, usedCount + 1); }
+    else assignment.set(slug, UNASSIGNED);
+  }
+  return assignment;
+}
+function resolveItemRoomKey(item, rooms, categoryAssignment) {
+  if (rooms.some((r) => r.key === item.roomSlug)) return item.roomSlug;
+  if (item.roomSlug === UNASSIGNED) return UNASSIGNED;
+  return categoryAssignment.get(item.roomSlug) ?? UNASSIGNED;
+}
+function selectDesignScope(items, rooms) {
+  const categoryAssignment = buildCategoryAssignment(items, rooms);
+  const roomGroups = sortRooms(rooms).map((room) => ({ room, items: [], subtotalMinor: 0 }));
+  const groupByKey = new Map(roomGroups.map((g) => [g.room.key, g]));
+  const unassignedItems = [];
+  let unassignedSubtotalMinor = 0;
+  for (const item of items) {
+    const lineTotal = (item.priceSnapshot?.totalMinor ?? 0) * item.quantity;
+    const key = resolveItemRoomKey(item, rooms, categoryAssignment);
+    const group = groupByKey.get(key);
+    if (group) { group.items.push(item); group.subtotalMinor += lineTotal; }
+    else { unassignedItems.push(item); unassignedSubtotalMinor += lineTotal; }
+  }
+  return { unassignedItems, unassignedSubtotalMinor, roomGroups };
+}
+
+// The tour's own project room list — matches getDesignFlowRoomList(), used
+// for reassignment before a unit is resolved.
+const TOUR_ROOM_LIST = [
+  { slug: 'living-room', name: 'Living Room' },
+  { slug: 'kitchen', name: 'Kitchen' },
+  { slug: 'foyer', name: 'Foyer' },
+  { slug: 'master-bedroom', name: 'Master Bedroom' },
+  { slug: 'guest-bedroom', name: 'Guest Bedroom' },
+  { slug: 'dining', name: 'Dining' },
+  { slug: 'bathroom', name: 'Bathroom' },
+  { slug: 'balcony', name: 'Balcony' },
+  { slug: 'kids-bedroom', name: "Kid's Bedroom" },
+];
+
+// Mock CRM lookup — same 7 entries as MOCK_RESULTS in EstimateSidebar.tsx.
+const MOCK_RESULTS = [
+  { id: 'r1', name: 'Rohit Sharma', tower: 'Tower B', unit: '1204', bhkType: '3BHK', incoId: 'INCO-4821', society: 'Seabreeze Residences' },
+  { id: 'r2', name: 'Rohit Sharma', tower: 'Tower A', unit: '0907', bhkType: '2BHK', incoId: 'INCO-4390', society: 'Seabreeze Residences' },
+  { id: 'r3', name: 'Rohit Mehta', tower: 'Tower C', unit: '1602', bhkType: '3BHK', incoId: 'INCO-5117', society: 'Seabreeze Residences' },
+  { id: 'r4', name: 'Ananya Gupta', tower: 'Tower A', unit: '0512', bhkType: '2BHK', incoId: 'INCO-3987', society: 'Seabreeze Residences' },
+  { id: 'r5', name: 'Vikram Nair', tower: 'Tower D', unit: '1108', bhkType: '4BHK', incoId: 'INCO-5502', society: 'Prestige Kingfisher Towers' },
+  { id: 'r6', name: 'Fatima Khan', tower: 'Tower B', unit: '0304', bhkType: '3BHK', incoId: 'INCO-4106', society: 'Prestige Kingfisher Towers' },
+  { id: 'r7', name: 'Karan Malhotra', tower: 'Tower C', unit: '0921', bhkType: '2BHK', incoId: 'INCO-4755', society: 'Prestige Kingfisher Towers' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// Cart / design-scope store — verbatim logic from lib/estimate/store.ts
+// (in-memory here instead of Zustand+localStorage)
+// ═══════════════════════════════════════════════════════════════════════
+let cartItems = [
+  // Pre-seeded — represents modules added earlier while touring other rooms,
+  // so the cart already tells a rich story the moment it's opened.
+  { id: 'seed:king-bed', roomSlug: 'master-bedroom', label: 'King Size Bed', sku: 'Walnut · Upholstered', quantity: 1, priceSnapshot: { totalMinor: 9800000 } },
+  { id: 'seed:wardrobe', roomSlug: 'guest-bedroom', label: '3-Door Wardrobe', sku: 'Oak · Matte', quantity: 1, priceSnapshot: { totalMinor: 6200000 } },
+  { id: 'seed:study-table', roomSlug: 'kids-bedroom', label: 'Study Table', sku: 'Birch · Compact', quantity: 1, priceSnapshot: { totalMinor: 1450000 } },
+  { id: 'seed:kitchen-unit', roomSlug: 'kitchen', label: 'Modular Kitchen Unit', moduleCode: 'MOD-KIT-02', quantity: 1, priceSnapshot: { totalMinor: 15400000 } },
+  { id: 'seed:console', roomSlug: 'foyer', label: 'Console Table', sku: 'Marble top', quantity: 1, priceSnapshot: { totalMinor: 2100000 } },
+];
+let resolvedProject = null; // set once an INCO id / unit is resolved
+let rooms = []; // the resolved unit's room skeleton
+
+function addItem(item) {
+  const existing = cartItems.find((i) => i.id === item.id);
+  if (existing) existing.quantity += item.quantity || 1;
+  else cartItems.push({ ...item, quantity: Math.max(1, item.quantity || 1) });
+  onCartChanged();
+}
+function removeItem(id) { cartItems = cartItems.filter((i) => i.id !== id); onCartChanged(); }
+function setQuantity(id, qty) {
+  const item = cartItems.find((i) => i.id === id);
+  if (item) item.quantity = Math.max(1, qty);
+  onCartChanged();
+}
+function setItemRoom(id, roomSlug) {
+  const item = cartItems.find((i) => i.id === id);
+  if (item) item.roomSlug = roomSlug;
+  onCartChanged();
+}
+function resolveProjectAction(project) {
+  resolvedProject = project;
+  rooms = generateRoomSkeleton(project.bhkType);
+  onCartChanged();
+}
+function clearResolvedProject() {
+  resolvedProject = null;
+  rooms = [];
+  onCartChanged();
+}
+function setBhkType(bhkType) {
+  if (!resolvedProject) return;
+  resolvedProject = { ...resolvedProject, bhkType };
+  rooms = generateRoomSkeleton(bhkType);
+  onCartChanged();
+}
+function addRoomAction(category) {
+  rooms = [...rooms, nextRoomInCategory(rooms, category)];
+  onCartChanged();
+}
+function removeRoomAction(roomKey) {
+  const categoryAssignment = buildCategoryAssignment(cartItems, rooms);
+  cartItems = cartItems.map((item) => {
+    const currentKey = resolveItemRoomKey(item, rooms, categoryAssignment);
+    return currentKey === roomKey ? { ...item, roomSlug: UNASSIGNED } : item;
+  });
+  rooms = rooms.filter((r) => r.key !== roomKey);
+  onCartChanged();
+}
+function selectSummary() {
+  const groupMap = new Map();
+  let grandTotalMinor = 0;
+  for (const item of cartItems) {
+    let group = groupMap.get(item.roomSlug);
+    if (!group) { group = { roomSlug: item.roomSlug, roomLabel: item.roomSlug, items: [], subtotalMinor: 0 }; groupMap.set(item.roomSlug, group); }
+    const lineTotal = (item.priceSnapshot?.totalMinor ?? 0) * item.quantity;
+    group.items.push(item);
+    group.subtotalMinor += lineTotal;
+    grandTotalMinor += lineTotal;
+  }
+  return { groups: [...groupMap.values()], grandTotalMinor, itemCount: cartItems.reduce((s, i) => s + i.quantity, 0) };
+}
+function isInCart(id) { return cartItems.some((i) => i.id === id); }
+
+// Every UI surface that reads the cart re-renders on any change.
+function onCartChanged() {
+  renderCartBadge();
+  renderSidebar();
+  updateSnippet();
+}
+
+function renderCartBadge() {
+  const { itemCount } = selectSummary();
+  document.getElementById('cartCount').textContent = itemCount;
+  document.getElementById('cartBadge').style.display = itemCount > 0 ? '' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Anchored room picker — vanilla-JS port of RoomLabelPicker.tsx. Appended to
+// document.body (a portal, not inline) because the drawer slides in/out via
+// a CSS transform, and a transform on an ancestor becomes the containing
+// block for `position: fixed` descendants — inline, this would render the
+// popover in the wrong place entirely.
+// ═══════════════════════════════════════════════════════════════════════
+let pickerState = null; // { itemId, options, selectedKey, triggerEl, expanded }
+const PICKER_VISIBLE_COUNT = 4;
+
+function closeRoomPicker() {
+  const el = document.getElementById('roomPickerPopover');
+  if (el) el.remove();
+  pickerState = null;
+}
+function openRoomPicker(triggerEl, itemId, options, selectedKey) {
+  closeRoomPicker();
+  pickerState = { itemId, options, selectedKey, triggerEl, expanded: false };
+  renderRoomPicker();
+}
+function renderRoomPicker() {
+  if (!pickerState) return;
+  let popover = document.getElementById('roomPickerPopover');
+  if (!popover) {
+    popover = document.createElement('div');
+    popover.id = 'roomPickerPopover';
+    popover.setAttribute('role', 'listbox');
+    popover.className = 'max-h-64 overflow-y-auto custom-scrollbar py-1 rounded-element border border-spatial-border-elevated bg-spatial-glass-elevated backdrop-blur-2xl shadow-modal';
+    popover.style.position = 'fixed';
+    popover.style.zIndex = '200';
+    document.body.appendChild(popover);
+  }
+  const { options, selectedKey, expanded } = pickerState;
+  const ordered = [...options.filter((o) => o.slug === selectedKey), ...options.filter((o) => o.slug !== selectedKey)];
+  const visible = expanded ? ordered : ordered.slice(0, PICKER_VISIBLE_COUNT + 1);
+  const remaining = ordered.length - visible.length;
+
+  popover.innerHTML = visible.map((room) => {
+    const isActive = room.slug === selectedKey;
+    return `<button type="button" role="option" data-room-slug="${room.slug}" aria-selected="${isActive}"
+      class="w-full flex items-center justify-between gap-tight px-element py-1.5 text-left whitespace-nowrap transition-colors duration-100 focus:outline-none focus-visible:bg-white/10 ${isActive ? 'text-primary-300' : 'text-neutral-200 hover:bg-white/5 hover:text-neutral-50'}">
+      <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit capitalize truncate">${room.name}</span>
+      ${isActive ? '<span aria-hidden class="shrink-0 leading-none">✓</span>' : ''}
+    </button>`;
+  }).join('') + (remaining > 0 ? `<button type="button" id="roomPickerMoreBtn" class="w-full px-element py-1.5 text-left text-neutral-500 hover:text-neutral-200 hover:bg-white/5 transition-colors duration-100">
+    <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">+${remaining} more</span>
+  </button>` : '');
+
+  popover.querySelectorAll('[data-room-slug]').forEach((btn) => {
+    btn.onclick = () => {
+      const roomKey = btn.getAttribute('data-room-slug');
+      const itemId = pickerState.itemId;
+      closeRoomPicker();
+      setItemRoom(itemId, roomKey);
+    };
+  });
+  const moreBtn = document.getElementById('roomPickerMoreBtn');
+  if (moreBtn) moreBtn.onclick = () => { pickerState.expanded = true; renderRoomPicker(); };
+
+  repositionRoomPicker();
+}
+function repositionRoomPicker() {
+  if (!pickerState) return;
+  const popover = document.getElementById('roomPickerPopover');
+  if (!popover) return;
+  const rect = pickerState.triggerEl.getBoundingClientRect();
+  const estHeight = popover.offsetHeight || 200;
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const openUp = spaceBelow < estHeight + 8 && rect.top > estHeight;
+  const longest = pickerState.options.reduce((max, o) => Math.max(max, o.name.length), 0);
+  const minWidth = Math.max(rect.width, Math.min(220, Math.max(160, longest * 7)));
+  popover.style.left = `${rect.left}px`;
+  popover.style.minWidth = `${minWidth}px`;
+  popover.style.maxWidth = '280px';
+  if (openUp) { popover.style.top = 'auto'; popover.style.bottom = `${window.innerHeight - rect.top + 4}px`; }
+  else { popover.style.bottom = 'auto'; popover.style.top = `${rect.bottom + 4}px`; }
+}
+document.addEventListener('mousedown', (e) => {
+  if (!pickerState) return;
+  const popover = document.getElementById('roomPickerPopover');
+  if (popover?.contains(e.target)) return;
+  if (pickerState.triggerEl?.contains(e.target)) return;
+  closeRoomPicker();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pickerState) closeRoomPicker(); });
+window.addEventListener('scroll', () => repositionRoomPicker(), true);
+window.addEventListener('resize', () => repositionRoomPicker());
+
+// ═══════════════════════════════════════════════════════════════════════
+// Room-section collapse/kebab-menu UI state — persists across re-renders,
+// same role as each RoomSection instance's own useState in React.
+// ═══════════════════════════════════════════════════════════════════════
+const sectionUiState = {};
+function getSectionState(key) {
+  if (!sectionUiState[key]) sectionUiState[key] = { expanded: true, menuOpen: false, confirmingRemove: false };
+  return sectionUiState[key];
+}
+let addRoomMenuOpen = false;
+
+document.addEventListener('mousedown', (e) => {
+  const anyMenuOpen = Object.values(sectionUiState).some((s) => s.menuOpen);
+  if (anyMenuOpen && !e.target.closest('[data-section-menu-wrap]')) {
+    Object.values(sectionUiState).forEach((s) => { s.menuOpen = false; s.confirmingRemove = false; });
+    renderSidebar();
+  }
+  if (addRoomMenuOpen && !e.target.closest('[data-add-room-wrap]')) {
+    addRoomMenuOpen = false;
+    renderSidebar();
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  let changed = false;
+  Object.values(sectionUiState).forEach((s) => { if (s.menuOpen) { s.menuOpen = false; s.confirmingRemove = false; changed = true; } });
+  if (addRoomMenuOpen) { addRoomMenuOpen = false; changed = true; }
+  if (changed) renderSidebar();
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// EstimateSidebar (cart drawer) — verbatim structure from EstimateSidebar.tsx
+// ═══════════════════════════════════════════════════════════════════════
+let estimateOpen = false;
+let quotePageOpen = false;
+let toastMessage = null;
+let toastTimer = null;
+
+function showRoomToast(msg) {
+  toastMessage = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toastMessage = null; renderSidebar(); }, 4000);
+  renderSidebar();
+}
+
+function itemRowHtml(item, roomLabel, selectedRoomKey, showDivider) {
+  return `
+  <div>
+    <div class="flex items-start gap-element px-element py-element">
+      <div class="w-[72px] h-[72px] shrink-0 rounded-element border border-spatial-border bg-spatial-glass-elevated flex items-center justify-center">
+        <img src="${ASSET('icons/default_icon.svg')}" alt="" aria-hidden class="w-6 h-6 opacity-25">
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start justify-between gap-tight">
+          <div class="min-w-0">
+            <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-50 truncate block">${item.label}</span>
+            <button type="button" data-room-trigger="${item.id}" data-room-key="${selectedRoomKey}"
+              class="flex items-center gap-0.5 min-w-0 max-w-full -mx-1 px-1 rounded-element hover:bg-white/5 transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+              <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-400 truncate capitalize">${roomLabel}</span>
+              <img src="${ASSET('icons/chevron_down.svg')}" alt="" aria-hidden class="w-2.5 h-2.5 shrink-0 opacity-50">
+            </button>
+          </div>
+          <button type="button" data-remove="${item.id}" aria-label="Remove ${item.label}" class="shrink-0 w-7 h-7 rounded-pill flex items-center justify-center text-neutral-500 hover:text-neutral-100 hover:bg-white/10 transition-all duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">×</button>
+        </div>
+        <div class="flex items-center justify-between mt-tight">
+          <div class="flex items-center rounded-element border border-spatial-border overflow-hidden">
+            <button type="button" data-qty-dec="${item.id}" aria-label="Decrease quantity" class="w-9 h-9 flex items-center justify-center text-neutral-300 hover:text-white hover:bg-white/10 transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">−</button>
+            <div class="w-px h-5 bg-spatial-border"></div>
+            <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-100 w-8 text-center inline-block">${item.quantity}</span>
+            <div class="w-px h-5 bg-spatial-border"></div>
+            <button type="button" data-qty-inc="${item.id}" aria-label="Increase quantity" class="w-9 h-9 flex items-center justify-center text-neutral-300 hover:text-white hover:bg-white/10 transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">+</button>
+          </div>
+          <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-bold text-neutral-50">${item.priceSnapshot ? formatINR(item.priceSnapshot.totalMinor * item.quantity) : '—'}</span>
+        </div>
+      </div>
+    </div>
+    ${showDivider ? '<div class="mx-element border-t border-spatial-border"></div>' : ''}
+  </div>`;
+}
+
+function sectionMenuHtml(group, st) {
+  const itemCount = group.items.length;
+  return `
+  <div class="absolute right-0 top-full mt-1 z-[60] min-w-[200px] rounded-element border border-spatial-border-elevated bg-spatial-glass-elevated backdrop-blur-2xl shadow-modal py-1">
+    ${!st.confirmingRemove ? `
+      <button type="button" data-section-remove-trigger="${group.room.key}" class="w-full px-element py-1.5 text-left text-neutral-300 hover:text-neutral-50 hover:bg-white/5 transition-colors duration-100 focus:outline-none focus-visible:bg-white/10">
+        <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">Remove room</span>
+      </button>` : `
+      <div class="px-element py-tight space-y-tight">
+        <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-300 block">Move ${itemCount} item${itemCount !== 1 ? 's' : ''} to Unassigned?</span>
+        <div class="flex gap-tight">
+          <button type="button" data-section-remove-cancel="${group.room.key}" class="flex-1 h-8 rounded-element border border-spatial-border text-neutral-300 hover:text-neutral-50 hover:bg-white/5 transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+            <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">Cancel</span>
+          </button>
+          <button type="button" data-section-remove-confirm="${group.room.key}" class="flex-1 h-8 rounded-element bg-primary-500/20 border border-primary-400 text-primary-300 hover:bg-primary-500/30 transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+            <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">Remove</span>
+          </button>
+        </div>
+      </div>`}
+  </div>`;
+}
+
+function roomSectionHtml(group) {
+  const st = getSectionState(group.room.key);
+  const isEmpty = group.items.length === 0;
+  return `
+  <div class="border-b border-spatial-border">
+    <div class="flex items-center gap-tight px-element py-tight">
+      <button type="button" data-section-toggle="${group.room.key}" aria-expanded="${st.expanded}" class="flex items-center gap-tight flex-1 min-w-0 text-left rounded-element focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+        <img src="${ASSET('icons/chevron_down.svg')}" alt="" aria-hidden class="w-3 h-3 shrink-0 opacity-60 transition-transform duration-150 ${st.expanded ? '' : '-rotate-90'}">
+        <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-100 truncate">${group.room.name}</span>
+        <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500 shrink-0 truncate">· ${group.items.length} item${group.items.length !== 1 ? 's' : ''}${group.items.length > 0 ? ' · ' + formatINR(group.subtotalMinor) : ''}</span>
+      </button>
+      <div class="relative shrink-0" data-section-menu-wrap="${group.room.key}">
+        <button type="button" data-section-menu-toggle="${group.room.key}" aria-label="More actions for ${group.room.name}" aria-expanded="${st.menuOpen}" class="w-7 h-7 rounded-pill flex items-center justify-center text-neutral-500 hover:text-neutral-200 hover:bg-white/10 transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+          <img src="${ASSET('icons/more.svg')}" alt="" aria-hidden class="w-4 h-4 opacity-70">
+        </button>
+        ${st.menuOpen ? sectionMenuHtml(group, st) : ''}
+      </div>
+    </div>
+    ${st.expanded ? (isEmpty
+      ? `<div class="px-element pb-element"><span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500">No items yet</span></div>`
+      : `<div>${group.items.map((item, idx) => itemRowHtml(item, group.room.name, group.room.key, idx < group.items.length - 1)).join('')}</div>`
+    ) : ''}
+  </div>`;
+}
+
+function addRoomMenuHtml() {
+  return `
+  <div class="relative px-element py-element" data-add-room-wrap>
+    ${addRoomMenuOpen ? `
+    <div role="listbox" aria-label="Add a room" class="absolute left-element right-element bottom-full mb-1 z-[60] rounded-element border border-spatial-border-elevated bg-spatial-glass-elevated backdrop-blur-2xl shadow-modal py-1">
+      ${ROOM_CATEGORY_ORDER.map((category) => {
+        const existingCount = rooms.filter((r) => r.category === category).length;
+        const copy = existingCount > 0 ? `Add another ${CATEGORY_LABEL[category]}` : `Add ${CATEGORY_LABEL[category]}`;
+        return `<button type="button" data-add-room="${category}" class="w-full px-element py-1.5 text-left text-neutral-200 hover:text-neutral-50 hover:bg-white/5 transition-colors duration-100 focus:outline-none focus-visible:bg-white/10">
+          <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">${copy}</span>
+        </button>`;
+      }).join('')}
+    </div>` : ''}
+    <button type="button" data-add-room-toggle aria-expanded="${addRoomMenuOpen}" class="w-full h-10 rounded-element border border-dashed border-spatial-border flex items-center justify-center gap-tight text-neutral-400 hover:text-neutral-100 hover:border-spatial-border-elevated hover:bg-white/5 transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+      <span aria-hidden class="leading-none text-base">+</span>
+      <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-inherit">Add room</span>
+    </button>
+  </div>`;
+}
+
+function renderSidebar() {
+  closeRoomPicker();
+  const summary = selectSummary();
+  const subtotal = summary.grandTotalMinor;
+  const gst = Math.round(subtotal * 0.18);
+  const total = subtotal + gst;
+
+  document.getElementById('estimate-title').textContent = resolvedProject ? 'Your design' : 'Your Cart';
+  document.getElementById('estItemCountLabel').textContent = `${summary.itemCount} item${summary.itemCount !== 1 ? 's' : ''}`;
+  document.getElementById('estItemCountLabel').style.display = summary.itemCount > 0 ? '' : 'none';
+
+  const breadcrumbWrap = document.getElementById('estBreadcrumbWrap');
+  if (resolvedProject) {
+    breadcrumbWrap.innerHTML = `
+      <div class="flex items-center gap-tight">
+        <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500 uppercase tracking-widest">Configuration</span>
+        <div class="relative">
+          <select id="bhkSelect" aria-label="Change BHK configuration — updates the rooms below"
+            class="appearance-none rounded-pill border border-spatial-border bg-spatial-glass-elevated pl-element pr-6 py-0.5 text-xs font-semibold uppercase tracking-wide text-neutral-100 hover:border-spatial-border-elevated transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary-500">
+            ${BHK_OPTIONS.map((b) => `<option value="${b}" ${b === resolvedProject.bhkType ? 'selected' : ''}>${b}</option>`).join('')}
+          </select>
+          <img src="${ASSET('icons/chevron_down.svg')}" alt="" aria-hidden class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 w-2.5 h-2.5 opacity-50">
+        </div>
+      </div>`;
+    document.getElementById('bhkSelect').onchange = (e) => setBhkType(e.target.value);
+  } else {
+    breadcrumbWrap.innerHTML = summary.groups.length > 0
+      ? `<span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500 uppercase tracking-widest">${ROOM_LABEL.replace(/-/g, ' ').toUpperCase()}</span>`
+      : '';
+  }
+
+  const toastEl = document.getElementById('estToast');
+  if (toastMessage) {
+    toastEl.style.display = '';
+    toastEl.innerHTML = `<span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-200">${toastMessage}</span>`;
+  } else {
+    toastEl.style.display = 'none';
+  }
+
+  const list = document.getElementById('estItemsList');
+  let activeRoomOptions;
+
+  if (!resolvedProject) {
+    activeRoomOptions = TOUR_ROOM_LIST;
+    if (summary.groups.length === 0) {
+      list.innerHTML = `<div class="flex items-center justify-center h-full px-group py-12">
+        <span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-neutral-400 text-center">Nothing in your cart yet. Tap a hotspot and add a module or product to get started.</span>
+      </div>`;
+    } else {
+      list.innerHTML = summary.groups.map((group) => group.items.map((item, idx) =>
+        itemRowHtml(item, group.roomLabel.replace(/-/g, ' '), item.roomSlug, idx < group.items.length - 1)
+      ).join('')).join('');
+    }
+  } else {
+    const scope = selectDesignScope(cartItems, rooms);
+    activeRoomOptions = rooms.map((r) => ({ slug: r.key, name: r.name }));
+    let html = '';
+    if (scope.unassignedItems.length > 0) {
+      html += `<div class="border-b border-spatial-border">
+        <div class="flex items-center gap-tight px-element py-tight">
+          <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-100">Unassigned</span>
+          <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500">· ${scope.unassignedItems.length} item${scope.unassignedItems.length !== 1 ? 's' : ''} · ${formatINR(scope.unassignedSubtotalMinor)}</span>
+        </div>
+        ${scope.unassignedItems.map((item, idx) => itemRowHtml(item, 'Unassigned', UNASSIGNED, idx < scope.unassignedItems.length - 1)).join('')}
+      </div>`;
+    }
+    scope.roomGroups.forEach((group) => { html += roomSectionHtml(group); });
+    html += addRoomMenuHtml();
+    list.innerHTML = html;
+
+    list.querySelectorAll('[data-section-toggle]').forEach((btn) => {
+      btn.onclick = () => { const key = btn.getAttribute('data-section-toggle'); getSectionState(key).expanded = !getSectionState(key).expanded; renderSidebar(); };
+    });
+    list.querySelectorAll('[data-section-menu-toggle]').forEach((btn) => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const key = btn.getAttribute('data-section-menu-toggle');
+        const wasOpen = getSectionState(key).menuOpen;
+        Object.keys(sectionUiState).forEach((k) => { sectionUiState[k].menuOpen = false; sectionUiState[k].confirmingRemove = false; });
+        getSectionState(key).menuOpen = !wasOpen;
+        renderSidebar();
+      };
+    });
+    list.querySelectorAll('[data-section-remove-trigger]').forEach((btn) => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const key = btn.getAttribute('data-section-remove-trigger');
+        const group = scope.roomGroups.find((g) => g.room.key === key);
+        if (group.items.length === 0) { removeRoomAction(key); return; }
+        getSectionState(key).confirmingRemove = true;
+        renderSidebar();
+      };
+    });
+    list.querySelectorAll('[data-section-remove-cancel]').forEach((btn) => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const key = btn.getAttribute('data-section-remove-cancel');
+        getSectionState(key).menuOpen = false;
+        getSectionState(key).confirmingRemove = false;
+        renderSidebar();
+      };
+    });
+    list.querySelectorAll('[data-section-remove-confirm]').forEach((btn) => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const key = btn.getAttribute('data-section-remove-confirm');
+        const group = scope.roomGroups.find((g) => g.room.key === key);
+        const count = group.items.length, name = group.room.name;
+        getSectionState(key).menuOpen = false;
+        getSectionState(key).confirmingRemove = false;
+        removeRoomAction(key);
+        if (count > 0) showRoomToast(`Moved ${count} item${count !== 1 ? 's' : ''} from ${name} to Unassigned`);
+      };
+    });
+    list.querySelectorAll('[data-add-room-toggle]').forEach((btn) => {
+      btn.onclick = (e) => { e.stopPropagation(); addRoomMenuOpen = !addRoomMenuOpen; renderSidebar(); };
+    });
+    list.querySelectorAll('[data-add-room]').forEach((btn) => {
+      btn.onclick = () => { const cat = btn.getAttribute('data-add-room'); addRoomMenuOpen = false; addRoomAction(cat); };
+    });
+  }
+
+  list.querySelectorAll('[data-remove]').forEach((btn) => btn.onclick = () => removeItem(btn.getAttribute('data-remove')));
+  list.querySelectorAll('[data-qty-dec]').forEach((btn) => { const id = btn.getAttribute('data-qty-dec'); btn.onclick = () => { const it = cartItems.find((i) => i.id === id); setQuantity(id, it.quantity - 1); }; });
+  list.querySelectorAll('[data-qty-inc]').forEach((btn) => { const id = btn.getAttribute('data-qty-inc'); btn.onclick = () => { const it = cartItems.find((i) => i.id === id); setQuantity(id, it.quantity + 1); }; });
+  list.querySelectorAll('[data-room-trigger]').forEach((btn) => {
+    const itemId = btn.getAttribute('data-room-trigger');
+    const selectedKey = btn.getAttribute('data-room-key');
+    btn.onclick = () => openRoomPicker(btn, itemId, activeRoomOptions, selectedKey);
+  });
+
+  document.getElementById('estFooter').style.display = summary.itemCount > 0 ? '' : 'none';
+  document.getElementById('estSubtotal').textContent = formatINR(subtotal);
+  document.getElementById('estGst').textContent = formatINR(gst);
+  document.getElementById('estTotal').textContent = formatINR(total);
+  document.getElementById('estCtaLabel').textContent = resolvedProject ? 'Push to BLOCKS' : 'Send for Quotation';
+}
+
+function openEstimate() {
+  estimateOpen = true;
+  document.getElementById('estBackdrop').className = 'fixed inset-0 z-[140] bg-black/30 backdrop-blur-sm transition-opacity duration-300 opacity-100 pointer-events-auto';
+  document.getElementById('estSidebar').className = 'fixed z-[150] top-[max(0.5rem,env(safe-area-inset-top))] bottom-[max(0.5rem,env(safe-area-inset-bottom))] right-[max(0.5rem,env(safe-area-inset-right))] w-[calc(100vw_-_1rem)] sm:w-[400px] flex flex-col bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-container transition-transform duration-300 ease-out translate-x-0';
+}
+function closeEstimate() {
+  estimateOpen = false;
+  quotePageOpen = false;
+  closeRoomPicker();
+  document.getElementById('estBackdrop').className = 'fixed inset-0 z-[140] bg-black/30 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none';
+  document.getElementById('estSidebar').className = 'fixed z-[150] top-[max(0.5rem,env(safe-area-inset-top))] bottom-[max(0.5rem,env(safe-area-inset-bottom))] right-[max(0.5rem,env(safe-area-inset-right))] w-[calc(100vw_-_1rem)] sm:w-[400px] flex flex-col bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-container transition-transform duration-300 ease-out translate-x-[calc(100%+8px)]';
+  document.getElementById('cartPage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-100 delay-150';
+  document.getElementById('quotePage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-0 pointer-events-none';
+}
+document.getElementById('cartBtn').onclick = openEstimate;
+document.getElementById('estCloseBtn').onclick = closeEstimate;
+document.getElementById('estBackdrop').onclick = closeEstimate;
+
+// ═══ Quotation search page — 2nd page of the same drawer, crossfaded ═══
+let quoteQuery = '';
+function renderQuoteResults() {
+  const q = quoteQuery.trim().toLowerCase();
+  const results = !q ? MOCK_RESULTS : MOCK_RESULTS.filter((r) =>
+    r.name.toLowerCase().includes(q) || r.society.toLowerCase().includes(q) || r.incoId.toLowerCase().includes(q));
+  const countEl = document.getElementById('quoteMatchCount');
+  countEl.style.display = q ? '' : 'none';
+  countEl.textContent = q ? `${results.length} match${results.length !== 1 ? 'es' : ''}` : '';
+
+  const list = document.getElementById('quoteResultsList');
+  if (results.length === 0) {
+    list.innerHTML = `<div class="flex items-center justify-center py-12"><span class="font-sans text-sm md:text-bodyMedium leading-relaxed font-normal text-neutral-400">No matches for &ldquo;${quoteQuery}&rdquo;.</span></div>`;
+    return;
+  }
+  list.innerHTML = results.map((r) => `
+    <button type="button" data-select-result="${r.id}" class="w-full flex items-center justify-between gap-element px-element py-tight rounded-element text-left hover:bg-white/5 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+      <div class="min-w-0">
+        <span class="font-sans text-[13px] md:text-titleSmall leading-snug font-semibold text-neutral-50 truncate block">${r.name}</span>
+        <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-400 mt-0.5 truncate block">${r.tower} · Unit ${r.unit} · ${r.bhkType}</span>
+      </div>
+      <span class="font-sans text-sm md:text-bodySmall leading-normal font-normal text-neutral-500 shrink-0 tracking-wide">${r.incoId}</span>
+    </button>`).join('');
+  list.querySelectorAll('[data-select-result]').forEach((btn) => {
+    btn.onclick = () => {
+      const r = MOCK_RESULTS.find((x) => x.id === btn.getAttribute('data-select-result'));
+      resolveProjectAction(r);
+      closeQuotePage();
+      toast(`Resolved to ${r.name} · ${r.tower} · Unit ${r.unit} · ${r.bhkType}`);
+    };
+  });
+}
+function openQuotePage() {
+  quotePageOpen = true;
+  quoteQuery = '';
+  document.getElementById('quoteSearchInput').value = '';
+  const { itemCount } = selectSummary();
+  document.getElementById('quoteItemCountLabel').textContent = `${itemCount} item${itemCount !== 1 ? 's' : ''}`;
+  document.getElementById('cartPage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-0 pointer-events-none';
+  document.getElementById('quotePage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-100 delay-150';
+  renderQuoteResults();
+}
+function closeQuotePage() {
+  quotePageOpen = false;
+  document.getElementById('quotePage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-0 pointer-events-none';
+  document.getElementById('cartPage').className = 'absolute inset-0 flex flex-col transition-opacity duration-300 opacity-100 delay-150';
+}
+document.getElementById('quoteBackBtn').onclick = closeQuotePage;
+document.getElementById('quoteCloseBtn').onclick = closeEstimate;
+document.getElementById('quoteSearchInput').oninput = (e) => { quoteQuery = e.target.value; renderQuoteResults(); };
+
+document.getElementById('estCtaBtn').onclick = () => {
+  if (resolvedProject) clearResolvedProject();
+  else openQuotePage();
+};
+
+// ═══ Hotspot snippet — live add point in this room ═══
+let activeHotspotId = null;
+function selectHotspot(id) { activeHotspotId = id; updateSnippet(); }
+
+function updateSnippet() {
+  const hotspot = HOTSPOTS.find((h) => h.id === activeHotspotId) || null;
+  const root = document.getElementById('snippetRoot');
+  if (!hotspot) { root.style.opacity = '0'; root.style.pointerEvents = 'none'; return; }
+  document.getElementById('snippetLabel').textContent = hotspot.label;
+  const meta = hotspot.sku ?? hotspot.moduleCode;
+  const metaEl = document.getElementById('snippetMeta');
+  if (meta) { metaEl.textContent = meta; metaEl.style.display = ''; } else { metaEl.style.display = 'none'; }
+  document.getElementById('snippetPrice').textContent = formatINR(hotspot.priceMinor);
+  const addBtn = document.getElementById('snippetAddBtn');
+  const inCart = isInCart(hotspot.id);
+  addBtn.textContent = inCart ? 'Remove' : 'Add';
+  addBtn.className = `h-8 px-3.5 rounded-pill text-xs font-semibold whitespace-nowrap transition-colors active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${inCart ? 'bg-transparent border border-spatial-border-elevated text-neutral-200 hover:bg-white/10' : 'bg-primary-500 text-white hover:bg-primary-400'}`;
+  addBtn.onclick = () => {
+    if (inCart) { removeItem(hotspot.id); toast(`Removed "${hotspot.label}" from estimate`); }
+    else { addItem({ id: hotspot.id, roomSlug: ROOM_SLUG, label: hotspot.label, sku: hotspot.sku, moduleCode: hotspot.moduleCode, quantity: 1, priceSnapshot: { totalMinor: hotspot.priceMinor } }); toast(`Added "${hotspot.label}" to estimate`); }
+  };
+}
+
+const DEG2RAD = Math.PI / 180, TAIL = 7, GAP = 12, EDGE = 10;
+(function followMarkerLoop() {
+  requestAnimationFrame(followMarkerLoop);
+  const hotspot = HOTSPOTS.find((h) => h.id === activeHotspotId);
+  if (!hotspot || !viewer) return;
+  const root = document.getElementById('snippetRoot');
+  const card = document.getElementById('snippetCard');
+  const tail = document.getElementById('snippetTail');
+  const pos = { yaw: hotspot.yaw * DEG2RAD, pitch: hotspot.pitch * DEG2RAD };
+  let visible = true;
+  try { visible = viewer.dataHelper.isPointVisible(pos); } catch { visible = false; }
+  if (!visible) { root.style.opacity = '0'; root.style.pointerEvents = 'none'; return; }
+  const { x, y } = viewer.dataHelper.sphericalCoordsToViewerCoords(pos);
+  const vw = viewer.container.clientWidth || window.innerWidth;
+  const w = card.offsetWidth, h = card.offsetHeight;
+  const placeBelow = y - h - GAP - TAIL < EDGE;
+  const left = Math.min(Math.max(x - w / 2, EDGE), vw - w - EDGE);
+  const top = placeBelow ? y + GAP + TAIL : y - h - GAP - TAIL;
+  root.style.transform = `translate(${Math.round(left)}px, ${Math.round(top)}px)`;
+  root.style.opacity = '1';
+  root.style.pointerEvents = 'auto';
+  const tailLeft = Math.min(Math.max(x - left, 16), w - 16);
+  tail.style.left = `${tailLeft}px`;
+  if (placeBelow) { tail.style.top = 'auto'; tail.style.bottom = '100%'; tail.style.borderColor = 'transparent transparent rgba(18,18,18,0.6) transparent'; }
+  else { tail.style.bottom = 'auto'; tail.style.top = '100%'; tail.style.borderColor = 'rgba(18,18,18,0.6) transparent transparent transparent'; }
+})();
+document.getElementById('snippetCloseBtn').onclick = () => selectHotspot(null);
+
+document.getElementById('roomInfoBtn').onclick = () => toast('Would open the Room Info sheet (see tour-cart-flow.html for that entry point)');
+
+window.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (pickerState) return; // its own listener already handles this
+  if (estimateOpen) { if (quotePageOpen) closeQuotePage(); else closeEstimate(); }
+  else if (activeHotspotId) selectHotspot(null);
+});
+
+// ═══ Bullseye marker — verbatim HTML/CSS from TourViewer.tsx ═══
+const BULLSEYE_MARKER_HTML = `
+  <button type="button" aria-label="Element marker" class="psv-marker-hotspot"
+    style="width:44px;height:44px;border-radius:9999px;background:rgba(23,168,229,.22);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;padding:0;animation:scatter-pulse 2.6s ease-in-out infinite;">
+    <span style="width:10px;height:10px;border-radius:9999px;background:#17A8E5;display:block;animation:scatter-dot-pulse 2.6s ease-in-out infinite;"></span>
+  </button>`;
+function makeMarkers() {
+  return HOTSPOTS.map((h) => ({
+    id: h.id,
+    position: { yaw: (h.yaw * Math.PI) / 180, pitch: (h.pitch * Math.PI) / 180 },
+    html: BULLSEYE_MARKER_HTML,
+    anchor: 'center center',
+    tooltip: { content: h.label, position: 'top' },
+    data: { hotspotId: h.id },
+  }));
+}
+
+let viewer = null, markersPlugin = null;
+function initViewer() {
+  viewer = new Viewer({
+    container: document.getElementById('psv-root'),
+    panorama: ASSET('panoramas/seabreeze-living-modern.jpg'),
+    navbar: false,
+    defaultYaw: 0,
+    defaultPitch: 0,
+    defaultTransition: { speed: '2rpm', rotation: true, effect: 'fade' },
+    plugins: [[MarkersPlugin, { markers: makeMarkers() }]],
+  });
+  markersPlugin = viewer.getPlugin(MarkersPlugin);
+  viewer.addEventListener('ready', () => { document.getElementById('loadingOverlay').style.display = 'none'; }, { once: true });
+  viewer.addEventListener('panorama-error', () => { document.getElementById('loadingOverlay').style.display = 'none'; });
+  markersPlugin.addEventListener('select-marker', ({ marker }) => {
+    const id = (marker.data || {}).hotspotId ?? marker.id;
+    markersPlugin.hideMarkerTooltip(marker.id);
+    selectHotspot(id);
+  });
+  viewer.addEventListener('click', (e) => { if (!e?.data?.marker && activeHotspotId) selectHotspot(null); });
+}
+
+// ─── Boot ───
+initViewer();
+renderCartBadge();
+renderSidebar();
+</script>
+</body>
+</html>

@@ -89,7 +89,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
         aria-hidden={!isOpen}
         onClick={(e) => e.stopPropagation()}
         className={`
-          w-full max-w-[860px] h-[min(600px,calc(min(100dvh,100vw)_-_48px))] flex flex-col overflow-hidden
+          w-full max-w-[960px] h-[min(640px,calc(min(100dvh,100vw)_-_48px))] flex flex-col overflow-hidden
           bg-spatial-glass backdrop-blur-3xl border border-spatial-border shadow-modal rounded-card
           transition-all duration-300 ease-out
           ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.98]'}
@@ -149,7 +149,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
                   No styles match “{searchQuery}”.
                 </Typography>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-element">
+                <div className="grid grid-cols-3 gap-element">
                   {visibleVariants.map((variant) => {
                     const isApplied = variant.slug === activeVariantSlug;
                     const thumbnail = thumbnailFor(variant);
@@ -159,7 +159,7 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
                         type="button"
                         onClick={() => openVariant(variant)}
                         className={`
-                          relative aspect-[4/3] rounded-card border overflow-hidden text-left
+                          group relative aspect-[4/3] rounded-card border overflow-hidden text-left
                           bg-spatial-glass-elevated
                           transition-all duration-200
                           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
@@ -174,13 +174,18 @@ export const VisualizeStylesModal: React.FC<VisualizeStylesModalProps> = ({
                           : <img src="/assets/icons/default_icon.svg" alt="" aria-hidden className="absolute inset-0 m-auto w-8 h-8 opacity-30" />
                         }
                         <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent" aria-hidden />
-                        {isApplied && (
-                          <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded-pill bg-primary-500/80 border border-primary-400">
-                            <Typography variant="bodySmall" colorClass="text-white" className="uppercase tracking-wider">
-                              Applied
-                            </Typography>
-                          </span>
-                        )}
+                        <span
+                          aria-hidden
+                          className="
+                            absolute top-2 right-2 w-7 h-7 rounded-pill
+                            bg-black/50 backdrop-blur-sm border border-white/20
+                            flex items-center justify-center
+                            opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100
+                            transition-opacity duration-200
+                          "
+                        >
+                          <img src="/assets/icons/eye_visibility_on.svg" alt="" aria-hidden className="w-3.5 h-3.5 opacity-90" />
+                        </span>
                         <Typography
                           variant="titleSmall"
                           weight="semiBold"
