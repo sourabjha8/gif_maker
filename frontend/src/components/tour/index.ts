@@ -6,7 +6,7 @@ export { VideoModal } from './VideoModal';
 export { VariantSwitcher } from './VariantSwitcher';
 export { ViewerIconDock } from './ViewerIconDock';
 export { GalleryModal } from './GalleryModal';
-export { VisualizeStylesModal } from './VisualizeStylesModal';
+export { VisualizeOverlay } from './VisualizeOverlay';
 export { RoomsMenu } from './RoomsMenu';
 export { RoomBrowserPanel } from './RoomBrowserPanel';
 export { RoomDescriptionCard } from './RoomDescriptionCard';

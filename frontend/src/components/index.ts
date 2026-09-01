@@ -30,7 +30,7 @@ export {
   VariantSwitcher,
   ViewerIconDock,
   GalleryModal,
-  VisualizeStylesModal,
+  VisualizeOverlay,
   RoomsMenu,
   RoomBrowserPanel,
   RoomDescriptionCard,

@@ -3175,7 +3175,36 @@
                       "walkthroughVideoUrl": "/assets/bangalore/rooms/bedroom_2_video.mp4",
                       "hotspots": [],
                       "gallery": [],
-                      "materials": []
+                      "materials": [
+                        {
+                          "id": "mat-bedroom2-floor",
+                          "label": "Flooring",
+                          "material": "Oak veneer",
+                          "finish": "Matte",
+                          "swatch": "linear-gradient(135deg, #b08a5b, #7a5a36)"
+                        },
+                        {
+                          "id": "mat-bedroom2-hardware",
+                          "label": "Hardware",
+                          "material": "Brushed brass",
+                          "finish": "Champagne",
+                          "swatch": "linear-gradient(135deg, #c9a464, #8d7236)"
+                        },
+                        {
+                          "id": "mat-bedroom2-upholstery",
+                          "label": "Upholstery",
+                          "material": "Linen weave",
+                          "finish": "Sand",
+                          "swatch": "linear-gradient(135deg, #d8c6a0, #a08864)"
+                        },
+                        {
+                          "id": "mat-bedroom2-walls",
+                          "label": "Walls",
+                          "material": "Warm plaster",
+                          "finish": "Smooth",
+                          "swatch": "linear-gradient(135deg, #d9c8b0, #b8a48a)"
+                        }
+                      ]
                     },
                     {
                       "id": "var-bedroom-2-contemporary",

@@ -11,7 +11,7 @@ import {
   EstimateSidebar,
   ViewerIconDock,
   GalleryModal,
-  VisualizeStylesModal,
+  VisualizeOverlay,
   RoomsMenu,
   RoomInfoPanel,
   RoomNavigator,
@@ -128,7 +128,8 @@ export const TourScreen: React.FC<TourScreenProps> = ({
 
   // New on-screen feature state.
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [isVisualizeOpen, setIsVisualizeOpen] = useState(false);
+  const [visualizeMode, setVisualizeMode] = useState<'closed' | 'styles' | 'upload'>('closed');
+  const [uploadVariantSlug, setUploadVariantSlug] = useState<string | null>(null);
   const [isRoomsMenuOpen, setIsRoomsMenuOpen] = useState(false);
   const [roomBrowserMode, setRoomBrowserMode] = useState<'closed' | 'list' | 'catalog'>('closed');
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -509,7 +510,7 @@ export const TourScreen: React.FC<TourScreenProps> = ({
           onOpenGallery={() => setIsGalleryOpen(true)}
           onOpenRoomsMenu={() => setIsRoomsMenuOpen(true)}
           onToggleMute={() => setIsMuted((m) => !m)}
-          onVisualize={() => setIsVisualizeOpen(true)}
+          onVisualize={() => setVisualizeMode('styles')}
           isWalkthrough={isWalkthrough}
           dimmed={chromeDimmed}
           onRestore={restoreChrome}
@@ -559,14 +560,23 @@ export const TourScreen: React.FC<TourScreenProps> = ({
         onClose={() => setIsGalleryOpen(false)}
       />
 
-      {/* Visualize — browse the current room's other styles + their galleries */}
+      {/* Visualize — one panel that grows/shrinks between the style
+          lookbook and the upload-your-room flow, cross-fading content as it
+          resizes (same technique as the room browser's drawer → catalog
+          grow) rather than opening a second modal on top. */}
       {resolved && (
-        <VisualizeStylesModal
+        <VisualizeOverlay
           roomName={resolved.room.name}
           variants={resolved.room.variants}
           activeVariantSlug={resolved.variant.slug}
-          isOpen={isVisualizeOpen}
-          onClose={() => setIsVisualizeOpen(false)}
+          mode={visualizeMode}
+          onClose={() => setVisualizeMode('closed')}
+          onEnterUpload={(variant) => {
+            setUploadVariantSlug(variant.slug);
+            setVisualizeMode('upload');
+          }}
+          onBackToStyles={() => setVisualizeMode('styles')}
+          initialUploadVariantSlug={uploadVariantSlug}
         />
       )}
 

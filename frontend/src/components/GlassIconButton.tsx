@@ -3,7 +3,7 @@
 import React from 'react';
 import { Tooltip, type TooltipPosition } from './Tooltip';
 
-export type GlassIconButtonShape = 'circle' | 'rounded';
+export type GlassIconButtonShape = 'circle' | 'rounded' | 'element';
 
 export interface GlassIconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,10 +13,12 @@ export interface GlassIconButtonProps
   tooltip?: boolean;
   /** Side the tooltip appears on. Defaults to 'top'. */
   tooltipPosition?: TooltipPosition;
-  /** `circle` → fully round, `rounded` → card radius. Defaults to 'circle'. */
+  /** `circle` → fully round, `rounded` → card radius, `element` → tighter 12px radius. Defaults to 'circle'. */
   shape?: GlassIconButtonShape;
   /** Selected/toggled state — fills with primary colour. */
   active?: boolean;
+  /** Use the elevated glass surface (`bg-spatial-glass-elevated`) instead of the base one. Defaults to false. */
+  elevated?: boolean;
   /**
    * Icon content. When omitted, falls back to the shared default icon.
    * Pass an icon component or an `<img>` (e.g. a rotated chevron) for control.
@@ -39,16 +41,18 @@ export const GlassIconButton = React.forwardRef<HTMLButtonElement, GlassIconButt
       tooltipPosition = 'top',
       shape = 'circle',
       active = false,
+      elevated = false,
       children,
       className = '',
       ...props
     },
     ref,
   ) => {
-    const shapeClass = shape === 'circle' ? 'rounded-full' : 'rounded-card';
+    const shapeClass = shape === 'circle' ? 'rounded-full' : shape === 'element' ? 'rounded-element' : 'rounded-card';
+    const baseBg = elevated ? 'bg-spatial-glass-elevated' : 'bg-spatial-glass';
     const stateClass = active
       ? 'bg-primary-500 text-white border-primary-400'
-      : 'bg-spatial-glass text-neutral-100 border-spatial-border hover:text-white hover:bg-white/10 hover:border-spatial-border-elevated';
+      : `${baseBg} text-neutral-100 border-spatial-border hover:text-white hover:bg-white/10 hover:border-spatial-border-elevated`;
 
     return (
       <span className="relative group inline-flex">

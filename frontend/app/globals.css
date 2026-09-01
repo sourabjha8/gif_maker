@@ -82,6 +82,30 @@
 
   /* Animations */
   --animate-ambient-blur: ambient-pulse 2s ease-in-out infinite;
+  /* A soft light band sweeping down a blurred image — the "generating" cue
+     for the upload-your-room flow. Fades in/out at each pass rather than
+     hard-cutting at the top/bottom edge. */
+  --animate-scan-sweep: scan-sweep 2.2s ease-in-out infinite;
+
+  @keyframes scan-sweep {
+    0% {
+      top: -15%;
+      opacity: 0;
+    }
+
+    12% {
+      opacity: 1;
+    }
+
+    88% {
+      opacity: 1;
+    }
+
+    100% {
+      top: 105%;
+      opacity: 0;
+    }
+  }
 
   @keyframes ambient-pulse {
 
